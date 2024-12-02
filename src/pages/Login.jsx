@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -13,23 +14,13 @@ export default function Login() {
   return (
     <div className="min-h-screen w-screen bg-gray-50 flex items-center justify-center p-0">
       {/* Main Container */}
-      <div 
-        className="bg-white rounded-lg shadow-lg overflow-hidden w-[1000px] h-[700px] flex"
-      >
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden w-[1000px] h-[700px] flex">
         {/* Left Column - Form Section */}
         <div className="w-[350px] flex flex-col px-10">
           {/* Logo Section */}
           <div className="flex items-center gap-2 pt-6">
-            <img 
-              src="/logo-svg.svg" 
-              alt="Company Logo" 
-              className="h-8 w-auto" 
-            />
-            <img 
-              src="/logo-text.svg" 
-              alt="Company Name" 
-              className="h-5 w-auto" 
-            />
+            <img src="/logo-svg.svg" alt="Company Logo" className="h-8 w-auto" />
+            <img src="/logo-text.svg" alt="Company Name" className="h-5 w-auto" />
           </div>
           
           {/* Center the form */}
@@ -37,44 +28,61 @@ export default function Login() {
             <div className="w-full">
               {/* Title Section */}
               <div className="mb-8">
-                <h1 className="text-2xl font-semibold text-gray-900">
-                  Login
+                <h1 className="text-2xl font-semibold text-gray-900 text-left">
+                  Welcome Back
                 </h1>
+                <p className="text-gray-600 mt-2 text-left">
+                  Please enter your details to sign in
+                </p>
               </div>
 
               {/* Form Section */}
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-primary">
-                    Email
-                  </label>
+                <div className="relative">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+                    placeholder="Email"
+                    className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors peer placeholder-transparent"
+                    id="email"
                   />
+                  <label 
+                    htmlFor="email"
+                    className="absolute left-4 -top-2.5 bg-white px-1 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary"
+                  >
+                    Email
+                  </label>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-primary">
-                    Password
-                  </label>
+                <div className="relative">
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+                    placeholder="Password"
+                    className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors peer placeholder-transparent"
+                    id="password"
                   />
+                  <label 
+                    htmlFor="password"
+                    className="absolute left-4 -top-2.5 bg-white px-1 text-sm text-gray-600 transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-3 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary"
+                  >
+                    Password
+                  </label>
                 </div>
 
-                <div className="flex justify-end">
-                  <Link 
-                    to="/reset-password" 
-                    className="text-sm text-primary hover:text-primary/80 transition-colors"
-                  >
-                    Passwort vergessen?
-                  </Link>
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="remember"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
+                  />
+                  <label htmlFor="remember" className="ml-2 text-sm text-gray-600">
+                    Remember me
+                  </label>
                 </div>
 
                 <button
@@ -83,6 +91,15 @@ export default function Login() {
                 >
                   Anmelden
                 </button>
+
+                <div className="text-center">
+                  <Link 
+                    to="/reset-password" 
+                    className="text-sm text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Passwort vergessen?
+                  </Link>
+                </div>
               </form>
             </div>
           </div>
