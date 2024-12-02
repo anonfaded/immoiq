@@ -12,26 +12,26 @@ export default function ResetPassword() {
     <div className="min-h-screen w-screen bg-gray-50 flex items-center justify-center p-0">
       {/* Main Container */}
       <div 
-        className="bg-white rounded-lg shadow-lg overflow-hidden w-[1150px] h-[800px] flex"
+        className="bg-white rounded-lg shadow-lg overflow-hidden w-[1000px] h-[700px] flex"
       >
         {/* Left Column - Form Section */}
-        <div className="w-[400px] flex flex-col px-12">
+        <div className="w-[350px] flex flex-col px-10">
           {/* Logo Section */}
           <div className="flex items-center gap-2 pt-6">
             <img 
               src="/logo-svg.svg" 
               alt="Company Logo" 
-              className="h-10 w-auto" 
+              className="h-8 w-auto" 
             />
             <img 
               src="/logo-text.svg" 
               alt="Company Name" 
-              className="h-6 w-auto" 
+              className="h-5 w-auto" 
             />
           </div>
           
           {/* Center the form */}
-          <div className="flex-1 flex items-center justify-center py-12">
+          <div className="flex-1 flex items-center justify-center py-10">
             <div className="w-full">
               {/* Title Section */}
               <div className="mb-8">
@@ -70,7 +70,7 @@ export default function ResetPassword() {
         </div>
 
         {/* Right Column - Image Section */}
-        <div className="w-[750px] bg-white pl-10">
+        <div className="w-[650px] bg-white pl-8">
           <div className="h-full w-full relative p-3 flex justify-end">
             <img
               src="/building.png"
