@@ -14,7 +14,7 @@ export default function Login() {
     <div className="min-h-screen w-screen bg-gray-50 flex items-center justify-center p-0">
       {/* Main Container */}
       <div 
-        className="bg-white rounded-lg shadow-lg overflow-hidden w-[1200px] h-[800px] flex"
+        className="bg-white rounded-lg shadow-lg overflow-hidden w-[1150px] h-[800px] flex"
       >
         {/* Left Column - Form Section */}
         <div className="w-[400px] flex flex-col px-12">
@@ -89,13 +89,13 @@ export default function Login() {
         </div>
 
         {/* Right Column - Image Section */}
-        <div className="w-[800px] bg-white pl-10">
-          <div className="h-full w-full relative p-3">
+        <div className="w-[750px] bg-white pl-10">
+          <div className="h-full w-full relative p-3 flex justify-end">
             <img
               src="/building.png"
               alt="Modern building with greenery"
-              className="w-full h-full object-contain"
-              style={{ objectPosition: 'center center' }} 
+              className="h-full object-contain object-right"
+              style={{ objectPosition: 'right center' }} 
             />
           </div>
         </div>
