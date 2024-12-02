@@ -11,9 +11,16 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen w-screen bg-gray-50 flex items-center justify-center p-6">
+    <div className="min-h-screen w-screen bg-gray-50 flex items-start justify-start p-0">
       {/* Main Container */}
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden w-full max-w-[1200px] flex">
+      <div 
+        className="bg-white rounded-lg shadow-lg overflow-hidden absolute w-[1440px] h-[800px] flex"
+        style={{ 
+          left: '253px',
+          top: '50%',
+          transform: 'translateY(-50%)'
+        }}
+      >
         {/* Left Column - Form Section */}
         <div className="w-1/2 flex flex-col px-20">
           {/* Logo Section */}
