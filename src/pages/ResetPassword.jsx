@@ -9,15 +9,10 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen w-screen bg-gray-50 flex items-start justify-start p-0">
+    <div className="min-h-screen w-screen bg-gray-50 flex items-center justify-center p-0">
       {/* Main Container */}
       <div 
-        className="bg-white rounded-lg shadow-lg overflow-hidden absolute w-[1200px] h-[800px] flex"
-        style={{ 
-          left: '253px',
-          top: '50%',
-          transform: 'translateY(-50%)'
-        }}
+        className="bg-white rounded-lg shadow-lg overflow-hidden w-[1200px] h-[800px] flex"
       >
         {/* Left Column - Form Section */}
         <div className="w-[400px] flex flex-col px-12">
