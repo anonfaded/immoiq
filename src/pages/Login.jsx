@@ -11,7 +11,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-screen w-screen overflow-hidden">
       {/* Left Column - Form Section */}
       <div className="w-1/2 flex items-center justify-center bg-white px-20">
         <div className="w-full max-w-md">
@@ -68,12 +68,15 @@ export default function Login() {
       </div>
 
       {/* Right Column - Image Section */}
-      <div className="w-1/2 h-full">
-        <img
-          src="/building.png"
-          alt="Modern building with greenery"
-          className="h-full w-full object-cover"
-        />
+      <div className="w-1/2 bg-white py-3 pr-3">
+        <div className="h-[calc(100vh-24px)] relative">
+          <img
+            src="/building.png"
+            alt="Modern building with greenery"
+            className="w-full h-full object-contain object-center"
+            style={{ objectPosition: '60% center' }}
+          />
+        </div>
       </div>
     </div>
   )

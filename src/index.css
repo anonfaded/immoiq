@@ -4,7 +4,7 @@
 
 @layer base {
   html, body, #root {
-    @apply h-full w-full m-0 p-0;
+    @apply h-screen w-screen m-0 p-0 overflow-hidden;
   }
 
   body {
