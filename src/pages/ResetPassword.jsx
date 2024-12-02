@@ -12,7 +12,7 @@ export default function ResetPassword() {
     <div className="min-h-screen w-screen bg-gray-50 flex items-start justify-start p-0">
       {/* Main Container */}
       <div 
-        className="bg-white rounded-lg shadow-lg overflow-hidden absolute w-[1440px] h-[800px] flex"
+        className="bg-white rounded-lg shadow-lg overflow-hidden absolute w-[1200px] h-[800px] flex"
         style={{ 
           left: '253px',
           top: '50%',
@@ -20,7 +20,7 @@ export default function ResetPassword() {
         }}
       >
         {/* Left Column - Form Section */}
-        <div className="w-1/2 flex flex-col px-20">
+        <div className="w-[400px] flex flex-col px-12">
           {/* Logo Section */}
           <div className="flex items-center gap-2 pt-6">
             <img 
@@ -37,7 +37,7 @@ export default function ResetPassword() {
           
           {/* Center the form */}
           <div className="flex-1 flex items-center justify-center py-12">
-            <div className="w-full max-w-md">
+            <div className="w-full">
               {/* Title Section */}
               <div className="mb-8">
                 <h1 className="text-2xl font-semibold text-gray-900 mb-2">
@@ -75,13 +75,13 @@ export default function ResetPassword() {
         </div>
 
         {/* Right Column - Image Section */}
-        <div className="w-1/2 bg-white p-3 pr-3">
-          <div className="h-full relative">
+        <div className="w-[800px] bg-white pl-10">
+          <div className="h-full w-full relative p-3">
             <img
               src="/building.png"
               alt="Modern building with greenery"
-              className="w-full h-full object-contain object-right"
-              style={{ objectPosition: '98% center' }} 
+              className="w-full h-full object-contain"
+              style={{ objectPosition: 'center center' }} 
             />
           </div>
         </div>
