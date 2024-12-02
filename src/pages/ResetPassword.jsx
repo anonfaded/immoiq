@@ -54,9 +54,10 @@ export default function ResetPassword() {
           <img
             src="/building.png"
             alt="Modern building with greenery"
-            className="w-full h-full object-contain object-center"
-            style={{ objectPosition: '60% center' }}
+            className="w-full h-full object-contain object-right"
+            style={{ objectPosition: '98% center' }} 
           />
+            {/* 98% center is the best position for the image */}
         </div>
       </div>
     </div>
