@@ -13,57 +13,74 @@ export default function Login() {
   return (
     <div className="flex h-screen w-screen overflow-hidden">
       {/* Left Column - Form Section */}
-      <div className="w-1/2 flex items-center justify-center bg-white px-20">
-        <div className="w-full max-w-md">
-          {/* Title Section */}
-          <div className="mb-8">
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Login
-            </h1>
-          </div>
-
-          {/* Form Section */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-primary">
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
-              />
+      <div className="w-1/2 flex flex-col bg-white px-20">
+        {/* Logo Section */}
+        <div className="flex items-center gap-2 pt-6">
+          <img 
+            src="/logo-svg.svg" 
+            alt="Company Logo" 
+            className="h-10 w-auto" 
+          />
+          <img 
+            src="/logo-text.svg" 
+            alt="Company Name" 
+            className="h-6 w-auto" 
+          />
+        </div>
+        
+        {/* Center the form */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="w-full max-w-md">
+            {/* Title Section */}
+            <div className="mb-8">
+              <h1 className="text-2xl font-semibold text-gray-900">
+                Login
+              </h1>
             </div>
 
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-primary">
-                Password
-              </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
-              />
-            </div>
+            {/* Form Section */}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-primary">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+                />
+              </div>
 
-            <div className="flex justify-end">
-              <Link 
-                to="/reset-password" 
-                className="text-sm text-primary hover:text-primary/80 transition-colors"
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-primary">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 rounded-md border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div className="flex justify-end">
+                <Link 
+                  to="/reset-password" 
+                  className="text-sm text-primary hover:text-primary/80 transition-colors"
+                >
+                  Passwort vergessen?
+                </Link>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-primary text-white font-medium py-3 px-4 rounded-md hover:bg-primary/90 transition-colors"
               >
-                Passwort vergessen?
-              </Link>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-primary text-white font-medium py-3 px-4 rounded-md hover:bg-primary/90 transition-colors"
-            >
-              Anmelden
-            </button>
-          </form>
+                Anmelden
+              </button>
+            </form>
+          </div>
         </div>
       </div>
 
