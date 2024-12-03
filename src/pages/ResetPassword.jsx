@@ -50,7 +50,7 @@ export default function ResetPassword() {
   return (
     <div className="min-h-screen w-screen bg-gray-50 flex items-center justify-center p-0">
       {/* Main Container */}
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden w-[1000px] h-[700px] flex">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden w-[1000px] h-[600px] flex">
         {/* Left Column - Form Section */}
         <div className="w-[400px] flex flex-col px-10">
           {/* Logo Section */}
@@ -60,7 +60,7 @@ export default function ResetPassword() {
           </div>
           
           {/* Center the form */}
-          <div className="flex-1 flex items-center justify-center py-10">
+          <div className="flex-1 flex items-center justify-center py-8">
             <div className="w-full pl-10">
               {/* Title Section */}
               <div className="mb-8">
