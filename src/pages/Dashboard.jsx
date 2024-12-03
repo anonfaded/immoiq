@@ -62,7 +62,7 @@ const lineChartData = {
     {
       label: 'Leads Konvertiert',
       data: [28, 48, 40, 19, 86, 27, 90],
-      borderColor: '#9333ea',
+      borderColor: '#FFB800',
       tension: 0.4,
       borderWidth: 2,
       pointRadius: 0,
@@ -75,15 +75,7 @@ const chartOptions = {
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      display: true,
-      position: 'bottom',
-      labels: {
-        boxWidth: 12,
-        padding: 15,
-        font: {
-          size: 12,
-        },
-      },
+      display: false,
     },
     tooltip: {
       mode: 'index',
@@ -323,38 +315,76 @@ export default function Dashboard() {
           {/* Performance Metrics Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Conversations Chart Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[9rem] flex flex-col">
-              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
-                Unterhaltungen & Leads
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 min-h-[24rem] flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-6">
+                KI-Widget Performance
               </h3>
-              <div className="flex-1">
-                <Line data={lineChartData} options={chartOptions} />
+              <div className="grid grid-cols-2 gap-6 flex-1">
+                {/* Left Column */}
+                <div className="flex flex-col">
+                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+                    Gesamt Unterhaltungen
+                  </h4>
+                  <span className="text-2xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-4">
+                    318
+                  </span>
+                  <div className="flex-1">
+                    <Line 
+                      data={{
+                        ...lineChartData,
+                        datasets: [lineChartData.datasets[0]]
+                      }} 
+                      options={chartOptions} 
+                    />
+                  </div>
+                </div>
+                {/* Right Column */}
+                <div className="flex flex-col">
+                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+                    Leads Konvertiert
+                  </h4>
+                  <span className="text-2xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-4">
+                    64
+                  </span>
+                  <div className="flex-1">
+                    <Line 
+                      data={{
+                        ...lineChartData,
+                        datasets: [{
+                          ...lineChartData.datasets[1],
+                          borderColor: '#FFB800'
+                        }]
+                      }} 
+                      options={chartOptions} 
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[9rem] flex flex-col">
-              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 min-h-[24rem] flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-6">
                 Gelöste Anfragen
               </h3>
               <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="text-3xl font-bold text-[#34c759] dark:text-[#2da94c] mb-2">85%</div>
-                <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                <div className="text-4xl font-bold text-[#34c759] dark:text-[#2da94c] mb-4">85%</div>
+                <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-3">
                   <div 
                     className="h-full bg-[#34c759] dark:bg-[#2da94c] rounded-full transition-all duration-500"
                     style={{ width: '85%' }}
                   />
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">234 von 275 Anfragen</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">234 von 275 Anfragen</p>
               </div>
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md p-4 min-h-[9rem] flex flex-col">
-              <h3 className="text-sm font-semibold text-white mb-2">Interaktionsrate</h3>
+            <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md p-6 min-h-[24rem] flex flex-col">
+              <h3 className="text-lg font-semibold text-white mb-6">Interaktionsrate</h3>
               <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="text-3xl font-bold text-white mb-1">92%</div>
-                <p className="text-xs text-white/90">Durchschnittliche Antwortrate</p>
+                <div className="text-4xl font-bold text-white mb-3">92%</div>
+                <p className="text-sm text-white/90">Durchschnittliche Antwortrate</p>
               </div>
             </div>
           </div>
