@@ -14,6 +14,37 @@ export default function Login() {
     // Handle login logic here
   }
 
+  const inputStyles = {
+    width: '320px',
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderWidth: '2px',
+        borderColor: '#e5e7eb',
+      },
+      '&:hover fieldset': {
+        borderColor: '#e5e7eb',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#0f6657',
+        borderWidth: '2px',
+      },
+      '& input': {
+        padding: '10.5px 14px',
+        '&::placeholder': {
+          opacity: 1,
+        },
+      },
+    },
+    '& .MuiInputLabel-root': {
+      '&.Mui-focused': {
+        color: '#0f6657',
+      },
+    },
+    '& .MuiOutlinedInput-input': {
+      padding: '10.5px 14px',
+    },
+  }
+
   return (
     <div className="min-h-screen w-screen bg-gray-50 flex items-center justify-center p-0">
       {/* Main Container */}
@@ -53,30 +84,7 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   variant="outlined"
-                  sx={{
-                    width: '320px',
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderWidth: '2px',
-                        borderColor: '#e5e7eb',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: '#e5e7eb',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'var(--primary)',
-                        borderWidth: '2px',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      '&.Mui-focused': {
-                        color: 'var(--primary)',
-                      },
-                    },
-                    '& .MuiOutlinedInput-input': {
-                      padding: '12px 16px',
-                    },
-                  }}
+                  sx={inputStyles}
                 />
 
                 <TextField
@@ -99,30 +107,7 @@ export default function Login() {
                       </InputAdornment>
                     ),
                   }}
-                  sx={{
-                    width: '320px',
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderWidth: '2px',
-                        borderColor: '#e5e7eb',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: '#e5e7eb',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'var(--primary)',
-                        borderWidth: '2px',
-                      },
-                    },
-                    '& .MuiInputLabel-root': {
-                      '&.Mui-focused': {
-                        color: 'var(--primary)',
-                      },
-                    },
-                    '& .MuiOutlinedInput-input': {
-                      padding: '12px 16px',
-                    },
-                  }}
+                  sx={inputStyles}
                 />
 
                 <FormControlLabel
@@ -133,7 +118,7 @@ export default function Login() {
                       sx={{
                         color: '#d1d5db',
                         '&.Mui-checked': {
-                          color: 'var(--primary)',
+                          color: '#0f6657',
                         },
                       }}
                     />
@@ -149,7 +134,7 @@ export default function Login() {
 
                 <button
                   type="submit"
-                  className="w-[320px] bg-primary text-white font-medium py-3 px-4 rounded-md hover:bg-primary/90 transition-colors"
+                  className="w-[320px] bg-[#0f6657] text-white font-medium py-3 px-4 rounded-md hover:bg-[#0f6657]/90 transition-colors"
                 >
                   Anmelden
                 </button>
