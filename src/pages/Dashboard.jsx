@@ -321,23 +321,23 @@ export default function Dashboard() {
         {/* Main Content Area */}
         <main className="p-6 space-y-6">
           {/* Performance Metrics Cards */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
             {/* Conversations Chart Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md w-80 h-36 p-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[9rem] flex flex-col">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
                 Unterhaltungen & Leads
               </h3>
-              <div className="h-16">
+              <div className="flex-1">
                 <Line data={lineChartData} options={chartOptions} />
               </div>
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md w-80 h-36 p-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[9rem] flex flex-col">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
                 Gelöste Anfragen
               </h3>
-              <div className="flex flex-col items-center justify-center h-20">
+              <div className="flex-1 flex flex-col items-center justify-center">
                 <div className="text-3xl font-bold text-[#34c759] dark:text-[#2da94c] mb-2">85%</div>
                 <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div 
@@ -350,11 +350,11 @@ export default function Dashboard() {
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md w-80 h-36 p-4 text-white">
-              <h3 className="text-sm font-semibold mb-2">Interaktionsrate</h3>
-              <div className="flex flex-col items-center justify-center h-20">
-                <div className="text-3xl font-bold mb-1">92%</div>
-                <p className="text-xs opacity-90">Durchschnittliche Antwortrate</p>
+            <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md p-4 min-h-[9rem] flex flex-col">
+              <h3 className="text-sm font-semibold text-white mb-2">Interaktionsrate</h3>
+              <div className="flex-1 flex flex-col items-center justify-center">
+                <div className="text-3xl font-bold text-white mb-1">92%</div>
+                <p className="text-xs text-white/90">Durchschnittliche Antwortrate</p>
               </div>
             </div>
           </div>
