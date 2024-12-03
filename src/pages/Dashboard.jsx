@@ -401,29 +401,31 @@ export default function Dashboard() {
 
             {/* Solved Requests Card */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-4">
+              <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-3">
                 Gelöste Anfragen
               </h3>
               <div className="flex-1 flex flex-col">
-                <div className="flex-1 flex items-center">
+                <div className="flex items-center pt-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-3xl font-bold text-[#34c759] dark:text-[#2da94c]">89%</span>
+                    <span className="text-3xl font-bold text-[#0e6854] dark:text-[#0e6854]">89%</span>
                     <div className="flex items-center gap-1.5 text-sm text-gray-500">
                       <span>diesen Monat</span>
-                      <svg className="w-4 h-4 text-[#34c759]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-4 h-4 text-[#0e6854]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </div>
                   </div>
                 </div>
-                <div className="relative flex items-center gap-2">
-                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-[#34c759] dark:bg-[#2da94c] rounded-full transition-all duration-500"
-                      style={{ width: '89%' }}
-                    />
+                <div className="flex-1 flex flex-col justify-end">
+                  <div className="relative flex items-center gap-2 px-1 mb-1">
+                    <div className="flex-1 h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-[#0e6854] dark:bg-[#0e6854] rounded-full transition-all duration-500"
+                        style={{ width: '89%' }}
+                      />
+                    </div>
+                    <span className="text-xs text-gray-500 -translate-y-1">89%</span>
                   </div>
-                  <span className="text-xs text-gray-500">89%</span>
                 </div>
               </div>
             </div>
