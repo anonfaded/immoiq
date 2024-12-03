@@ -9,7 +9,85 @@ import {
   Email,
   DarkMode,
   Menu as MenuIcon,
+  MoreVert,
+  Edit,
+  Delete,
 } from '@mui/icons-material'
+import { Line } from 'react-chartjs-2'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js'
+
+// Register ChartJS components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+)
+
+// Chart data
+const lineChartData = {
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  datasets: [
+    {
+      label: 'Gesamt Unterhaltungen',
+      data: [65, 59, 80, 81, 56, 55, 40],
+      borderColor: '#0f6657',
+      tension: 0.4,
+    },
+    {
+      label: 'Leads Konvertiert',
+      data: [28, 48, 40, 19, 86, 27, 90],
+      borderColor: '#9333ea',
+      tension: 0.4,
+    }
+  ]
+}
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'bottom',
+    }
+  },
+  scales: {
+    y: {
+      beginAtZero: true
+    }
+  }
+}
+
+// Sample table data
+const tableData = [
+  {
+    id: 1,
+    name: 'Max Mustermann',
+    timestamp: '2024-01-20 14:30',
+    description: 'Neue Anfrage erstellt',
+    status: 'Aktiv'
+  },
+  {
+    id: 2,
+    name: 'Anna Schmidt',
+    timestamp: '2024-01-20 13:15',
+    description: 'Dokument hochgeladen',
+    status: 'Abgeschlossen'
+  },
+  // Add more rows as needed
+]
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
@@ -172,7 +250,7 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1">
+      <div className="flex-1 overflow-auto">
         {/* Top Navigation Bar */}
         <nav className="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 text-gray-600">
@@ -199,9 +277,143 @@ export default function Dashboard() {
         </nav>
 
         {/* Main Content Area */}
-        <main className="p-6">
-          {/* Content will be added in next steps */}
-          <div className="text-gray-500">Dashboard content will be implemented in next steps</div>
+        <main className="p-6 space-y-6">
+          {/* Performance Metrics Cards */}
+          <div className="grid grid-cols-3 gap-6">
+            {/* Conversations Chart Card */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Unterhaltungen & Leads</h3>
+              <div className="h-64">
+                <Line data={lineChartData} options={chartOptions} />
+              </div>
+            </div>
+
+            {/* Solved Requests Card */}
+            <div className="bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Gelöste Anfragen</h3>
+              <div className="flex flex-col items-center justify-center h-64">
+                <div className="text-4xl font-bold text-[#0f6657] mb-2">85%</div>
+                <div className="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[#0f6657] rounded-full"
+                    style={{ width: '85%' }}
+                  />
+                </div>
+                <p className="text-sm text-gray-500 mt-2">234 von 275 Anfragen</p>
+              </div>
+            </div>
+
+            {/* Interaction Rate Card */}
+            <div className="bg-[#0f6657] rounded-lg shadow p-6 text-white">
+              <h3 className="text-lg font-semibold mb-4">Interaktionsrate</h3>
+              <div className="flex flex-col items-center justify-center h-64">
+                <div className="text-6xl font-bold mb-2">92%</div>
+                <p className="text-sm opacity-80">Durchschnittliche Antwortrate</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-4">
+            <button className="px-4 py-2 bg-[#0f6657] text-white rounded-md hover:bg-[#0f6657]/90 transition-colors flex items-center gap-2">
+              <span>KI-Widget</span>
+            </button>
+            <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors">
+              Rückrufformular
+            </button>
+            <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+              Guides/Checklisten
+            </button>
+            <button className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors">
+              Preisanfrage
+            </button>
+          </div>
+
+          {/* Main Table */}
+          <div className="bg-white rounded-lg shadow">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">Letzte Aktivitäten</h3>
+                <div className="flex items-center gap-4">
+                  <input
+                    type="text"
+                    placeholder="Suchen..."
+                    className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#0f6657] focus:border-transparent"
+                  />
+                  <button className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors">
+                    Filter
+                  </button>
+                </div>
+              </div>
+
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Name</th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Zeitpunkt</th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Beschreibung</th>
+                    <th className="text-left py-3 px-4 text-gray-600 font-medium">Status</th>
+                    <th className="text-right py-3 px-4 text-gray-600 font-medium">Aktionen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableData.map((row) => (
+                    <tr key={row.id} className="border-b hover:bg-gray-50">
+                      <td className="py-3 px-4">{row.name}</td>
+                      <td className="py-3 px-4 text-gray-500">{row.timestamp}</td>
+                      <td className="py-3 px-4">{row.description}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 rounded-full text-xs ${
+                          row.status === 'Aktiv' 
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-gray-100 text-gray-800'
+                        }`}>
+                          {row.status}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center justify-end gap-2">
+                          <IconButton size="small" className="text-gray-400 hover:text-gray-600">
+                            <Edit fontSize="small" />
+                          </IconButton>
+                          <IconButton size="small" className="text-gray-400 hover:text-gray-600">
+                            <Delete fontSize="small" />
+                          </IconButton>
+                          <IconButton size="small" className="text-gray-400 hover:text-gray-600">
+                            <MoreVert fontSize="small" />
+                          </IconButton>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {/* Pagination */}
+              <div className="flex justify-between items-center mt-4">
+                <div className="text-sm text-gray-500">
+                  Zeige 1 bis 10 von 42 Einträgen
+                </div>
+                <div className="flex gap-2">
+                  <button className="px-3 py-1 border rounded hover:bg-gray-50 disabled:opacity-50">
+                    Zurück
+                  </button>
+                  <button className="px-3 py-1 bg-[#0f6657] text-white rounded hover:bg-[#0f6657]/90">
+                    1
+                  </button>
+                  <button className="px-3 py-1 border rounded hover:bg-gray-50">
+                    2
+                  </button>
+                  <button className="px-3 py-1 border rounded hover:bg-gray-50">
+                    3
+                  </button>
+                  <button className="px-3 py-1 border rounded hover:bg-gray-50">
+                    Weiter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
