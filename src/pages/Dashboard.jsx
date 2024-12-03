@@ -78,45 +78,22 @@ const chartOptions = {
       display: false,
     },
     tooltip: {
-      mode: 'index',
-      intersect: false,
+      enabled: false
     },
   },
   scales: {
     y: {
+      display: false,
       beginAtZero: true,
-      grid: {
-        display: false,
-      },
-      ticks: {
-        font: {
-          size: 8,
-        },
-        maxTicksLimit: 4,
-        padding: 4
-      },
-      max: 100
     },
     x: {
-      grid: {
-        display: false,
-      },
-      ticks: {
-        font: {
-          size: 8,
-        },
-        maxTicksLimit: 4,
-        padding: 4
-      }
-    },
-  },
-  interaction: {
-    intersect: false,
-    mode: 'index',
+      display: false,
+    }
   },
   elements: {
     line: {
-      borderWidth: 1.5,
+      tension: 0.4,
+      borderWidth: 2,
     },
     point: {
       radius: 0,
@@ -334,44 +311,32 @@ export default function Dashboard() {
               </h3>
               <div className="grid grid-cols-2 gap-4 flex-1">
                 {/* Left Column */}
-                <div className="flex flex-col h-[8rem]">
+                <div className="flex flex-col h-[6rem]">
                   <h4 className="text-xs font-medium text-gray-500">
                     Gesamt Unterhaltungen
                   </h4>
                   <span className="text-lg font-bold text-[#FF3366] mb-1">
                     318
                   </span>
-                  <div className="flex-1">
+                  <div className="h-[3rem]">
                     <Line 
                       data={{
                         ...lineChartData,
                         datasets: [lineChartData.datasets[0]]
                       }} 
-                      options={{
-                        ...chartOptions,
-                        scales: {
-                          ...chartOptions.scales,
-                          x: {
-                            ...chartOptions.scales.x,
-                            ticks: {
-                              ...chartOptions.scales.x.ticks,
-                              padding: 0
-                            }
-                          }
-                        }
-                      }}
+                      options={chartOptions}
                     />
                   </div>
                 </div>
                 {/* Right Column */}
-                <div className="flex flex-col h-[8rem]">
+                <div className="flex flex-col h-[6rem]">
                   <h4 className="text-xs font-medium text-gray-500">
                     Leads Konvertiert
                   </h4>
                   <span className="text-lg font-bold text-[#FF3366] mb-1">
                     64
                   </span>
-                  <div className="flex-1">
+                  <div className="h-[3rem]">
                     <Line 
                       data={{
                         ...lineChartData,
@@ -380,19 +345,7 @@ export default function Dashboard() {
                           borderColor: '#FFB800'
                         }]
                       }} 
-                      options={{
-                        ...chartOptions,
-                        scales: {
-                          ...chartOptions.scales,
-                          x: {
-                            ...chartOptions.scales.x,
-                            ticks: {
-                              ...chartOptions.scales.x.ticks,
-                              padding: 0
-                            }
-                          }
-                        }
-                      }}
+                      options={chartOptions}
                     />
                   </div>
                 </div>
