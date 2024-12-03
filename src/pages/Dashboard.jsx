@@ -321,7 +321,7 @@ export default function Dashboard() {
         {/* Main Content Area */}
         <main className="p-6 space-y-6">
           {/* Performance Metrics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Conversations Chart Card */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[9rem] flex flex-col">
               <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
