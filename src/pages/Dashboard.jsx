@@ -179,14 +179,14 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
       <div 
-        className={`fixed h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 z-20
+        className={`fixed h-screen bg-white shadow-lg transition-all duration-300 z-20
           ${isSidebarOpen ? 'w-64' : 'w-20'} flex flex-col`}
       >
         {/* Logo Section */}
-        <div className="h-20 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+        <div className="h-20 p-4 border-b border-gray-200 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src="/logo-svg.svg" alt="Company Logo" className="h-8 w-auto" />
             {isSidebarOpen && (
@@ -195,7 +195,7 @@ export default function Dashboard() {
           </div>
           <IconButton 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-gray-500 dark:text-gray-400"
+            className="text-gray-500"
           >
             <MenuIcon />
           </IconButton>
@@ -207,7 +207,7 @@ export default function Dashboard() {
             <div key={section} className="mb-6 px-4">
               <button
                 onClick={() => toggleSection(section)}
-                className="w-full flex items-center justify-between px-4 py-2 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase bg-gray-100 dark:bg-gray-700/50 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors mb-2"
+                className="w-full flex items-center justify-between px-4 py-2 text-xs font-bold text-gray-500 uppercase bg-gray-100 rounded-md hover:bg-gray-200 transition-colors mb-2"
               >
                 <div className="flex items-center gap-2">
                   {menuIcons[section]}
@@ -225,11 +225,11 @@ export default function Dashboard() {
                       className={`block py-2 pr-4 text-sm transition-colors ${
                         activeSection === item.id
                           ? 'text-[#34c759]'
-                          : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
+                          : 'text-gray-600 hover:text-gray-900'
                       }`}
                       onClick={() => setActiveSection(item.id)}
                     >
-                      <span className="text-gray-400 dark:text-gray-500">-</span>
+                      <span className="text-gray-400">-</span>
                       <span className="ml-2">{item.label}</span>
                     </Link>
                   ))}
@@ -240,12 +240,12 @@ export default function Dashboard() {
         </div>
 
         {/* Help Section */}
-        <div className="p-4 border-t border-gray-200 dark:border-gray-700 relative">
-          <div className="bg-[#34c759] dark:bg-[#2da94c] text-white rounded-lg p-4 h-auto pt-12">
+        <div className="p-4 border-t border-gray-200 relative">
+          <div className="bg-[#34c759] text-white rounded-lg p-4 h-auto pt-12">
             {/* Profile Picture */}
             <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-              <div className="w-16 h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center shadow-lg">
-                <AccountCircle className="w-14 h-14 text-gray-500 dark:text-gray-400" />
+              <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
+                <AccountCircle className="w-14 h-14 text-gray-500" />
               </div>
             </div>
 
@@ -277,8 +277,8 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className={`flex-1 ${isSidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300`}>
         {/* Top Navigation Bar */}
-        <nav className="h-16 bg-white dark:bg-gray-800 shadow-sm px-6 flex items-center justify-between sticky top-0 z-10">
-          <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
+        <nav className="h-16 bg-white shadow-sm px-6 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-2 text-gray-600">
             <Home className="w-4 h-4" />
             <span className="text-gray-400">/</span>
             <span className="text-sm">Lead-Management</span>
@@ -287,13 +287,13 @@ export default function Dashboard() {
           <div className="flex items-center gap-4">
             <IconButton 
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className="text-gray-600 dark:text-gray-300"
+              className="text-gray-600"
             >
               <DarkMode />
             </IconButton>
             
-            <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <span className="text-gray-600 dark:text-gray-200 font-medium">C</span>
+            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-600 font-medium">C</span>
             </div>
           </div>
         </nav>
@@ -304,19 +304,19 @@ export default function Dashboard() {
             <span className="text-4xl">👋</span>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                <span className="text-2xl font-bold text-gray-900">
                   Grüzi Carlos
                 </span>
                 <span className="text-gray-400 text-2xl">-</span>
-                <span className="text-2xl text-gray-500 dark:text-gray-400">
+                <span className="text-2xl text-gray-500">
                   Lass uns heute mehr Verkaufsmandate gewinnen!
                 </span>
               </div>
             </div>
           </div>
 
-          <button className="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm">
-            <span className="text-gray-700 dark:text-gray-300">
+          <button className="px-4 py-2 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-2 text-sm">
+            <span className="text-gray-700">
               Vorschlag einreichen
             </span>
             <span className="text-lg">→</span>
@@ -328,17 +328,17 @@ export default function Dashboard() {
           {/* Performance Metrics Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Conversations Chart Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-2">
+            <div className="bg-white rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
+              <h3 className="text-base font-semibold text-gray-800 mb-3">
                 KI-Widget Performance
               </h3>
               <div className="grid grid-cols-2 gap-4 flex-1">
                 {/* Left Column */}
                 <div className="flex flex-col h-[8rem]">
-                  <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                  <h4 className="text-xs font-medium text-gray-500">
                     Gesamt Unterhaltungen
                   </h4>
-                  <span className="text-lg font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
+                  <span className="text-lg font-bold text-[#FF3366] mb-1">
                     318
                   </span>
                   <div className="flex-1">
@@ -365,10 +365,10 @@ export default function Dashboard() {
                 </div>
                 {/* Right Column */}
                 <div className="flex flex-col h-[8rem]">
-                  <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                  <h4 className="text-xs font-medium text-gray-500">
                     Leads Konvertiert
                   </h4>
-                  <span className="text-lg font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
+                  <span className="text-lg font-bold text-[#FF3366] mb-1">
                     64
                   </span>
                   <div className="flex-1">
@@ -400,14 +400,14 @@ export default function Dashboard() {
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-3">
+            <div className="bg-white rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
+              <h3 className="text-base font-semibold text-gray-800 mb-3">
                 Gelöste Anfragen
               </h3>
               <div className="flex-1 flex flex-col">
                 <div className="flex items-center pt-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-3xl font-bold text-[#0e6854] dark:text-[#0e6854]">89%</span>
+                    <span className="text-3xl font-bold text-[#0e6854]">89%</span>
                     <div className="flex items-center gap-1.5 text-sm text-gray-500">
                       <span>diesen Monat</span>
                       <svg className="w-4 h-4 text-[#0e6854]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -418,13 +418,13 @@ export default function Dashboard() {
                 </div>
                 <div className="flex-1 flex flex-col justify-end">
                   <div className="relative flex items-center px-1 mb-1">
-                    <div className="relative flex-1 h-3 bg-[#0e6854]/10 dark:bg-[#0e6854]/10 rounded-full overflow-hidden">
+                    <div className="relative flex-1 h-3 bg-[#0e6854]/10 rounded-full overflow-hidden">
                       <div 
-                        className="absolute top-0 left-0 h-full bg-[#0e6854] dark:bg-[#0e6854] rounded-full transition-all duration-500"
+                        className="absolute top-0 left-0 h-full bg-[#0e6854] rounded-full transition-all duration-500"
                         style={{ width: '89%' }}
                       />
                       <div 
-                        className="absolute top-[10%] left-0 h-[80%] bg-[#0e6854] dark:bg-[#0e6854] rounded-full transition-all duration-500"
+                        className="absolute top-[10%] left-0 h-[80%] bg-[#0e6854] rounded-full transition-all duration-500"
                         style={{ width: '89%' }}
                       />
                     </div>
@@ -435,7 +435,7 @@ export default function Dashboard() {
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#0e6854] dark:bg-[#0e6854] rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col relative overflow-hidden">
+            <div className="bg-[#0e6854] rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col relative overflow-hidden">
               <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#12705b]"></div>
               <h3 className="text-base font-semibold text-white mb-4 relative">
                 Interaktionsrate
@@ -473,10 +473,10 @@ export default function Dashboard() {
           </div>
 
           {/* Main Table */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+          <div className="bg-white rounded-lg shadow-md">
             <div className="max-w-full p-4">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                <h3 className="text-sm font-semibold text-gray-700">
                   Letzte Aktivitäten
                 </h3>
                 <div className="flex items-center gap-2">
@@ -484,11 +484,11 @@ export default function Dashboard() {
                     <input
                       type="text"
                       placeholder="Suchen..."
-                      className="w-64 h-9 pl-9 pr-4 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-[#34c759] focus:border-transparent"
+                      className="w-64 h-9 pl-9 pr-4 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#34c759] focus:border-transparent"
                     />
                     <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                   </div>
-                  <button className="h-9 px-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors flex items-center gap-1">
+                  <button className="h-9 px-3 text-sm text-gray-600 hover:bg-gray-100 rounded-md transition-colors flex items-center gap-1">
                     <Sort className="w-4 h-4" />
                     Filter
                   </button>
@@ -497,29 +497,29 @@ export default function Dashboard() {
 
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-gray-200 dark:border-gray-700">
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
                       Name
                       <button className="ml-1 text-gray-400 hover:text-gray-600">
                         <Sort className="w-4 h-4" />
                       </button>
                     </th>
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
                       Zeitpunkt
                       <button className="ml-1 text-gray-400 hover:text-gray-600">
                         <Sort className="w-4 h-4" />
                       </button>
                     </th>
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
                       Beschreibung
                     </th>
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
                       Status
                       <button className="ml-1 text-gray-400 hover:text-gray-600">
                         <Sort className="w-4 h-4" />
                       </button>
                     </th>
-                    <th className="text-right py-3 px-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <th className="text-right py-3 px-6 text-sm font-medium text-gray-500">
                       Aktionen
                     </th>
                   </tr>
@@ -529,22 +529,22 @@ export default function Dashboard() {
                     <tr 
                       key={index} 
                       className={`
-                        border-b border-gray-200 dark:border-gray-700 h-12
-                        ${index % 2 === 0 ? 'bg-white dark:bg-gray-800' : 'bg-gray-50 dark:bg-gray-700/50'}
-                        hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors
+                        border-b border-gray-200 h-12
+                        ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+                        hover:bg-gray-100 transition-colors
                       `}
                     >
-                      <td className="py-3 px-6 text-sm text-gray-900 dark:text-gray-100">
+                      <td className="py-3 px-6 text-sm text-gray-900">
                         Max Mustermann
                       </td>
-                      <td className="py-3 px-6 text-sm text-gray-500 dark:text-gray-400">
+                      <td className="py-3 px-6 text-sm text-gray-500">
                         Heute, 14:30
                       </td>
-                      <td className="py-3 px-6 text-sm text-gray-900 dark:text-gray-100">
+                      <td className="py-3 px-6 text-sm text-gray-900">
                         Neue Anfrage erstellt
                       </td>
                       <td className="py-3 px-6">
-                        <span className="px-2 py-1 text-xs rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200">
+                        <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
                           Aktiv
                         </span>
                       </td>
@@ -552,19 +552,19 @@ export default function Dashboard() {
                         <div className="flex items-center justify-end gap-1">
                           <IconButton 
                             size="small" 
-                            className="text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-400 hover:text-gray-600"
                           >
                             <Edit className="w-4 h-4" />
                           </IconButton>
                           <IconButton 
                             size="small" 
-                            className="text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-400 hover:text-gray-600"
                           >
                             <Delete className="w-4 h-4" />
                           </IconButton>
                           <IconButton 
                             size="small" 
-                            className="text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+                            className="text-gray-400 hover:text-gray-600"
                           >
                             <MoreVert className="w-4 h-4" />
                           </IconButton>
@@ -577,24 +577,24 @@ export default function Dashboard() {
 
               {/* Pagination */}
               <div className="flex justify-between items-center mt-4">
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <div className="text-sm text-gray-500">
                   Zeige 1 bis 5 von 42 Einträgen
                 </div>
                 <div className="flex gap-2">
-                  <button className="h-8 px-3 border border-gray-300 dark:border-gray-600 rounded text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-1 disabled:opacity-50">
+                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-1 disabled:opacity-50">
                     <ChevronLeft className="w-4 h-4" />
                     Zurück
                   </button>
                   <button className="h-8 px-3 bg-[#34c759] text-white rounded text-sm hover:bg-[#34c759]/90 transition-colors">
                     1
                   </button>
-                  <button className="h-8 px-3 border border-gray-300 dark:border-gray-600 rounded text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors">
                     2
                   </button>
-                  <button className="h-8 px-3 border border-gray-300 dark:border-gray-600 rounded text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors">
                     3
                   </button>
-                  <button className="h-8 px-3 border border-gray-300 dark:border-gray-600 rounded text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-1">
+                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-1">
                     Weiter
                     <ChevronRight className="w-4 h-4" />
                   </button>
