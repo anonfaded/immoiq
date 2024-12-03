@@ -294,14 +294,28 @@ export default function Dashboard() {
         </nav>
 
         {/* Greeting Section */}
-        <div className="px-6 py-4 flex items-center gap-2">
-          <span className="text-2xl">👋</span>
-          <div>
-            <span className="font-bold text-gray-900 dark:text-white">Grüzi Carlos</span>
-            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-              Schön, dass du wieder da bist!
-            </p>
+        <div className="px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-4xl">👋</span>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Grüzi Carlos
+                </span>
+                <span className="text-gray-400 text-2xl">-</span>
+                <span className="text-2xl text-gray-500 dark:text-gray-400">
+                  Lass uns heute mehr Verkaufsmandate gewinnen!
+                </span>
+              </div>
+            </div>
           </div>
+
+          <button className="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm">
+            <span className="text-gray-700 dark:text-gray-300">
+              Vorschlag einreichen
+            </span>
+            <span className="text-lg">→</span>
+          </button>
         </div>
 
         {/* Main Content Area */}
