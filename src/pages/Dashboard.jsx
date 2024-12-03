@@ -404,9 +404,9 @@ export default function Dashboard() {
               <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-4">
                 Gelöste Anfragen
               </h3>
-              <div className="flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
+              <div className="flex-1 flex flex-col">
+                <div className="flex-1 flex items-center">
+                  <div className="flex items-center gap-2">
                     <span className="text-3xl font-bold text-[#34c759] dark:text-[#2da94c]">89%</span>
                     <div className="flex items-center gap-1.5 text-sm text-gray-500">
                       <span>diesen Monat</span>
@@ -415,12 +415,15 @@ export default function Dashboard() {
                       </svg>
                     </div>
                   </div>
-                  <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                </div>
+                <div className="relative flex items-center gap-2">
+                  <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-[#34c759] dark:bg-[#2da94c] rounded-full transition-all duration-500"
                       style={{ width: '89%' }}
                     />
                   </div>
+                  <span className="text-xs text-gray-500">89%</span>
                 </div>
               </div>
             </div>
@@ -430,10 +433,12 @@ export default function Dashboard() {
               <h3 className="text-base font-semibold text-white mb-4">
                 Interaktionsrate
               </h3>
-              <div className="flex-1 flex flex-col justify-between">
-                <div className="text-3xl font-bold text-white">76%</div>
-                <div className="flex items-end justify-between">
-                  <p className="text-sm text-white/90 max-w-[70%]">
+              <div className="flex-1 flex flex-col">
+                <div className="flex-1 flex items-center">
+                  <div className="text-3xl font-bold text-white">76%</div>
+                </div>
+                <div className="flex items-end justify-between mb-2">
+                  <p className="text-xs text-gray-100/70 max-w-[70%]">
                     Der Besucher haben mit dem Widget interagiert
                   </p>
                   <button className="px-3 py-1 text-sm text-white border border-white/40 rounded hover:bg-white/10 transition-colors">
