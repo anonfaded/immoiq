@@ -17,6 +17,7 @@ export default function Login() {
   const inputStyles = {
     width: '320px',
     '& .MuiOutlinedInput-root': {
+      height: '48px',
       '& fieldset': {
         borderWidth: '2px',
         borderColor: '#e5e7eb',
@@ -29,19 +30,24 @@ export default function Login() {
         borderWidth: '2px',
       },
       '& input': {
-        padding: '10.5px 14px',
-        '&::placeholder': {
-          opacity: 1,
-        },
+        height: '48px',
+        padding: '4px 14px !important',
+        boxSizing: 'border-box',
       },
     },
     '& .MuiInputLabel-root': {
       '&.Mui-focused': {
         color: '#0f6657',
       },
+      transform: 'translate(14px, 14px) scale(1)',
+      '&.Mui-focused, &.MuiFormLabel-filled': {
+        transform: 'translate(14px, -9px) scale(0.75)',
+      },
     },
     '& .MuiOutlinedInput-input': {
-      padding: '10.5px 14px',
+      '&::placeholder': {
+        opacity: 1,
+      },
     },
   }
 
@@ -100,7 +106,11 @@ export default function Login() {
                         <IconButton
                           onClick={() => setShowPassword(!showPassword)}
                           edge="end"
-                          sx={{ color: 'gray' }}
+                          sx={{ 
+                            color: 'gray',
+                            padding: '4px',
+                            marginRight: '-4px'
+                          }}
                         >
                           {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
