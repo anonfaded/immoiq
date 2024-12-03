@@ -55,7 +55,7 @@ const lineChartData = {
       label: 'Gesamt Unterhaltungen',
       data: [65, 59, 80, 81, 56, 55, 40],
       borderColor: '#34c759',
-      tension: 0.4,
+      tension: 0.3,
       borderWidth: 2,
       pointRadius: 0,
     },
@@ -63,7 +63,7 @@ const lineChartData = {
       label: 'Leads Konvertiert',
       data: [28, 48, 40, 19, 86, 27, 90],
       borderColor: '#FFB800',
-      tension: 0.4,
+      tension: 0.3,
       borderWidth: 2,
       pointRadius: 0,
     }
@@ -329,37 +329,49 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Conversations Chart Card */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+              <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-2">
                 KI-Widget Performance
               </h3>
               <div className="grid grid-cols-2 gap-4 flex-1">
                 {/* Left Column */}
-                <div className="flex flex-col h-[6.5rem]">
-                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                <div className="flex flex-col h-[8rem]">
+                  <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400">
                     Gesamt Unterhaltungen
                   </h4>
-                  <span className="text-xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
+                  <span className="text-lg font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
                     318
                   </span>
-                  <div className="h-[3.5rem]">
+                  <div className="flex-1">
                     <Line 
                       data={{
                         ...lineChartData,
                         datasets: [lineChartData.datasets[0]]
                       }} 
-                      options={chartOptions}
+                      options={{
+                        ...chartOptions,
+                        scales: {
+                          ...chartOptions.scales,
+                          x: {
+                            ...chartOptions.scales.x,
+                            ticks: {
+                              ...chartOptions.scales.x.ticks,
+                              padding: 0
+                            }
+                          }
+                        }
+                      }}
                     />
                   </div>
                 </div>
                 {/* Right Column */}
-                <div className="flex flex-col h-[6.5rem]">
-                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                <div className="flex flex-col h-[8rem]">
+                  <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400">
                     Leads Konvertiert
                   </h4>
-                  <span className="text-xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
+                  <span className="text-lg font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
                     64
                   </span>
-                  <div className="h-[3.5rem]">
+                  <div className="flex-1">
                     <Line 
                       data={{
                         ...lineChartData,
@@ -368,7 +380,19 @@ export default function Dashboard() {
                           borderColor: '#FFB800'
                         }]
                       }} 
-                      options={chartOptions}
+                      options={{
+                        ...chartOptions,
+                        scales: {
+                          ...chartOptions.scales,
+                          x: {
+                            ...chartOptions.scales.x,
+                            ticks: {
+                              ...chartOptions.scales.x.ticks,
+                              padding: 0
+                            }
+                          }
+                        }
+                      }}
                     />
                   </div>
                 </div>
