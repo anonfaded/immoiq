@@ -401,27 +401,45 @@ export default function Dashboard() {
 
             {/* Solved Requests Card */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
+              <h3 className="text-base font-semibold text-gray-800 dark:text-gray-200 mb-4">
                 Gelöste Anfragen
               </h3>
-              <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="text-3xl font-bold text-[#34c759] dark:text-[#2da94c] mb-2">85%</div>
-                <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-1">
-                  <div 
-                    className="h-full bg-[#34c759] dark:bg-[#2da94c] rounded-full transition-all duration-500"
-                    style={{ width: '85%' }}
-                  />
+              <div className="flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-3xl font-bold text-[#34c759] dark:text-[#2da94c]">89%</span>
+                    <div className="flex items-center gap-1.5 text-sm text-gray-500">
+                      <span>diesen Monat</span>
+                      <svg className="w-4 h-4 text-[#34c759]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-[#34c759] dark:bg-[#2da94c] rounded-full transition-all duration-500"
+                      style={{ width: '89%' }}
+                    />
+                  </div>
                 </div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">234 von 275 Anfragen</p>
               </div>
             </div>
 
             {/* Interaction Rate Card */}
             <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-lg font-semibold text-white mb-3">Interaktionsrate</h3>
-              <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="text-3xl font-bold text-white mb-1">92%</div>
-                <p className="text-sm text-white/90">Durchschnittliche Antwortrate</p>
+              <h3 className="text-base font-semibold text-white mb-4">
+                Interaktionsrate
+              </h3>
+              <div className="flex-1 flex flex-col justify-between">
+                <div className="text-3xl font-bold text-white">76%</div>
+                <div className="flex items-end justify-between">
+                  <p className="text-sm text-white/90 max-w-[70%]">
+                    Der Besucher haben mit dem Widget interagiert
+                  </p>
+                  <button className="px-3 py-1 text-sm text-white border border-white/40 rounded hover:bg-white/10 transition-colors">
+                    Oktober
+                  </button>
+                </div>
               </div>
             </div>
           </div>
