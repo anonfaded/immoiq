@@ -429,11 +429,12 @@ export default function Dashboard() {
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-base font-semibold text-white mb-4">
+            <div className="bg-[#0e6854] dark:bg-[#0e6854] rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col relative overflow-hidden">
+              <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#12705b]"></div>
+              <h3 className="text-base font-semibold text-white mb-4 relative">
                 Interaktionsrate
               </h3>
-              <div className="flex-1 flex flex-col">
+              <div className="flex-1 flex flex-col relative">
                 <div className="flex-1 flex items-center">
                   <div className="text-3xl font-bold text-white">76%</div>
                 </div>
