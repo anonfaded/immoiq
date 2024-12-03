@@ -20,6 +20,9 @@ import {
   Logout,
   AccountCircle,
   Phone,
+  Dashboard as DashboardIcon,
+  SmartToy,
+  Support,
 } from '@mui/icons-material'
 import { Line } from 'react-chartjs-2'
 import {
@@ -116,6 +119,13 @@ const chartOptions = {
   },
 }
 
+const menuIcons = {
+  mandatscout: <DashboardIcon className="w-4 h-4" />,
+  kiwidget: <SmartToy className="w-4 h-4" />,
+  kontoeinstellungen: <Settings className="w-4 h-4" />,
+  support: <Support className="w-4 h-4" />,
+}
+
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [activeSection, setActiveSection] = useState('privatverkaufschancen')
@@ -187,117 +197,46 @@ export default function Dashboard() {
         </div>
 
         {/* Navigation Menu */}
-        <div className="flex-1 overflow-y-auto py-6">
-          {/* MandatScout Section */}
-          <div className="mb-6">
-            <button
-              onClick={() => toggleSection('mandatscout')}
-              className={`w-full flex items-center justify-between px-6 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase mb-2
-                ${isSidebarOpen ? '' : 'justify-center'}`}
-            >
-              <span>MandatScout</span>
-              {isSidebarOpen && (expandedSections.mandatscout ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
-            </button>
-            
-            {(isSidebarOpen && expandedSections.mandatscout) && (
-              <div className="space-y-1">
-                {menuItems.mandatscout.map(item => (
-                  <Link
-                    key={item.id}
-                    to="#"
-                    className={`block py-2 px-6 text-sm transition-colors ${
-                      activeSection === item.id
-                        ? 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border-l-4 border-green-500'
-                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                    }`}
-                    onClick={() => setActiveSection(item.id)}
-                  >
-                    - {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* KI-Widget Section */}
-          <div className="mb-6">
-            <button
-              onClick={() => toggleSection('kiwidget')}
-              className={`w-full flex items-center justify-between px-6 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase mb-2`}
-            >
-              <span>KI-Widget</span>
-              {isSidebarOpen && (expandedSections.kiwidget ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
-            </button>
-            
-            {(isSidebarOpen && expandedSections.kiwidget) && (
-              <div className="space-y-1">
-                {menuItems.kiwidget.map(item => (
-                  <Link
-                    key={item.id}
-                    to="#"
-                    className="block py-2 px-6 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    - {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Kontoeinstellungen Section */}
-          <div className="mb-6">
-            <button
-              onClick={() => toggleSection('kontoeinstellungen')}
-              className={`w-full flex items-center justify-between px-6 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase mb-2`}
-            >
-              <span>Kontoeinstellungen</span>
-              {isSidebarOpen && (expandedSections.kontoeinstellungen ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
-            </button>
-            
-            {(isSidebarOpen && expandedSections.kontoeinstellungen) && (
-              <div className="space-y-1">
-                {menuItems.kontoeinstellungen.map(item => (
-                  <Link
-                    key={item.id}
-                    to="#"
-                    className="block py-2 px-6 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    - {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Support Section */}
-          <div className="mb-6">
-            <button
-              onClick={() => toggleSection('support')}
-              className={`w-full flex items-center justify-between px-6 text-xs font-bold text-gray-400 dark:text-gray-500 uppercase mb-2`}
-            >
-              <span>Support</span>
-              {isSidebarOpen && (expandedSections.support ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
-            </button>
-            
-            {(isSidebarOpen && expandedSections.support) && (
-              <div className="space-y-1">
-                {menuItems.support.map(item => (
-                  <Link
-                    key={item.id}
-                    to="#"
-                    className="block py-2 px-6 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  >
-                    - {item.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+        <div className="flex-1 overflow-y-auto py-6 overflow-x-hidden">
+          {Object.entries(menuItems).map(([section, items]) => (
+            <div key={section} className="mb-6 px-4">
+              <button
+                onClick={() => toggleSection(section)}
+                className="w-full flex items-center justify-between px-4 py-2 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase bg-gray-100 dark:bg-gray-700/50 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors mb-2"
+              >
+                <div className="flex items-center gap-2">
+                  {menuIcons[section]}
+                  <span>{section}</span>
+                </div>
+                {isSidebarOpen && (expandedSections[section] ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
+              </button>
+              
+              {(isSidebarOpen && expandedSections[section]) && (
+                <div className="space-y-1 pl-8">
+                  {items.map(item => (
+                    <Link
+                      key={item.id}
+                      to="#"
+                      className={`block py-2 pr-4 text-sm transition-colors ${
+                        activeSection === item.id
+                          ? 'text-[#34c759]'
+                          : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
+                      }`}
+                      onClick={() => setActiveSection(item.id)}
+                    >
+                      <span className="text-gray-400 dark:text-gray-500">-</span>
+                      <span className="ml-2">{item.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* Help Section */}
         <div className="p-4 border-t border-gray-200 dark:border-gray-700 relative">
-          <div className="bg-[#34c759] dark:bg-[#2da94c] text-white rounded-lg p-4 h-48 pt-12">
+          <div className="bg-[#34c759] dark:bg-[#2da94c] text-white rounded-lg p-4 h-auto pt-12">
             {/* Profile Picture */}
             <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
               <div className="w-16 h-16 rounded-full bg-white dark:bg-gray-700 flex items-center justify-center shadow-lg">
@@ -320,7 +259,7 @@ export default function Dashboard() {
                 href="https://wa.me/1234567890"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 text-sm bg-white text-[#34c759] px-3 py-2 rounded-full hover:bg-gray-50 transition-colors"
+                className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-full hover:bg-white/20 transition-colors"
               >
                 <WhatsApp className="w-4 h-4" />
                 WhatsApp Support
