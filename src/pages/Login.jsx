@@ -16,6 +16,7 @@ export default function Login() {
 
   const inputStyles = {
     width: '320px',
+    marginBottom: '12px',
     '& .MuiOutlinedInput-root': {
       height: '48px',
       '& fieldset': {
@@ -77,13 +78,13 @@ export default function Login() {
                 >
                   Anmeldung
                 </h1>
-                <p className="text-gray-400 mt-2 text-left text-sm">
+                <p className="text-gray-500 mt-2 text-left text-base">
                   Bitte geben Sie Ihre Zugangsdaten ein.
                 </p>
               </div>
 
               {/* Form Section */}
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="flex flex-col items-start">
                 <TextField
                   fullWidth
                   label="Email"
@@ -126,18 +127,29 @@ export default function Login() {
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
                       sx={{
-                        color: '#d1d5db',
+                        color: '#6B7280',
+                        padding: '0',
                         '&.Mui-checked': {
                           color: '#0f6657',
+                        },
+                        '& .MuiSvgIcon-root': {
+                          fontSize: 20,
                         },
                       }}
                     />
                   }
                   label="Angemeldet bleiben"
                   sx={{
+                    marginBottom: '12px',
+                    width: '320px',
+                    marginLeft: '0',
+                    marginRight: '0',
                     '& .MuiFormControlLabel-label': {
                       fontSize: '0.875rem',
                       color: '#111827',
+                    },
+                    '& .MuiButtonBase-root': {
+                      marginRight: '12px',
                     },
                   }}
                 />
@@ -149,7 +161,7 @@ export default function Login() {
                   Anmelden
                 </button>
 
-                <div className="flex justify-center w-[320px]">
+                <div className="flex justify-center w-[320px] mt-4">
                   <Link 
                     to="/reset-password" 
                     className="text-sm text-gray-900 hover:text-gray-700 underline transition-colors"
