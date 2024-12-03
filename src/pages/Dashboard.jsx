@@ -90,9 +90,12 @@ const chartOptions = {
       },
       ticks: {
         font: {
-          size: 11,
+          size: 8,
         },
+        maxTicksLimit: 4,
+        padding: 4
       },
+      max: 100
     },
     x: {
       grid: {
@@ -100,15 +103,25 @@ const chartOptions = {
       },
       ticks: {
         font: {
-          size: 11,
+          size: 8,
         },
-      },
+        maxTicksLimit: 4,
+        padding: 4
+      }
     },
   },
   interaction: {
     intersect: false,
     mode: 'index',
   },
+  elements: {
+    line: {
+      borderWidth: 1.5,
+    },
+    point: {
+      radius: 0,
+    }
+  }
 }
 
 const menuIcons = {
@@ -315,38 +328,38 @@ export default function Dashboard() {
           {/* Performance Metrics Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Conversations Chart Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 min-h-[24rem] flex flex-col">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
                 KI-Widget Performance
               </h3>
-              <div className="grid grid-cols-2 gap-6 flex-1">
+              <div className="grid grid-cols-2 gap-4 flex-1">
                 {/* Left Column */}
-                <div className="flex flex-col">
-                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+                <div className="flex flex-col h-[6.5rem]">
+                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Gesamt Unterhaltungen
                   </h4>
-                  <span className="text-2xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-4">
+                  <span className="text-xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
                     318
                   </span>
-                  <div className="flex-1">
+                  <div className="h-[3.5rem]">
                     <Line 
                       data={{
                         ...lineChartData,
                         datasets: [lineChartData.datasets[0]]
                       }} 
-                      options={chartOptions} 
+                      options={chartOptions}
                     />
                   </div>
                 </div>
                 {/* Right Column */}
-                <div className="flex flex-col">
-                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+                <div className="flex flex-col h-[6.5rem]">
+                  <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Leads Konvertiert
                   </h4>
-                  <span className="text-2xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-4">
+                  <span className="text-xl font-bold text-[#FF3366] dark:text-[#FF3366] mb-1">
                     64
                   </span>
-                  <div className="flex-1">
+                  <div className="h-[3.5rem]">
                     <Line 
                       data={{
                         ...lineChartData,
@@ -355,7 +368,7 @@ export default function Dashboard() {
                           borderColor: '#FFB800'
                         }]
                       }} 
-                      options={chartOptions} 
+                      options={chartOptions}
                     />
                   </div>
                 </div>
@@ -363,13 +376,13 @@ export default function Dashboard() {
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 min-h-[24rem] flex flex-col">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">
                 Gelöste Anfragen
               </h3>
               <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="text-4xl font-bold text-[#34c759] dark:text-[#2da94c] mb-4">85%</div>
-                <div className="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-3">
+                <div className="text-3xl font-bold text-[#34c759] dark:text-[#2da94c] mb-2">85%</div>
+                <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mb-1">
                   <div 
                     className="h-full bg-[#34c759] dark:bg-[#2da94c] rounded-full transition-all duration-500"
                     style={{ width: '85%' }}
@@ -380,10 +393,10 @@ export default function Dashboard() {
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md p-6 min-h-[24rem] flex flex-col">
-              <h3 className="text-lg font-semibold text-white mb-6">Interaktionsrate</h3>
+            <div className="bg-[#34c759] dark:bg-[#2da94c] rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
+              <h3 className="text-lg font-semibold text-white mb-3">Interaktionsrate</h3>
               <div className="flex-1 flex flex-col items-center justify-center">
-                <div className="text-4xl font-bold text-white mb-3">92%</div>
+                <div className="text-3xl font-bold text-white mb-1">92%</div>
                 <p className="text-sm text-white/90">Durchschnittliche Antwortrate</p>
               </div>
             </div>
