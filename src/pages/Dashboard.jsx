@@ -417,14 +417,18 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col justify-end">
-                  <div className="relative flex items-center gap-2 px-1 mb-1">
-                    <div className="flex-1 h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div className="relative flex items-center px-1 mb-1">
+                    <div className="relative flex-1 h-3 bg-[#0e6854]/10 dark:bg-[#0e6854]/10 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-[#0e6854] dark:bg-[#0e6854] rounded-full transition-all duration-500"
+                        className="absolute top-0 left-0 h-full bg-[#0e6854] dark:bg-[#0e6854] rounded-full transition-all duration-500"
+                        style={{ width: '89%' }}
+                      />
+                      <div 
+                        className="absolute top-[10%] left-0 h-[80%] bg-[#0e6854] dark:bg-[#0e6854] rounded-full transition-all duration-500"
                         style={{ width: '89%' }}
                       />
                     </div>
-                    <span className="text-xs text-gray-500 -translate-y-1">89%</span>
+                    <span className="text-xs text-gray-500 ml-4">89%</span>
                   </div>
                 </div>
               </div>
