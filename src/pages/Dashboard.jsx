@@ -276,6 +276,74 @@ export default function Dashboard() {
   })
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 9;
+
+  const rows = [
+    {
+      name: "Bernd Eisenhammer",
+      time: "Heute - 11:30",
+      description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde ..."
+    },
+    {
+      name: "Hanspeter Schmid",
+      time: "Gestern - 21:10",
+      description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
+    },
+    {
+      name: "Ursula Müller",
+      time: "Vor 2 Tagen",
+      description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
+    },
+    {
+      name: "Monika Zimmermann",
+      time: "Vor 2 Tagen",
+      description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite ..."
+    },
+    {
+      name: "Bernd Eisenhammer",
+      time: "Vor 2 Tagen",
+      description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde."
+    },
+    {
+      name: "Hanspeter Schmid",
+      time: "Vor 4 Tagen",
+      description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
+    },
+    {
+      name: "Ursula Müller",
+      time: "Vor 6 Tagen",
+      description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
+    },
+    {
+      name: "Monika Zimmermann",
+      time: "Vor 1 Woche",
+      description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite .."
+    },
+    {
+      name: "Bernd Eisenhammer",
+      time: "Vor 1 Woche",
+      description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde .."
+    },
+    {
+      name: "Hanspeter Schmid",
+      time: "Vor 1 Woche",
+      description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
+    },
+    {
+      name: "Ursula Müller",
+      time: "Vor 2 Wochen",
+      description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
+    }
+  ];
+
+  const totalRows = rows.length;
+  const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+  const getCurrentPageRows = () => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    return rows.slice(startIndex, startIndex + rowsPerPage);
+  };
 
   useEffect(() => {
     if (isDarkMode) {
@@ -558,7 +626,7 @@ export default function Dashboard() {
           </div>
 
           {/* New Section */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
             {/* Top Control Row */}
             <div className="flex items-center justify-between mb-4">
               {/* Left Controls */}
@@ -624,12 +692,26 @@ export default function Dashboard() {
 
               {/* Pagination */}
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">1-10 von 24</span>
+                <span className="text-sm text-gray-600">
+                  {`${(currentPage - 1) * rowsPerPage + 1}-${Math.min(currentPage * rowsPerPage, totalRows)} von ${totalRows}`}
+                </span>
                 <div className="flex gap-0.5">
-                  <button className="w-7 h-7 flex items-center justify-center rounded-full text-gray-400 cursor-not-allowed">
+                  <button 
+                    className={`w-7 h-7 flex items-center justify-center rounded-full ${
+                      currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                    onClick={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
+                    disabled={currentPage === 1}
+                  >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
-                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600">
+                  <button 
+                    className={`w-7 h-7 flex items-center justify-center rounded-full ${
+                      currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                    onClick={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
+                    disabled={currentPage === totalPages}
+                  >
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -640,64 +722,8 @@ export default function Dashboard() {
             <div className="h-px bg-gray-200 -mx-6 mb-4" />
 
             {/* Data Rows */}
-            <div className="space-y-[1px]">
-              {[
-                {
-                  name: "Bernd Eisenhammer",
-                  time: "Heute - 11:30",
-                  description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde ..."
-                },
-                {
-                  name: "Hanspeter Schmid",
-                  time: "Gestern - 21:10",
-                  description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
-                },
-                {
-                  name: "Ursula Müller",
-                  time: "Vor 2 Tagen",
-                  description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
-                },
-                {
-                  name: "Monika Zimmermann",
-                  time: "Vor 2 Tagen",
-                  description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite ..."
-                },
-                {
-                  name: "Bernd Eisenhammer",
-                  time: "Vor 2 Tagen",
-                  description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde."
-                },
-                {
-                  name: "Hanspeter Schmid",
-                  time: "Vor 4 Tagen",
-                  description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
-                },
-                {
-                  name: "Ursula Müller",
-                  time: "Vor 6 Tagen",
-                  description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
-                },
-                {
-                  name: "Monika Zimmermann",
-                  time: "Vor 1 Woche",
-                  description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite .."
-                },
-                {
-                  name: "Bernd Eisenhammer",
-                  time: "Vor 1 Woche",
-                  description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde .."
-                },
-                {
-                  name: "Hanspeter Schmid",
-                  time: "Vor 1 Woche",
-                  description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
-                },
-                {
-                  name: "Ursula Müller",
-                  time: "Vor 2 Wochen",
-                  description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
-                }
-              ].map((row, index) => (
+            <div className="space-y-[1px] mb-4">
+              {getCurrentPageRows().map((row, index) => (
                 <div 
                   key={index}
                   className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
