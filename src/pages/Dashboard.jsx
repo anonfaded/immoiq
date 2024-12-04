@@ -640,14 +640,14 @@ export default function Dashboard() {
             <div className="h-px bg-gray-200 -mx-6 mb-4" />
 
             {/* Data Rows */}
-            <div className="space-y-[2px]">
+            <div className="space-y-[1px]">
               {[...Array(10)].map((_, index) => (
                 <div 
                   key={index}
-                  className="h-14 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
+                  className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
                 >
                   {/* Checkbox */}
-                  <div className="pl-3 pr-4 border-r border-[#E0E0E0]">
+                  <div className="pl-3 pr-2">
                     <input 
                       type="checkbox" 
                       className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
@@ -655,23 +655,23 @@ export default function Dashboard() {
                   </div>
 
                   {/* Name with Status */}
-                  <div className="px-4 flex items-center gap-2 min-w-[200px] border-r border-[#E0E0E0]">
+                  <div className="flex items-center gap-2 min-w-[180px] px-2">
                     <div className="w-2 h-2 rounded-full bg-[#34C759]" />
                     <span className="font-semibold text-black">Bernd Eisenhammer</span>
                   </div>
 
                   {/* Time */}
-                  <div className="px-6 min-w-[160px] font-semibold text-[#1E88E5] border-r border-[#E0E0E0]">
+                  <div className="px-2 min-w-[120px] font-semibold text-[#1E88E5]">
                     Heute - 14:00
                   </div>
 
                   {/* Description */}
-                  <div className="px-6 flex-1 text-[14px] text-[#757575] truncate border-r border-[#E0E0E0]">
+                  <div className="px-2 flex-1 text-[14px] text-[#757575] truncate pr-4">
                     Neue Anfrage für Immobilienbewertung in München erstellt...
                   </div>
 
                   {/* Actions */}
-                  <div className="px-4 flex items-center gap-2">
+                  <div className="px-3 flex items-center gap-1.5">
                     <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
                       <AttachFile className="w-3.5 h-3.5 text-gray-600" />
                     </button>
