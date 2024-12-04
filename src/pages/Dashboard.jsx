@@ -48,7 +48,30 @@ ChartJS.register(
   Legend
 )
 
-const lineChartData = {
+const greenChartData = {
+  labels: (() => {
+    const today = new Date();
+    return Array.from({ length: 15 }, (_, i) => {
+      const date = new Date(today);
+      date.setDate(today.getDate() - (14 - i));
+      return date.toISOString().split('T')[0];
+    });
+  })(),
+  datasets: [{
+    label: 'Gesamt Unterhaltungen',
+    data: [25, 65, 30, 75, 40, 85, 35, 80, 45, 90, 50, 95, 60, 100, 70],
+    borderColor: '#34c759',
+    tension: 0.4,
+    borderWidth: 2,
+    pointRadius: 0,
+    pointHoverRadius: 0,
+    pointHitRadius: 30,
+    cubicInterpolationMode: 'monotone',
+    spanGaps: true
+  }]
+};
+
+const yellowChartData = {
   labels: (() => {
     const today = new Date();
     return Array.from({ length: 9 }, (_, i) => {
@@ -57,37 +80,19 @@ const lineChartData = {
       return date.toISOString().split('T')[0];
     });
   })(),
-  datasets: [
-    {
-      label: 'Gesamt Unterhaltungen',
-      data: [30, 55, 35, 65, 45, 75, 50, 85, 60],
-      borderColor: '#34c759',
-      tension: 0.4,
-      borderWidth: 2,
-      pointRadius: 0,
-      pointHoverRadius: 5,
-      pointHoverBorderWidth: 2,
-      pointHoverBorderColor: 'white',
-      pointHoverBackgroundColor: '#34c759',
-      pointHitRadius: 20,
-      cubicInterpolationMode: 'monotone',
-    },
-    {
-      label: 'Leads Konvertiert',
-      data: [25, 60, 35, 70, 45, 80, 55, 90, 65],
-      borderColor: '#FFB800',
-      tension: 0.4,
-      borderWidth: 2,
-      pointRadius: 0,
-      pointHoverRadius: 5,
-      pointHoverBorderWidth: 2,
-      pointHoverBorderColor: 'white',
-      pointHoverBackgroundColor: '#FFB800',
-      pointHitRadius: 20,
-      cubicInterpolationMode: 'monotone',
-    }
-  ]
-}
+  datasets: [{
+    label: 'Leads Konvertiert',
+    data: [25, 60, 35, 70, 45, 80, 55, 90, 65],
+    borderColor: '#FFB800',
+    tension: 0.4,
+    borderWidth: 2,
+    pointRadius: 0,
+    pointHoverRadius: 0,
+    pointHitRadius: 30,
+    cubicInterpolationMode: 'monotone',
+    spanGaps: true
+  }]
+};
 
 const chartOptions = {
   responsive: true,
@@ -439,10 +444,7 @@ export default function Dashboard() {
                   </span>
                   <div className="h-[3rem] mt-1">
                     <Line 
-                      data={{
-                        ...lineChartData,
-                        datasets: [lineChartData.datasets[0]]
-                      }} 
+                      data={greenChartData}
                       options={chartOptions}
                     />
                   </div>
@@ -457,10 +459,7 @@ export default function Dashboard() {
                   </span>
                   <div className="h-[3rem] mt-1">
                     <Line 
-                      data={{
-                        ...lineChartData,
-                        datasets: [lineChartData.datasets[1]]
-                      }} 
+                      data={yellowChartData}
                       options={chartOptions}
                     />
                   </div>
