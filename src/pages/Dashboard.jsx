@@ -49,23 +49,25 @@ ChartJS.register(
 
 // Chart data and options
 const lineChartData = {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon'],
   datasets: [
     {
       label: 'Gesamt Unterhaltungen',
-      data: [20, 85, 30, 70, 25, 90, 35],
+      data: [45, 75, 40, 85, 35, 80, 45, 70],
       borderColor: '#34c759',
-      tension: 0,
+      tension: 0.5,
       borderWidth: 2,
       pointRadius: 0,
+      cubicInterpolationMode: 'monotone',
     },
     {
       label: 'Leads Konvertiert',
-      data: [28, 48, 40, 19, 86, 27, 90],
+      data: [75, 35, 85, 40, 90, 30, 70, 45],
       borderColor: '#FFB800',
-      tension: 0,
+      tension: 0.5,
       borderWidth: 2,
       pointRadius: 0,
+      cubicInterpolationMode: 'monotone',
     }
   ]
 }
@@ -92,8 +94,9 @@ const chartOptions = {
   },
   elements: {
     line: {
-      tension: 0,
+      tension: 0.5,
       borderWidth: 2,
+      cubicInterpolationMode: 'monotone',
     },
     point: {
       radius: 0,
