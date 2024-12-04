@@ -49,24 +49,34 @@ ChartJS.register(
 
 // Chart data and options
 const lineChartData = {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon', 'Tue'],
+  labels: ['Jan 01', 'Jan 02', 'Jan 03', 'Jan 04', 'Jan 05', 'Jan 06', 'Jan 07', 'Jan 08', 'Jan 09'],
   datasets: [
     {
       label: 'Gesamt Unterhaltungen',
-      data: [40, 15, 65, 35, 95, 45, 100, 60, 65],
+      data: [30, 55, 35, 65, 45, 75, 50, 85, 60],
       borderColor: '#34c759',
       tension: 0.4,
       borderWidth: 2,
       pointRadius: 0,
+      pointHoverRadius: 5,
+      pointHoverBorderWidth: 2,
+      pointHoverBorderColor: 'white',
+      pointHoverBackgroundColor: '#34c759',
+      pointHitRadius: 20,
       cubicInterpolationMode: 'monotone',
     },
     {
       label: 'Leads Konvertiert',
-      data: [65, 50, 85, 40, 85, 40, 99, 50, 95],
+      data: [25, 60, 35, 70, 45, 80, 55, 90, 65],
       borderColor: '#FFB800',
       tension: 0.4,
       borderWidth: 2,
       pointRadius: 0,
+      pointHoverRadius: 5,
+      pointHoverBorderWidth: 2,
+      pointHoverBorderColor: 'white',
+      pointHoverBackgroundColor: '#FFB800',
+      pointHitRadius: 20,
       cubicInterpolationMode: 'monotone',
     }
   ]
@@ -75,12 +85,43 @@ const lineChartData = {
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  interaction: {
+    mode: 'nearest',
+    axis: 'x',
+    intersect: false
+  },
   plugins: {
     legend: {
       display: false,
     },
     tooltip: {
-      enabled: false
+      enabled: true,
+      position: 'nearest',
+      backgroundColor: 'white',
+      titleColor: '#1f2937',
+      bodyColor: '#6b7280',
+      borderColor: '#e5e7eb',
+      borderWidth: 1,
+      padding: 12,
+      cornerRadius: 6,
+      titleFont: {
+        size: 12,
+        weight: '500',
+      },
+      bodyFont: {
+        size: 12,
+      },
+      displayColors: false,
+      yAlign: 'bottom',
+      xAlign: 'right',
+      callbacks: {
+        title: function(context) {
+          return context[0].label;
+        },
+        label: function(context) {
+          return `${context.raw}%`;
+        }
+      }
     },
   },
   scales: {
@@ -101,6 +142,16 @@ const chartOptions = {
     },
     point: {
       radius: 0,
+      hitRadius: 20,
+      hoverRadius: 5,
+      hoverBorderWidth: 2,
+      hoverBorderColor: 'white',
+      backgroundColor: function(context) {
+        return context.dataset.borderColor;
+      },
+      hoverBackgroundColor: function(context) {
+        return context.dataset.borderColor;
+      },
     }
   }
 }
