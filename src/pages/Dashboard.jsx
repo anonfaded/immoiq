@@ -301,74 +301,56 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content Area */}
-        <main className="p-6 space-y-6">
+        <main className="p-4 space-y-4">
           {/* Performance Metrics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Conversations Chart Card */}
-            <div className="bg-white rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-base font-semibold text-gray-800 mb-2">
+            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col">
+              <h3 className="text-sm font-semibold text-gray-800 mb-3">
                 KI-Widget Performance
               </h3>
-              <div className="grid grid-cols-2 gap-4 flex-1">
+              <div className="grid grid-cols-2 gap-3 flex-1">
                 {/* Left Column */}
-                <div className="flex flex-col h-[6.5rem]">
+                <div className="flex flex-col h-[6rem]">
                   <h4 className="text-xs font-medium text-gray-500 mb-1">
                     Gesamt Unterhaltungen
                   </h4>
-                  <span className="text-lg font-bold text-[#FF3366]">
+                  <span className="text-base font-bold text-[#FF3366]">
                     318
                   </span>
-                  <div className="h-[4rem] mt-1">
+                  <div className="h-[3rem] mt-1">
                     <Line 
                       data={{
                         ...lineChartData,
                         datasets: [{
                           ...lineChartData.datasets[0],
-                          tension: 0.1,
+                          tension: 0,
                           borderColor: '#34c759'
                         }]
                       }} 
-                      options={{
-                        ...chartOptions,
-                        elements: {
-                          ...chartOptions.elements,
-                          line: {
-                            tension: 0.1,
-                            borderWidth: 2
-                          }
-                        }
-                      }}
+                      options={chartOptions}
                     />
                   </div>
                 </div>
                 {/* Right Column */}
-                <div className="flex flex-col h-[6.5rem]">
+                <div className="flex flex-col h-[6rem]">
                   <h4 className="text-xs font-medium text-gray-500 mb-1">
                     Leads Konvertiert
                   </h4>
-                  <span className="text-lg font-bold text-[#FF3366]">
+                  <span className="text-base font-bold text-[#FF3366]">
                     64
                   </span>
-                  <div className="h-[4rem] mt-1">
+                  <div className="h-[3rem] mt-1">
                     <Line 
                       data={{
                         ...lineChartData,
                         datasets: [{
                           ...lineChartData.datasets[1],
-                          tension: 0.1,
+                          tension: 0,
                           borderColor: '#FFB800'
                         }]
                       }} 
-                      options={{
-                        ...chartOptions,
-                        elements: {
-                          ...chartOptions.elements,
-                          line: {
-                            tension: 0.1,
-                            borderWidth: 2
-                          }
-                        }
-                      }}
+                      options={chartOptions}
                     />
                   </div>
                 </div>
@@ -376,17 +358,17 @@ export default function Dashboard() {
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-base font-semibold text-gray-800 mb-3">
+            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col">
+              <h3 className="text-sm font-semibold text-gray-800 mb-3">
                 Gelöste Anfragen
               </h3>
               <div className="flex-1 flex flex-col">
-                <div className="flex items-center pt-4">
+                <div className="flex items-center pt-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-3xl font-bold text-[#0e6854]">89%</span>
-                    <div className="flex items-center gap-1.5 text-sm text-gray-500">
+                    <span className="text-2xl font-bold text-[#0e6854]">89%</span>
+                    <div className="flex items-center gap-1.5 text-xs text-gray-500">
                       <span>diesen Monat</span>
-                      <svg className="w-4 h-4 text-[#0e6854]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-3 h-3 text-[#0e6854]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </div>
@@ -394,7 +376,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex-1 flex flex-col justify-end">
                   <div className="relative flex items-center px-1 mb-1">
-                    <div className="relative flex-1 h-3 bg-[#0e6854]/10 rounded-full overflow-hidden">
+                    <div className="relative flex-1 h-2.5 bg-[#0e6854]/10 rounded-full overflow-hidden">
                       <div 
                         className="absolute top-0 left-0 h-full bg-[#0e6854] rounded-full transition-all duration-500"
                         style={{ width: '89%' }}
@@ -411,20 +393,20 @@ export default function Dashboard() {
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#0e6854] rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col relative overflow-hidden">
+            <div className="bg-[#0e6854] rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col relative overflow-hidden">
               <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#12705b]"></div>
-              <h3 className="text-base font-semibold text-white mb-4 relative">
+              <h3 className="text-sm font-semibold text-white mb-3 relative">
                 Interaktionsrate
               </h3>
               <div className="flex-1 flex flex-col relative">
                 <div className="flex-1 flex items-center">
-                  <div className="text-3xl font-bold text-white">76%</div>
+                  <div className="text-2xl font-bold text-white">76%</div>
                 </div>
-                <div className="flex items-end justify-between mb-2">
+                <div className="flex items-end justify-between mb-1">
                   <p className="text-xs text-gray-100/70 max-w-[70%]">
                     Der Besucher haben mit dem Widget interagiert
                   </p>
-                  <button className="px-3 py-1 text-sm text-white border border-white/40 rounded hover:bg-white/10 transition-colors">
+                  <button className="px-2 py-0.5 text-xs text-white border border-white/40 rounded hover:bg-white/10 transition-colors">
                     Oktober
                   </button>
                 </div>
