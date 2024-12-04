@@ -135,11 +135,26 @@ const chartOptions = {
           div.style.border = '2px solid white';
           div.style.transform = 'translate(-50%, -50%)';
           document.body.appendChild(div);
+
+          // Create vertical line element
+          const line = document.createElement('div');
+          line.id = 'chartjs-vertical-line';
+          line.style.position = 'fixed';
+          line.style.pointerEvents = 'none';
+          line.style.zIndex = 9997;
+          line.style.transition = 'all .15s ease';
+          line.style.width = '1px';
+          line.style.borderLeft = '2px dotted rgba(0, 0, 0, 0.2)';
+          line.style.transform = 'translateX(-50%)';
+          document.body.appendChild(line);
         }
+
+        const verticalLineEl = document.getElementById('chartjs-vertical-line');
 
         if (context.tooltip.opacity === 0) {
           tooltipEl.style.opacity = 0;
           pointEl.style.opacity = 0;
+          verticalLineEl.style.opacity = 0;
           return;
         }
 
@@ -148,9 +163,11 @@ const chartOptions = {
           const bodyLines = context.tooltip.body.map(b => b.lines);
           const color = context.tooltip.labelColors[0].borderColor;
 
-          // Update point style
+          // Update point and line style
           pointEl.style.backgroundColor = color;
           pointEl.style.opacity = 1;
+          verticalLineEl.style.opacity = 1;
+          verticalLineEl.style.borderColor = 'rgba(0, 0, 0, 0.2)';
 
           // Format the date
           const date = new Date(titleLines[0]);
@@ -174,12 +191,14 @@ const chartOptions = {
           tooltipEl.innerHTML = innerHtml;
         }
 
+        // Position everything
         const position = context.chart.canvas.getBoundingClientRect();
         const tooltipWidth = tooltipEl.offsetWidth;
         const tooltipX = position.left + context.tooltip.caretX;
+        const tooltipY = position.top + context.tooltip.caretY;
         const chartWidth = position.width;
         const padding = 100;
-        
+
         let xPosition;
         if (tooltipX < position.left + padding) {
           xPosition = tooltipX + 20;
@@ -191,13 +210,20 @@ const chartOptions = {
             tooltipX + 20;
         }
 
+        // Position tooltip
         tooltipEl.style.opacity = 1;
         tooltipEl.style.left = xPosition + 'px';
-        tooltipEl.style.top = (position.top + context.tooltip.caretY - tooltipEl.offsetHeight / 2) + 'px';
+        tooltipEl.style.top = (tooltipY - tooltipEl.offsetHeight / 2) + 'px';
 
-        // Position the point
-        pointEl.style.left = (position.left + context.tooltip.caretX) + 'px';
-        pointEl.style.top = (position.top + context.tooltip.caretY) + 'px';
+        // Position the hover point
+        pointEl.style.left = tooltipX + 'px';
+        pointEl.style.top = tooltipY + 'px';
+
+        // Position the vertical line
+        verticalLineEl.style.left = tooltipX + 'px';
+        verticalLineEl.style.top = position.top + 'px';
+        verticalLineEl.style.height = position.height + 'px';
+        verticalLineEl.style.opacity = 1;
       }
     },
   },
