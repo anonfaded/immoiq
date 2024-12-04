@@ -53,9 +53,9 @@ const lineChartData = {
   datasets: [
     {
       label: 'Gesamt Unterhaltungen',
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: [20, 85, 30, 70, 25, 90, 35],
       borderColor: '#34c759',
-      tension: 0.3,
+      tension: 0,
       borderWidth: 2,
       pointRadius: 0,
     },
@@ -63,7 +63,7 @@ const lineChartData = {
       label: 'Leads Konvertiert',
       data: [28, 48, 40, 19, 86, 27, 90],
       borderColor: '#FFB800',
-      tension: 0.3,
+      tension: 0,
       borderWidth: 2,
       pointRadius: 0,
     }
@@ -92,7 +92,7 @@ const chartOptions = {
   },
   elements: {
     line: {
-      tension: 0.4,
+      tension: 0,
       borderWidth: 2,
     },
     point: {
@@ -306,46 +306,69 @@ export default function Dashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Conversations Chart Card */}
             <div className="bg-white rounded-lg shadow-md p-4 min-h-[12rem] flex flex-col">
-              <h3 className="text-base font-semibold text-gray-800 mb-3">
+              <h3 className="text-base font-semibold text-gray-800 mb-2">
                 KI-Widget Performance
               </h3>
               <div className="grid grid-cols-2 gap-4 flex-1">
                 {/* Left Column */}
-                <div className="flex flex-col h-[6rem]">
-                  <h4 className="text-xs font-medium text-gray-500">
+                <div className="flex flex-col h-[6.5rem]">
+                  <h4 className="text-xs font-medium text-gray-500 mb-1">
                     Gesamt Unterhaltungen
                   </h4>
-                  <span className="text-lg font-bold text-[#FF3366] mb-1">
+                  <span className="text-lg font-bold text-[#FF3366]">
                     318
                   </span>
-                  <div className="h-[3rem]">
+                  <div className="h-[4rem] mt-1">
                     <Line 
                       data={{
                         ...lineChartData,
-                        datasets: [lineChartData.datasets[0]]
+                        datasets: [{
+                          ...lineChartData.datasets[0],
+                          tension: 0.1,
+                          borderColor: '#34c759'
+                        }]
                       }} 
-                      options={chartOptions}
+                      options={{
+                        ...chartOptions,
+                        elements: {
+                          ...chartOptions.elements,
+                          line: {
+                            tension: 0.1,
+                            borderWidth: 2
+                          }
+                        }
+                      }}
                     />
                   </div>
                 </div>
                 {/* Right Column */}
-                <div className="flex flex-col h-[6rem]">
-                  <h4 className="text-xs font-medium text-gray-500">
+                <div className="flex flex-col h-[6.5rem]">
+                  <h4 className="text-xs font-medium text-gray-500 mb-1">
                     Leads Konvertiert
                   </h4>
-                  <span className="text-lg font-bold text-[#FF3366] mb-1">
+                  <span className="text-lg font-bold text-[#FF3366]">
                     64
                   </span>
-                  <div className="h-[3rem]">
+                  <div className="h-[4rem] mt-1">
                     <Line 
                       data={{
                         ...lineChartData,
                         datasets: [{
                           ...lineChartData.datasets[1],
+                          tension: 0.1,
                           borderColor: '#FFB800'
                         }]
                       }} 
-                      options={chartOptions}
+                      options={{
+                        ...chartOptions,
+                        elements: {
+                          ...chartOptions.elements,
+                          line: {
+                            tension: 0.1,
+                            borderWidth: 2
+                          }
+                        }
+                      }}
                     />
                   </div>
                 </div>
