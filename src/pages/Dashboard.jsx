@@ -29,6 +29,8 @@ import {
   Refresh,
   Archive,
   HelpOutline,
+  AttachFile,
+  Close,
 } from '@mui/icons-material'
 import { Line } from 'react-chartjs-2'
 import {
@@ -560,77 +562,82 @@ export default function Dashboard() {
             {/* Top Control Row */}
             <div className="flex items-center justify-between mb-4">
               {/* Left Controls */}
-              <div className="flex items-center gap-4">
-                <input 
-                  type="checkbox" 
-                  className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
-                />
-                <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
-                  <Refresh className="w-5 h-5 text-gray-600" />
+              <div className="flex items-center gap-2">
+                <div className="pl-3 pr-4">
+                  <input 
+                    type="checkbox" 
+                    className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                  />
+                </div>
+                <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                  <Refresh className="w-4 h-4 text-gray-600" />
                 </button>
-                <button className="flex items-center gap-2 text-red-600 hover:text-red-700">
-                  <Archive className="w-5 h-5" />
+                <button className="flex items-center gap-1.5 text-red-600 hover:text-red-700">
+                  <Archive className="w-4 h-4" />
                   <span className="text-sm font-medium">Zum Archiv</span>
                 </button>
               </div>
 
               {/* Right Controls */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Leads durchsuchen"
-                    className="w-64 h-9 pl-4 pr-10 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
+                    className="w-60 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
                   />
-                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                 </div>
-                <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
-                  <Settings className="w-5 h-5 text-gray-600" />
+                <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                  <Settings className="w-4 h-4 text-gray-600" />
                 </button>
-                <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
-                  <HelpOutline className="w-5 h-5 text-gray-600" />
+                <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                  <HelpOutline className="w-4 h-4 text-gray-600" />
                 </button>
               </div>
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-gray-200 mb-4" />
+            <div className="h-px bg-gray-200 -mx-6 mb-4" />
 
             {/* Buttons Row with Pagination */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-4">
               {/* Action Buttons */}
-              <div className="flex gap-4">
-                <button className="h-9 px-4 flex items-center gap-2 bg-[#E9F8E9] border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#d7f3d7] transition-colors">
-                  <SmartToy className="w-4 h-4" />
+              <div className="flex gap-3">
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#E9F8E9] border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#d7f3d7] transition-colors text-sm">
+                  <SmartToy className="w-3.5 h-3.5" />
                   KI-Widget
                 </button>
-                <button className="h-9 px-4 flex items-center gap-2 bg-[#FFF5E8] border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#fff0d9] transition-colors">
-                  <Phone className="w-4 h-4" />
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#FFF5E8] border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#fff0d9] transition-colors text-sm">
+                  <Phone className="w-3.5 h-3.5" />
                   Rückrufformular
                 </button>
-                <button className="h-9 px-4 flex items-center gap-2 bg-[#E6F3FF] border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#d9ecff] transition-colors">
-                  <MenuBook className="w-4 h-4" />
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#E6F3FF] border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#d9ecff] transition-colors text-sm">
+                  <MenuBook className="w-3.5 h-3.5" />
                   Guides/Checklisten
                 </button>
-                <button className="h-9 px-4 flex items-center gap-2 bg-[#F3E8FF] border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#ecdaff] transition-colors">
-                  <RequestQuote className="w-4 h-4" />
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#F3E8FF] border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#ecdaff] transition-colors text-sm">
+                  <RequestQuote className="w-3.5 h-3.5" />
                   Preisanfrage
                 </button>
               </div>
 
               {/* Pagination */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <span className="text-sm text-gray-600">1-10 von 24</span>
-                <div className="flex gap-1">
-                  <button className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 cursor-not-allowed">
-                    <ChevronLeft className="w-5 h-5" />
+                <div className="flex gap-0.5">
+                  <button className="w-7 h-7 flex items-center justify-center rounded-full text-gray-400 cursor-not-allowed">
+                    <ChevronLeft className="w-4 h-4" />
                   </button>
-                  <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600">
-                    <ChevronRight className="w-5 h-5" />
+                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600">
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
             </div>
+
+            {/* Second Divider */}
+            <div className="h-px bg-gray-200 -mx-6 mb-4" />
 
             {/* Data Rows */}
             <div className="space-y-[2px]">
@@ -665,11 +672,11 @@ export default function Dashboard() {
 
                   {/* Actions */}
                   <div className="px-4 flex items-center gap-2">
-                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                      <Edit className="w-4 h-4 text-gray-600" />
+                    <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                      <AttachFile className="w-3.5 h-3.5 text-gray-600" />
                     </button>
-                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                      <Delete className="w-4 h-4 text-gray-600" />
+                    <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                      <Close className="w-3.5 h-3.5 text-gray-600" />
                     </button>
                   </div>
                 </div>
