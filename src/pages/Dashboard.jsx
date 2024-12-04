@@ -23,6 +23,7 @@ import {
   Dashboard as DashboardIcon,
   SmartToy,
   Support,
+  ArrowUpward as ArrowUpIcon,
 } from '@mui/icons-material'
 import { Line } from 'react-chartjs-2'
 import {
@@ -47,9 +48,15 @@ ChartJS.register(
   Legend
 )
 
-// Chart data and options
 const lineChartData = {
-  labels: ['Jan 01', 'Jan 02', 'Jan 03', 'Jan 04', 'Jan 05', 'Jan 06', 'Jan 07', 'Jan 08', 'Jan 09'],
+  labels: (() => {
+    const today = new Date();
+    return Array.from({ length: 9 }, (_, i) => {
+      const date = new Date(today);
+      date.setDate(today.getDate() - (8 - i));
+      return date.toISOString().split('T')[0];
+    });
+  })(),
   datasets: [
     {
       label: 'Gesamt Unterhaltungen',
@@ -107,7 +114,6 @@ const chartOptions = {
           div.style.position = 'fixed';
           div.style.zIndex = 9999;
           div.style.transition = 'all .1s ease';
-          div.style.minWidth = '80px';
           document.body.appendChild(div);
         }
 
@@ -121,12 +127,16 @@ const chartOptions = {
           const bodyLines = context.tooltip.body.map(b => b.lines);
           const color = context.tooltip.labelColors[0].borderColor;
 
+          // Format the date
+          const date = new Date(titleLines[0]);
+          const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString().slice(-2)}`;
+
           let innerHtml = `
-            <div style="overflow: hidden; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-              <div style="padding: 8px 12px; background: #1f2937;">
-                <div style="color: white; font-size: 12px; font-weight: 500;">${titleLines[0]}</div>
+            <div style="overflow: hidden; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); display: inline-block;">
+              <div style="padding: 8px 12px; background: #1f2937; white-space: nowrap;">
+                <div style="color: white; font-size: 12px; font-weight: 500;">${formattedDate}</div>
               </div>
-              <div style="padding: 8px 12px; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; gap: 6px;">
+              <div style="padding: 8px 12px; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap;">
                 <div style="width: 6px; height: 6px; border-radius: 50%; background: ${color};"></div>
                 <div style="color: white; font-size: 12px;">${context.tooltip.body[0].lines[0].split(':')[1].trim()}</div>
               </div>
@@ -412,11 +422,7 @@ export default function Dashboard() {
                     <Line 
                       data={{
                         ...lineChartData,
-                        datasets: [{
-                          ...lineChartData.datasets[0],
-                          tension: 0,
-                          borderColor: '#34c759'
-                        }]
+                        datasets: [lineChartData.datasets[0]]
                       }} 
                       options={chartOptions}
                     />
@@ -434,11 +440,7 @@ export default function Dashboard() {
                     <Line 
                       data={{
                         ...lineChartData,
-                        datasets: [{
-                          ...lineChartData.datasets[1],
-                          tension: 0,
-                          borderColor: '#FFB800'
-                        }]
+                        datasets: [lineChartData.datasets[1]]
                       }} 
                       options={chartOptions}
                     />
