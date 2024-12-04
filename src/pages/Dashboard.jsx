@@ -93,9 +93,8 @@ const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   interaction: {
-    mode: 'nearest',
-    axis: 'x',
-    intersect: false
+    mode: 'index',
+    intersect: false,
   },
   plugins: {
     legend: {
@@ -105,6 +104,7 @@ const chartOptions = {
       enabled: false,
       external: function(context) {
         const tooltipEl = document.getElementById('chartjs-tooltip');
+        const pointEl = document.getElementById('chartjs-point');
         
         if (!tooltipEl) {
           const div = document.createElement('div');
@@ -117,8 +117,24 @@ const chartOptions = {
           document.body.appendChild(div);
         }
 
+        if (!pointEl) {
+          const div = document.createElement('div');
+          div.id = 'chartjs-point';
+          div.style.position = 'fixed';
+          div.style.pointerEvents = 'none';
+          div.style.zIndex = 9998;
+          div.style.transition = 'all .15s ease';
+          div.style.width = '10px';
+          div.style.height = '10px';
+          div.style.borderRadius = '50%';
+          div.style.border = '2px solid white';
+          div.style.transform = 'translate(-50%, -50%)';
+          document.body.appendChild(div);
+        }
+
         if (context.tooltip.opacity === 0) {
           tooltipEl.style.opacity = 0;
+          pointEl.style.opacity = 0;
           return;
         }
 
@@ -127,18 +143,25 @@ const chartOptions = {
           const bodyLines = context.tooltip.body.map(b => b.lines);
           const color = context.tooltip.labelColors[0].borderColor;
 
+          // Update point style
+          pointEl.style.backgroundColor = color;
+          pointEl.style.opacity = 1;
+
           // Format the date
           const date = new Date(titleLines[0]);
           const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString().slice(-2)}`;
 
+          // Get value directly from the datapoint
+          const value = Math.round(context.tooltip.dataPoints[0].raw);
+
           let innerHtml = `
             <div style="overflow: hidden; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); display: inline-block;">
-              <div style="padding: 8px 12px; background: #1f2937; white-space: nowrap;">
+              <div style="padding: 6px 10px; background: #1f2937; white-space: nowrap;">
                 <div style="color: white; font-size: 12px; font-weight: 500;">${formattedDate}</div>
               </div>
-              <div style="padding: 8px 12px; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap;">
-                <div style="width: 6px; height: 6px; border-radius: 50%; background: ${color};"></div>
-                <div style="color: white; font-size: 12px;">${context.tooltip.body[0].lines[0].split(':')[1].trim()}</div>
+              <div style="padding: 6px 10px; background: rgba(0, 0, 0, 0.7); display: flex; align-items: center; gap: 12px; white-space: nowrap;">
+                <div style="width: 10px; height: 10px; border-radius: 50%; background: ${color};"></div>
+                <div style="color: white; font-size: 12px;">${value}</div>
               </div>
             </div>
           `;
@@ -166,6 +189,10 @@ const chartOptions = {
         tooltipEl.style.opacity = 1;
         tooltipEl.style.left = xPosition + 'px';
         tooltipEl.style.top = (position.top + context.tooltip.caretY - tooltipEl.offsetHeight / 2) + 'px';
+
+        // Position the point
+        pointEl.style.left = (position.left + context.tooltip.caretX) + 'px';
+        pointEl.style.top = (position.top + context.tooltip.caretY) + 'px';
       }
     },
   },
@@ -187,16 +214,8 @@ const chartOptions = {
     },
     point: {
       radius: 0,
-      hitRadius: 20,
-      hoverRadius: 5,
-      hoverBorderWidth: 2,
-      hoverBorderColor: 'white',
-      backgroundColor: function(context) {
-        return context.dataset.borderColor;
-      },
-      hoverBackgroundColor: function(context) {
-        return context.dataset.borderColor;
-      },
+      hitRadius: 30,
+      hoverRadius: 0,
     }
   }
 }
