@@ -112,8 +112,13 @@ const chartOptions = {
         size: 12,
       },
       displayColors: false,
-      yAlign: 'bottom',
-      xAlign: 'right',
+      yAlign: 'center',
+      xAlign: function(context) {
+        const chart = context.chart;
+        const tooltipX = context.tooltip.x;
+        const chartWidth = chart.width;
+        return tooltipX > chartWidth / 2 ? 'left' : 'right';
+      },
       callbacks: {
         title: function(context) {
           return context[0].label;
