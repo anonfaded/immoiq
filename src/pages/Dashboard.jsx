@@ -53,7 +53,7 @@ const lineChartData = {
   datasets: [
     {
       label: 'Gesamt Unterhaltungen',
-      data: [30, 55, 35, 65, 45, 75, 50, 85, 60],
+      data: [40, 15, 65, 35, 95, 45, 100, 60, 65],
       borderColor: '#34c759',
       tension: 0.4,
       borderWidth: 2,
@@ -62,7 +62,7 @@ const lineChartData = {
     },
     {
       label: 'Leads Konvertiert',
-      data: [25, 60, 35, 70, 45, 80, 55, 90, 65],
+      data: [65, 50, 85, 40, 85, 40, 99, 50, 95],
       borderColor: '#FFB800',
       tension: 0.4,
       borderWidth: 2,
