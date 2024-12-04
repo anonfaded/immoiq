@@ -24,6 +24,11 @@ import {
   SmartToy,
   Support,
   ArrowUpward as ArrowUpIcon,
+  MenuBook,
+  RequestQuote,
+  Refresh,
+  Archive,
+  HelpOutline,
 } from '@mui/icons-material'
 import { Line } from 'react-chartjs-2'
 import {
@@ -550,150 +555,125 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="h-12 flex gap-2">
-            <button className="py-2 px-4 bg-[#34c759] hover:bg-[#34c759]/90 text-white rounded-md transition-colors text-sm font-semibold flex items-center gap-2">
-              <span>KI-Widget</span>
-            </button>
-            <button className="py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors text-sm font-semibold">
-              Rückrufformular
-            </button>
-            <button className="py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors text-sm font-semibold">
-              Guides/Checklisten
-            </button>
-            <button className="py-2 px-4 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition-colors text-sm font-semibold">
-              Preisanfrage
-            </button>
-          </div>
-
-          {/* Main Table */}
-          <div className="bg-white rounded-lg shadow-md">
-            <div className="max-w-full p-4">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-sm font-semibold text-gray-700">
-                  Letzte Aktivitäten
-                </h3>
-                <div className="flex items-center gap-2">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Suchen..."
-                      className="w-64 h-9 pl-9 pr-4 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#34c759] focus:border-transparent"
-                    />
-                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  </div>
-                  <button className="h-9 px-3 text-sm text-gray-600 hover:bg-gray-100 rounded-md transition-colors flex items-center gap-1">
-                    <Sort className="w-4 h-4" />
-                    Filter
-                  </button>
-                </div>
+          {/* New Section */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            {/* Top Control Row */}
+            <div className="flex items-center justify-between mb-4">
+              {/* Left Controls */}
+              <div className="flex items-center gap-4">
+                <input 
+                  type="checkbox" 
+                  className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                />
+                <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                  <Refresh className="w-5 h-5 text-gray-600" />
+                </button>
+                <button className="flex items-center gap-2 text-red-600 hover:text-red-700">
+                  <Archive className="w-5 h-5" />
+                  <span className="text-sm font-medium">Zum Archiv</span>
+                </button>
               </div>
 
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
-                      Name
-                      <button className="ml-1 text-gray-400 hover:text-gray-600">
-                        <Sort className="w-4 h-4" />
-                      </button>
-                    </th>
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
-                      Zeitpunkt
-                      <button className="ml-1 text-gray-400 hover:text-gray-600">
-                        <Sort className="w-4 h-4" />
-                      </button>
-                    </th>
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
-                      Beschreibung
-                    </th>
-                    <th className="text-left py-3 px-6 text-sm font-medium text-gray-500">
-                      Status
-                      <button className="ml-1 text-gray-400 hover:text-gray-600">
-                        <Sort className="w-4 h-4" />
-                      </button>
-                    </th>
-                    <th className="text-right py-3 px-6 text-sm font-medium text-gray-500">
-                      Aktionen
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...Array(5)].map((_, index) => (
-                    <tr 
-                      key={index} 
-                      className={`
-                        border-b border-gray-200 h-12
-                        ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
-                        hover:bg-gray-100 transition-colors
-                      `}
-                    >
-                      <td className="py-3 px-6 text-sm text-gray-900">
-                        Max Mustermann
-                      </td>
-                      <td className="py-3 px-6 text-sm text-gray-500">
-                        Heute, 14:30
-                      </td>
-                      <td className="py-3 px-6 text-sm text-gray-900">
-                        Neue Anfrage erstellt
-                      </td>
-                      <td className="py-3 px-6">
-                        <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                          Aktiv
-                        </span>
-                      </td>
-                      <td className="py-3 px-6">
-                        <div className="flex items-center justify-end gap-1">
-                          <IconButton 
-                            size="small" 
-                            className="text-gray-400 hover:text-gray-600"
-                          >
-                            <Edit className="w-4 h-4" />
-                          </IconButton>
-                          <IconButton 
-                            size="small" 
-                            className="text-gray-400 hover:text-gray-600"
-                          >
-                            <Delete className="w-4 h-4" />
-                          </IconButton>
-                          <IconButton 
-                            size="small" 
-                            className="text-gray-400 hover:text-gray-600"
-                          >
-                            <MoreVert className="w-4 h-4" />
-                          </IconButton>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              {/* Right Controls */}
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Leads durchsuchen"
+                    className="w-64 h-9 pl-4 pr-10 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
+                  />
+                  <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                </div>
+                <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                  <Settings className="w-5 h-5 text-gray-600" />
+                </button>
+                <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                  <HelpOutline className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-gray-200 mb-4" />
+
+            {/* Buttons Row with Pagination */}
+            <div className="flex items-center justify-between mb-6">
+              {/* Action Buttons */}
+              <div className="flex gap-4">
+                <button className="h-9 px-4 flex items-center gap-2 bg-[#E9F8E9] border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#d7f3d7] transition-colors">
+                  <SmartToy className="w-4 h-4" />
+                  KI-Widget
+                </button>
+                <button className="h-9 px-4 flex items-center gap-2 bg-[#FFF5E8] border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#fff0d9] transition-colors">
+                  <Phone className="w-4 h-4" />
+                  Rückrufformular
+                </button>
+                <button className="h-9 px-4 flex items-center gap-2 bg-[#E6F3FF] border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#d9ecff] transition-colors">
+                  <MenuBook className="w-4 h-4" />
+                  Guides/Checklisten
+                </button>
+                <button className="h-9 px-4 flex items-center gap-2 bg-[#F3E8FF] border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#ecdaff] transition-colors">
+                  <RequestQuote className="w-4 h-4" />
+                  Preisanfrage
+                </button>
+              </div>
 
               {/* Pagination */}
-              <div className="flex justify-between items-center mt-4">
-                <div className="text-sm text-gray-500">
-                  Zeige 1 bis 5 von 42 Einträgen
-                </div>
-                <div className="flex gap-2">
-                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-1 disabled:opacity-50">
-                    <ChevronLeft className="w-4 h-4" />
-                    Zurück
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600">1-10 von 24</span>
+                <div className="flex gap-1">
+                  <button className="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 cursor-not-allowed">
+                    <ChevronLeft className="w-5 h-5" />
                   </button>
-                  <button className="h-8 px-3 bg-[#34c759] text-white rounded text-sm hover:bg-[#34c759]/90 transition-colors">
-                    1
-                  </button>
-                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors">
-                    2
-                  </button>
-                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors">
-                    3
-                  </button>
-                  <button className="h-8 px-3 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-100 transition-colors flex items-center gap-1">
-                    Weiter
-                    <ChevronRight className="w-4 h-4" />
+                  <button className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600">
+                    <ChevronRight className="w-5 h-5" />
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* Data Rows */}
+            <div className="space-y-[2px]">
+              {[...Array(10)].map((_, index) => (
+                <div 
+                  key={index}
+                  className="h-14 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
+                >
+                  {/* Checkbox */}
+                  <div className="pl-3 pr-4 border-r border-[#E0E0E0]">
+                    <input 
+                      type="checkbox" 
+                      className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                    />
+                  </div>
+
+                  {/* Name with Status */}
+                  <div className="px-4 flex items-center gap-2 min-w-[200px] border-r border-[#E0E0E0]">
+                    <div className="w-2 h-2 rounded-full bg-[#34C759]" />
+                    <span className="font-semibold text-black">Bernd Eisenhammer</span>
+                  </div>
+
+                  {/* Time */}
+                  <div className="px-6 min-w-[160px] font-semibold text-[#1E88E5] border-r border-[#E0E0E0]">
+                    Heute - 14:00
+                  </div>
+
+                  {/* Description */}
+                  <div className="px-6 flex-1 text-[14px] text-[#757575] truncate border-r border-[#E0E0E0]">
+                    Neue Anfrage für Immobilienbewertung in München erstellt...
+                  </div>
+
+                  {/* Actions */}
+                  <div className="px-4 flex items-center gap-2">
+                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                      <Edit className="w-4 h-4 text-gray-600" />
+                    </button>
+                    <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                      <Delete className="w-4 h-4 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </main>
