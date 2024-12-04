@@ -367,7 +367,7 @@ export default function Dashboard() {
                 Gelöste Anfragen
               </h3>
               <div className="flex-1 flex flex-col">
-                <div className="flex items-center pt-2">
+                <div className="flex items-center pt-6">
                   <div className="flex items-center gap-2">
                     <span className="text-2xl font-bold text-[#0e6854]">89%</span>
                     <div className="flex items-center gap-1.5 text-xs text-gray-500">
