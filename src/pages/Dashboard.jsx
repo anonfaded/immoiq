@@ -95,41 +95,19 @@ const chartOptions = {
       display: false,
     },
     tooltip: {
-      enabled: true,
-      position: 'nearest',
-      backgroundColor: 'white',
-      titleColor: '#1f2937',
-      bodyColor: '#6b7280',
-      borderColor: '#e5e7eb',
-      borderWidth: 1,
-      padding: 12,
-      cornerRadius: 6,
-      titleFont: {
-        size: 12,
-        weight: '500',
-      },
-      bodyFont: {
-        size: 12,
-      },
-      displayColors: false,
-      yAlign: 'center',
+      enabled: false,
       external: function(context) {
         const tooltipEl = document.getElementById('chartjs-tooltip');
         
         if (!tooltipEl) {
           const div = document.createElement('div');
           div.id = 'chartjs-tooltip';
-          div.style.background = 'white';
-          div.style.borderRadius = '6px';
-          div.style.border = '1px solid #e5e7eb';
-          div.style.padding = '0px';
           div.style.opacity = 1;
           div.style.pointerEvents = 'none';
           div.style.position = 'fixed';
           div.style.zIndex = 9999;
           div.style.transition = 'all .1s ease';
           div.style.minWidth = '80px';
-          div.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
           document.body.appendChild(div);
         }
 
@@ -144,12 +122,14 @@ const chartOptions = {
           const color = context.tooltip.labelColors[0].borderColor;
 
           let innerHtml = `
-            <div style="padding: 8px 12px; border-bottom: 1px solid #e5e7eb;">
-              <div style="color: #1f2937; font-size: 12px; font-weight: 500;">${titleLines[0]}</div>
-            </div>
-            <div style="padding: 8px 12px; display: flex; align-items: center; gap: 6px;">
-              <div style="width: 6px; height: 6px; border-radius: 50%; background: ${color};"></div>
-              <div style="color: #6b7280; font-size: 12px;">${bodyLines[0]}</div>
+            <div style="overflow: hidden; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+              <div style="padding: 8px 12px; background: #1f2937;">
+                <div style="color: white; font-size: 12px; font-weight: 500;">${titleLines[0]}</div>
+              </div>
+              <div style="padding: 8px 12px; background: rgba(31, 41, 55, 0.8); display: flex; align-items: center; gap: 6px;">
+                <div style="width: 6px; height: 6px; border-radius: 50%; background: ${color};"></div>
+                <div style="color: rgba(255, 255, 255, 0.9); font-size: 12px;">${bodyLines[0]}</div>
+              </div>
             </div>
           `;
 
@@ -157,12 +137,11 @@ const chartOptions = {
         }
 
         const position = context.chart.canvas.getBoundingClientRect();
-        const bodyPosition = document.body.getBoundingClientRect();
         const tooltipWidth = tooltipEl.offsetWidth;
         const tooltipX = position.left + context.tooltip.caretX;
         const chartWidth = position.width;
         const padding = 100;
-
+        
         let xPosition;
         if (tooltipX < position.left + padding) {
           xPosition = tooltipX + 20;
@@ -177,8 +156,7 @@ const chartOptions = {
         tooltipEl.style.opacity = 1;
         tooltipEl.style.left = xPosition + 'px';
         tooltipEl.style.top = (position.top + context.tooltip.caretY - tooltipEl.offsetHeight / 2) + 'px';
-      },
-      enabled: false
+      }
     },
   },
   scales: {
