@@ -126,9 +126,9 @@ const chartOptions = {
               <div style="padding: 8px 12px; background: #1f2937;">
                 <div style="color: white; font-size: 12px; font-weight: 500;">${titleLines[0]}</div>
               </div>
-              <div style="padding: 8px 12px; background: rgba(31, 41, 55, 0.8); display: flex; align-items: center; gap: 6px;">
+              <div style="padding: 8px 12px; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; gap: 6px;">
                 <div style="width: 6px; height: 6px; border-radius: 50%; background: ${color};"></div>
-                <div style="color: rgba(255, 255, 255, 0.9); font-size: 12px;">${bodyLines[0]}</div>
+                <div style="color: white; font-size: 12px;">${context.tooltip.body[0].lines[0].split(':')[1].trim()}</div>
               </div>
             </div>
           `;
