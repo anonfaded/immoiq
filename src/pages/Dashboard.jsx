@@ -584,7 +584,7 @@ export default function Dashboard() {
                   <input
                     type="text"
                     placeholder="Leads durchsuchen"
-                    className="w-60 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
+                    className="w-48 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
                   />
                   <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                 </div>
@@ -604,19 +604,19 @@ export default function Dashboard() {
             <div className="flex items-center justify-between mb-4">
               {/* Action Buttons */}
               <div className="flex gap-3">
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#E9F8E9] border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#d7f3d7] transition-colors text-sm">
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
                   <SmartToy className="w-3.5 h-3.5" />
                   KI-Widget
                 </button>
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#FFF5E8] border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#fff0d9] transition-colors text-sm">
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
                   <Phone className="w-3.5 h-3.5" />
                   Rückrufformular
                 </button>
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#E6F3FF] border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#d9ecff] transition-colors text-sm">
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
                   <MenuBook className="w-3.5 h-3.5" />
                   Guides/Checklisten
                 </button>
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-[#F3E8FF] border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#ecdaff] transition-colors text-sm">
+                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
                   <RequestQuote className="w-3.5 h-3.5" />
                   Preisanfrage
                 </button>
