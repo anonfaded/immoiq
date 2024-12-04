@@ -641,7 +641,63 @@ export default function Dashboard() {
 
             {/* Data Rows */}
             <div className="space-y-[1px]">
-              {[...Array(10)].map((_, index) => (
+              {[
+                {
+                  name: "Bernd Eisenhammer",
+                  time: "Heute - 11:30",
+                  description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde ..."
+                },
+                {
+                  name: "Hanspeter Schmid",
+                  time: "Gestern - 21:10",
+                  description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
+                },
+                {
+                  name: "Ursula Müller",
+                  time: "Vor 2 Tagen",
+                  description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
+                },
+                {
+                  name: "Monika Zimmermann",
+                  time: "Vor 2 Tagen",
+                  description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite ..."
+                },
+                {
+                  name: "Bernd Eisenhammer",
+                  time: "Vor 2 Tagen",
+                  description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde."
+                },
+                {
+                  name: "Hanspeter Schmid",
+                  time: "Vor 4 Tagen",
+                  description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
+                },
+                {
+                  name: "Ursula Müller",
+                  time: "Vor 6 Tagen",
+                  description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
+                },
+                {
+                  name: "Monika Zimmermann",
+                  time: "Vor 1 Woche",
+                  description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite .."
+                },
+                {
+                  name: "Bernd Eisenhammer",
+                  time: "Vor 1 Woche",
+                  description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde .."
+                },
+                {
+                  name: "Hanspeter Schmid",
+                  time: "Vor 1 Woche",
+                  description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
+                },
+                {
+                  name: "Ursula Müller",
+                  time: "Vor 2 Wochen",
+                  description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
+                }
+              ].map((row, index) => (
                 <div 
                   key={index}
                   className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
@@ -657,17 +713,17 @@ export default function Dashboard() {
                   {/* Name with Status */}
                   <div className="flex items-center gap-2 min-w-[180px] px-2">
                     <div className="w-2 h-2 rounded-full bg-[#34C759]" />
-                    <span className="font-semibold text-black">Bernd Eisenhammer</span>
+                    <span className="font-semibold text-black">{row.name}</span>
                   </div>
 
                   {/* Time */}
                   <div className="px-2 min-w-[120px] font-semibold text-[#1E88E5]">
-                    Heute - 14:00
+                    {row.time}
                   </div>
 
                   {/* Description */}
                   <div className="px-2 flex-1 text-[14px] text-[#757575] truncate pr-4">
-                    Neue Anfrage für Immobilienbewertung in München erstellt...
+                    {row.description}
                   </div>
 
                   {/* Actions */}
