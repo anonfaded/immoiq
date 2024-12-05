@@ -565,7 +565,7 @@ export default function Dashboard() {
                 href="https://wa.me/436776203125"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-[8px] hover:bg-white/20 transition-colors"
+                className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-[12px] hover:bg-white/20 transition-colors"
               >
                 <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4" />
                 WhatsApp Support
@@ -580,22 +580,26 @@ export default function Dashboard() {
         {/* Top Navigation Bar */}
         <nav className="h-16 bg-white shadow-sm px-4 md:px-8 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-2 text-gray-600 min-w-0">
-            <Home className="w-4 h-4 shrink-0" />
-            <span className="text-gray-400 shrink-0">/</span>
-            <span className="text-sm truncate">Lead-Management</span>
+            <img src="/home.png" alt="Home" className="w-[17.5px] h-[17.5px]" />
+            <span className="text-gray-400">/</span>
+            <span className="font-nunito text-[14px] font-semibold">Lead-Management</span>
           </div>
 
-          <div className="flex items-center gap-2 md:gap-4 ml-4 shrink-0">
-            <IconButton 
+          {/* Right Section */}
+          <div className="flex items-center gap-2">
+            <IconButton
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="text-gray-600"
             >
-              <DarkMode />
+              <img src="/dark-mode.png" alt="Dark Mode" className="w-9 h-9" />
             </IconButton>
             
-            <div className="w-8 md:w-10 h-8 md:h-10 rounded-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-600 font-medium">C</span>
-            </div>
+            <IconButton
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              className="text-gray-600"
+            >
+              <img src="/profile.png" alt="Profile" className="w-9 h-9" />
+            </IconButton>
           </div>
         </nav>
 
