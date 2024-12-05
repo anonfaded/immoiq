@@ -553,7 +553,7 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className={`flex-1 ${isSidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300 min-w-0`}>
         {/* Top Navigation Bar */}
-        <nav className="h-16 bg-white shadow-sm px-4 md:px-6 flex items-center justify-between sticky top-0 z-10">
+        <nav className="h-16 bg-white shadow-sm px-4 md:px-8 flex items-center justify-between sticky top-0 z-10">
           <div className="flex items-center gap-2 text-gray-600 min-w-0">
             <Home className="w-4 h-4 shrink-0" />
             <span className="text-gray-400 shrink-0">/</span>
@@ -575,7 +575,7 @@ export default function Dashboard() {
         </nav>
 
         {/* Greeting Section */}
-        <div className="p-4 md:px-6 md:py-4 overflow-hidden">
+        <div className="p-4 md:px-8 md:py-4 overflow-hidden">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-3 min-w-0 overflow-hidden">
               <span className="text-3xl md:text-4xl shrink-0">👋</span>
@@ -602,7 +602,7 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content Area */}
-        <main className="p-4 md:p-4 space-y-4 min-w-0 overflow-hidden">
+        <main className="p-4 md:px-8 space-y-4 min-w-0 overflow-hidden">
           {/* Performance Metrics Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4 overflow-x-auto">
             {/* Cards with min-width to prevent squishing */}
@@ -702,7 +702,7 @@ export default function Dashboard() {
           </div>
 
           {/* Table Section with proper overflow handling */}
-          <div className="overflow-x-auto -mx-4 px-4">
+          <div className="overflow-x-auto -mx-4 md:-mx-8 px-4 md:px-8">
             <div 
               ref={containerRef}
               className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-1 md:mb-4"
