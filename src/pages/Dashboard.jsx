@@ -73,7 +73,7 @@ const greenChartData = {
   })(),
   datasets: [{
     label: 'Gesamt Unterhaltungen',
-    data: [25, 65, 30, 75, 40, 85, 35, 80, 45, 90, 50, 95, 60, 100, 50],
+    data: [25, 65, 30, 75, 40, 85, 35, 80, 45, 90, 50, 95, 60, 93, 20],
     borderColor: '#34c759',
     tension: 0.4,
     borderWidth: 2,
@@ -96,7 +96,7 @@ const yellowChartData = {
   })(),
   datasets: [{
     label: 'Leads Konvertiert',
-    data: [25, 60, 35, 70, 45, 80, 55, 90, 65],
+    data: [25, 60, 35, 70, 45, 80, 55, 90, 45],
     borderColor: '#FFB800',
     tension: 0.4,
     borderWidth: 2,
