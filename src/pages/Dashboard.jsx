@@ -759,7 +759,7 @@ export default function Dashboard() {
                 {getCurrentPageRows().map((row, index) => (
                   <div 
                     key={index}
-                    className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
+                    className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
                   >
                     {/* Checkbox */}
                     <div className="pl-3 pr-2 shrink-0">
