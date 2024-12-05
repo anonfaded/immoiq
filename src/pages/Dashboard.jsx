@@ -836,7 +836,7 @@ export default function Dashboard() {
                         className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
                       >
                         {/* Checkbox */}
-                        <div className="w-[52px] flex justify-center shrink-0">
+                        <div className="w-[52px] flex justify-center shrink-0 pr-4">
                           <input 
                             type="checkbox" 
                             className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
@@ -844,17 +844,19 @@ export default function Dashboard() {
                         </div>
 
                         {/* Name with Status */}
-                        <div className="w-[180px] flex items-center gap-2 shrink-0">
-                          <div 
-                            className="w-2 h-2 rounded-full shrink-0"
-                            style={{ backgroundColor: rowColor }}
-                          />
-                          <span className="font-semibold text-black truncate">{row.name}</span>
+                        <div className="w-[180px] flex items-center shrink-0">
+                          <div className="flex items-center pr-8">
+                            <div 
+                              className="w-2 h-2 rounded-full shrink-0 mr-2"
+                              style={{ backgroundColor: rowColor }}
+                            />
+                            <span className="font-semibold text-black truncate pl-2">{row.name}</span>
+                          </div>
                         </div>
 
                         {/* Time */}
                         <div 
-                          className="w-[160px] font-semibold shrink-0 whitespace-nowrap"
+                          className="w-[160px] font-semibold shrink-0 whitespace-nowrap pl-2"
                           style={{ color: rowColor }}
                         >
                           {row.time}
