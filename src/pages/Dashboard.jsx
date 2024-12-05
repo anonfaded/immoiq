@@ -73,7 +73,7 @@ const greenChartData = {
   })(),
   datasets: [{
     label: 'Gesamt Unterhaltungen',
-    data: [25, 65, 30, 75, 40, 85, 35, 80, 45, 90, 50, 95, 60, 100, 70],
+    data: [25, 65, 30, 75, 40, 85, 35, 80, 45, 90, 50, 95, 60, 100, 50],
     borderColor: '#34c759',
     tension: 0.4,
     borderWidth: 2,
