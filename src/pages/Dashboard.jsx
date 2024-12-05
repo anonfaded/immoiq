@@ -808,46 +808,75 @@ export default function Dashboard() {
               {/* Data Rows Section */}
               <div className="px-6 pb-4 flex-1 overflow-hidden">
                 <div className="h-full">
-                  {getCurrentPageRows().map((row, index) => (
-                    <div 
-                      key={index}
-                      className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
-                    >
-                      {/* Checkbox */}
-                      <div className="w-[52px] flex justify-center shrink-0">
-                        <input 
-                          type="checkbox" 
-                          className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
-                        />
-                      </div>
+                  {getCurrentPageRows().map((row, index) => {
+                    // Define colors for each row
+                    const colors = {
+                      0: '#4361ee',
+                      1: '#eb8203',
+                      2: '#15725d',
+                      3: '#7c02e6',
+                      4: '#4462ed',
+                      5: '#eb860c',
+                      6: '#056751',
+                      7: '#7c03e5',
+                      8: '#4260ed',
+                      9: '#eb860c',
+                      10: '#12705b',
+                      11: '#7b01e6',
+                      12: '#3858ec',
+                      13: '#eb860c',
+                      14: '#18735f'
+                    };
 
-                      {/* Name with Status */}
-                      <div className="w-[180px] flex items-center gap-2 shrink-0">
-                        <div className="w-2 h-2 rounded-full bg-[#34C759] shrink-0" />
-                        <span className="font-semibold text-black truncate">{row.name}</span>
-                      </div>
+                    const rowColor = colors[index] || '#34C759'; // Fallback color if index not found
 
-                      {/* Time */}
-                      <div className="w-[160px] font-semibold text-[#1E88E5] shrink-0 whitespace-nowrap">
-                        {row.time}
-                      </div>
+                    return (
+                      <div 
+                        key={index}
+                        className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
+                      >
+                        {/* Checkbox */}
+                        <div className="w-[52px] flex justify-center shrink-0">
+                          <input 
+                            type="checkbox" 
+                            className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                          />
+                        </div>
 
-                      {/* Description */}
-                      <div className="flex-1 min-w-0 text-[14px] text-[#757575]">
-                        <p className="truncate">{row.description}</p>
-                      </div>
+                        {/* Name with Status */}
+                        <div className="w-[180px] flex items-center gap-2 shrink-0">
+                          <div 
+                            className="w-2 h-2 rounded-full shrink-0"
+                            style={{ backgroundColor: rowColor }}
+                          />
+                          <span className="font-semibold text-black truncate">{row.name}</span>
+                        </div>
 
-                      {/* Actions */}
-                      <div className="w-[100px] flex items-center gap-1.5 justify-end shrink-0">
-                        <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                          <AttachFile className="w-3.5 h-3.5 text-gray-600" />
-                        </button>
-                        <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                          <Close className="w-3.5 h-3.5 text-gray-600" />
-                        </button>
+                        {/* Time */}
+                        <div 
+                          className="w-[160px] font-semibold shrink-0 whitespace-nowrap"
+                          style={{ color: rowColor }}
+                        >
+                          {row.time}
+                        </div>
+
+                        {/* Description */}
+                        <div className="flex-1 min-w-0 text-[14px] text-[#757575] pr-4">
+                          <p className="truncate">{row.description}</p>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="w-[100px] flex items-center gap-1.5 justify-end shrink-0">
+                          <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                            <AttachFile className="w-3.5 h-3.5 text-gray-600" />
+                          </button>
+                          <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                            <Close className="w-3.5 h-3.5 text-gray-600" />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
