@@ -44,6 +44,10 @@ import {
   Legend
 } from 'chart.js'
 import LightModeIcon from '@mui/icons-material/LightMode'
+import SettingsIcon from '@mui/icons-material/Settings'
+import LogoutIcon from '@mui/icons-material/Logout'
+import PersonIcon from '@mui/icons-material/Person'
+import BusinessIcon from '@mui/icons-material/Business'
 
 // Register ChartJS components
 ChartJS.register(
@@ -281,6 +285,8 @@ export default function Dashboard() {
   const [containerHeight, setContainerHeight] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(8);
   const containerRef = useRef(null);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const profileMenuRef = useRef(null);
 
   const rows = [
     {
@@ -475,6 +481,17 @@ export default function Dashboard() {
     return () => window.removeEventListener('resize', logViewportInfo);
   }, [rowsPerPage]);
 
+  // Close profile menu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
       {/* Sidebar */}
@@ -619,9 +636,63 @@ export default function Dashboard() {
               )}
             </button>
             
-            <button className="p-1.5 hover:bg-gray-100 rounded-lg dark:hover:bg-gray-700">
-              <img src="/profile.png" alt="Profile" className="w-9 h-9" />
-            </button>
+            <div className="relative" ref={profileMenuRef}>
+              <button 
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+                className="w-[42px] h-[42px] flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+              >
+                <img src="/profile.png" alt="Profile" className="w-9 h-9" />
+              </button>
+
+              {/* Profile Menu Popup */}
+              <div className={`absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50 transform transition-all duration-200 ease-out origin-top-right ${
+                showProfileMenu 
+                  ? 'opacity-100 scale-100 translate-y-0' 
+                  : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+              }`}>
+                {/* User Info Section */}
+                <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center gap-3">
+                    <img src="/profile.png" alt="Profile" className="w-10 h-10" />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-nunito text-sm font-semibold text-gray-900 dark:text-white truncate">
+                        Carlos Weber
+                      </p>
+                      <p className="font-nunito text-xs text-gray-500 dark:text-gray-400 truncate">
+                        carlos.weber@example.com
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Menu Items */}
+                <div className="py-1">
+                  <button className="w-full px-4 py-2 flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150">
+                    <PersonIcon className="w-5 h-5" />
+                    <span className="font-nunito">Profil verwalten</span>
+                  </button>
+                  <button className="w-full px-4 py-2 flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150">
+                    <BusinessIcon className="w-5 h-5" />
+                    <span className="font-nunito">Firma verwalten</span>
+                  </button>
+                  <button className="w-full px-4 py-2 flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150">
+                    <SettingsIcon className="w-5 h-5" />
+                    <span className="font-nunito">Einstellungen</span>
+                  </button>
+                </div>
+
+                {/* Divider */}
+                <div className="h-px bg-gray-200 dark:bg-gray-700 my-1" />
+
+                {/* Logout */}
+                <div className="py-1">
+                  <button className="w-full px-4 py-2 flex items-center gap-3 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150">
+                    <LogoutIcon className="w-5 h-5" />
+                    <span className="font-nunito">Abmelden</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </nav>
 
