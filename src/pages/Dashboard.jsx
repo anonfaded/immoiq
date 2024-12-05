@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { IconButton } from '@mui/material'
+import { IconButton, Checkbox } from '@mui/material'
 import {
   Home,
   KeyboardArrowDown,
@@ -812,9 +812,24 @@ export default function Dashboard() {
                   {/* Left Controls */}
                   <div className="flex items-center gap-1">
                     <div className="pl-2 pr-2">
-                      <input 
-                        type="checkbox" 
-                        className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                      <Checkbox
+                        sx={{
+                          color: '#E0E6ED',
+                          padding: '0',
+                          '&:hover': {
+                            color: '#94A3B8',
+                            backgroundColor: 'transparent'
+                          },
+                          '&.Mui-checked': {
+                            color: '#12705B',
+                            '&:hover': {
+                              color: '#12705B'
+                            }
+                          },
+                          '& .MuiSvgIcon-root': {
+                            fontSize: 20,
+                          },
+                        }}
                       />
                     </div>
                     <button className="p-1 hover:bg-gray-100 rounded-lg">
@@ -948,9 +963,24 @@ export default function Dashboard() {
                       >
                         {/* Checkbox */}
                         <div className="w-[52px] flex justify-center shrink-0 pr-4">
-                          <input 
-                            type="checkbox" 
-                            className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                          <Checkbox
+                            sx={{
+                              color: '#E0E6ED',
+                              padding: '0',
+                              '&:hover': {
+                                color: '#94A3B8',
+                                backgroundColor: 'transparent'
+                              },
+                              '&.Mui-checked': {
+                                color: '#12705B',
+                                '&:hover': {
+                                  color: '#12705B'
+                                }
+                              },
+                              '& .MuiSvgIcon-root': {
+                                fontSize: 20,
+                              },
+                            }}
                           />
                         </div>
 
