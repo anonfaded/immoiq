@@ -277,7 +277,7 @@ export default function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 9;
+  const rowsPerPage = 8;
 
   const rows = [
     {
@@ -528,7 +528,7 @@ export default function Dashboard() {
         {/* Main Content Area */}
         <main className="p-4 space-y-4">
           {/* Performance Metrics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
             {/* Conversations Chart Card */}
             <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col">
               <h3 className="text-sm font-semibold text-gray-800 mb-3">
@@ -626,143 +626,148 @@ export default function Dashboard() {
           </div>
 
           {/* New Section */}
-          <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-            {/* Top Control Row */}
-            <div className="flex items-center justify-between mb-4">
-              {/* Left Controls */}
-              <div className="flex items-center gap-2">
-                <div className="pl-3 pr-4">
-                  <input 
-                    type="checkbox" 
-                    className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
-                  />
-                </div>
-                <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                  <Refresh className="w-4 h-4 text-gray-600" />
-                </button>
-                <button className="flex items-center gap-1.5 text-red-600 hover:text-red-700">
-                  <Archive className="w-4 h-4" />
-                  <span className="text-sm font-medium">Zum Archiv</span>
-                </button>
-              </div>
-
-              {/* Right Controls */}
-              <div className="flex items-center gap-2">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Leads durchsuchen"
-                    className="w-48 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
-                  />
-                  <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
-                </div>
-                <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                  <Settings className="w-4 h-4 text-gray-600" />
-                </button>
-                <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                  <HelpOutline className="w-4 h-4 text-gray-600" />
-                </button>
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div className="h-px bg-gray-200 -mx-6 mb-4" />
-
-            {/* Buttons Row with Pagination */}
-            <div className="flex items-center justify-between mb-4">
-              {/* Action Buttons */}
-              <div className="flex gap-3">
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                  <SmartToy className="w-3.5 h-3.5" />
-                  KI-Widget
-                </button>
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                  <Phone className="w-3.5 h-3.5" />
-                  Rückrufformular
-                </button>
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                  <MenuBook className="w-3.5 h-3.5" />
-                  Guides/Checklisten
-                </button>
-                <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                  <RequestQuote className="w-3.5 h-3.5" />
-                  Preisanfrage
-                </button>
-              </div>
-
-              {/* Pagination */}
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">
-                  {`${(currentPage - 1) * rowsPerPage + 1}-${Math.min(currentPage * rowsPerPage, totalRows)} von ${totalRows}`}
-                </span>
-                <div className="flex gap-0.5">
-                  <button 
-                    className={`w-7 h-7 flex items-center justify-center rounded-full ${
-                      currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
-                    }`}
-                    onClick={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button 
-                    className={`w-7 h-7 flex items-center justify-center rounded-full ${
-                      currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
-                    }`}
-                    onClick={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Second Divider */}
-            <div className="h-px bg-gray-200 -mx-6 mb-4" />
-
-            {/* Data Rows */}
-            <div className="space-y-[1px] mb-4">
-              {getCurrentPageRows().map((row, index) => (
-                <div 
-                  key={index}
-                  className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
-                >
-                  {/* Checkbox */}
-                  <div className="pl-3 pr-2">
+          <div className="bg-white rounded-lg shadow-sm flex flex-col mb-4">
+            {/* Top Section */}
+            <div className="p-6">
+              {/* Top Control Row */}
+              <div className="flex items-center justify-between mb-4">
+                {/* Left Controls */}
+                <div className="flex items-center gap-2">
+                  <div className="pl-3 pr-4">
                     <input 
                       type="checkbox" 
                       className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
                     />
                   </div>
+                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                    <Refresh className="w-4 h-4 text-gray-600" />
+                  </button>
+                  <button className="flex items-center gap-1.5 text-red-600 hover:text-red-700">
+                    <Archive className="w-4 h-4" />
+                    <span className="text-sm font-medium">Zum Archiv</span>
+                  </button>
+                </div>
 
-                  {/* Name with Status */}
-                  <div className="flex items-center gap-2 min-w-[180px] px-2">
-                    <div className="w-2 h-2 rounded-full bg-[#34C759]" />
-                    <span className="font-semibold text-black">{row.name}</span>
+                {/* Right Controls */}
+                <div className="flex items-center gap-2">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Leads durchsuchen"
+                      className="w-48 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
+                    />
+                    <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                   </div>
+                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                    <Settings className="w-4 h-4 text-gray-600" />
+                  </button>
+                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                    <HelpOutline className="w-4 h-4 text-gray-600" />
+                  </button>
+                </div>
+              </div>
 
-                  {/* Time */}
-                  <div className="px-2 min-w-[120px] font-semibold text-[#1E88E5]">
-                    {row.time}
-                  </div>
+              {/* First Divider */}
+              <div className="h-px bg-gray-200 -mx-6 mb-4" />
 
-                  {/* Description */}
-                  <div className="px-2 flex-1 text-[14px] text-[#757575] truncate pr-4">
-                    {row.description}
-                  </div>
+              {/* Buttons Row with Pagination */}
+              <div className="flex items-center justify-between mb-4">
+                {/* Action Buttons */}
+                <div className="flex gap-3">
+                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                    <SmartToy className="w-3.5 h-3.5" />
+                    KI-Widget
+                  </button>
+                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                    <Phone className="w-3.5 h-3.5" />
+                    Rückrufformular
+                  </button>
+                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                    <MenuBook className="w-3.5 h-3.5" />
+                    Guides/Checklisten
+                  </button>
+                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                    <RequestQuote className="w-3.5 h-3.5" />
+                    Preisanfrage
+                  </button>
+                </div>
 
-                  {/* Actions */}
-                  <div className="px-3 flex items-center gap-1.5">
-                    <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                      <AttachFile className="w-3.5 h-3.5 text-gray-600" />
+                {/* Pagination */}
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-600">
+                    {`${(currentPage - 1) * rowsPerPage + 1}-${Math.min(currentPage * rowsPerPage, totalRows)} von ${totalRows}`}
+                  </span>
+                  <div className="flex gap-0.5">
+                    <button 
+                      className={`w-7 h-7 flex items-center justify-center rounded-full ${
+                        currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                      }`}
+                      onClick={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
+                      disabled={currentPage === 1}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
                     </button>
-                    <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                      <Close className="w-3.5 h-3.5 text-gray-600" />
+                    <button 
+                      className={`w-7 h-7 flex items-center justify-center rounded-full ${
+                        currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                      }`}
+                      onClick={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
+                      disabled={currentPage === totalPages}
+                    >
+                      <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Second Divider */}
+              <div className="h-px bg-gray-200 -mx-6" />
+            </div>
+
+            {/* Data Rows Section with overflow control */}
+            <div className="px-6 pb-4 overflow-hidden">
+              <div className="space-y-[1px]">
+                {getCurrentPageRows().map((row, index) => (
+                  <div 
+                    key={index}
+                    className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
+                  >
+                    {/* Checkbox */}
+                    <div className="pl-3 pr-2">
+                      <input 
+                        type="checkbox" 
+                        className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                      />
+                    </div>
+
+                    {/* Name with Status */}
+                    <div className="flex items-center gap-2 min-w-[180px] px-2">
+                      <div className="w-2 h-2 rounded-full bg-[#34C759]" />
+                      <span className="font-semibold text-black">{row.name}</span>
+                    </div>
+
+                    {/* Time */}
+                    <div className="px-2 min-w-[120px] font-semibold text-[#1E88E5]">
+                      {row.time}
+                    </div>
+
+                    {/* Description */}
+                    <div className="px-2 flex-1 text-[14px] text-[#757575] truncate pr-4">
+                      {row.description}
+                    </div>
+
+                    {/* Actions */}
+                    <div className="px-3 flex items-center gap-1.5">
+                      <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                        <AttachFile className="w-3.5 h-3.5 text-gray-600" />
+                      </button>
+                      <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                        <Close className="w-3.5 h-3.5 text-gray-600" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </main>
