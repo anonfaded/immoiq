@@ -736,7 +736,7 @@ export default function Dashboard() {
                     </div>
 
                     {/* Time */}
-                    <div className="w-[120px] font-semibold text-[#1E88E5] shrink-0">
+                    <div className="w-[160px] font-semibold text-[#1E88E5] shrink-0 whitespace-nowrap">
                       {row.time}
                     </div>
 
