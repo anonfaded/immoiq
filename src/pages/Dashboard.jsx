@@ -626,7 +626,7 @@ export default function Dashboard() {
           </div>
 
           {/* New Section */}
-          <div className="bg-white rounded-lg shadow-sm flex flex-col mb-4">
+          <div className="bg-white rounded-lg shadow flex flex-col mb-4">
             {/* Top Section */}
             <div className="p-6">
               {/* Top Control Row */}
