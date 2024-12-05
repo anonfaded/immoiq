@@ -633,7 +633,7 @@ export default function Dashboard() {
           {/* Performance Metrics Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 overflow-x-auto py-2 px-1">
             {/* Conversations Chart Card */}
-            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col min-w-[280px] relative">
+            <div className="bg-white rounded-lg shadow-md p-3 min-h-[6rem] flex flex-col min-w-[280px] relative">
               <h3 className="font-nunito-sans text-[12.88px] font-semibold leading-[17.56px] text-left text-gray-800 mb-3"
                 style={{ 
                   textUnderlinePosition: 'from-font',
@@ -697,7 +697,7 @@ export default function Dashboard() {
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col min-w-[280px] relative">
+            <div className="bg-white rounded-lg shadow-md p-3 min-h-[6rem] flex flex-col min-w-[280px] relative">
               <h3 className="font-nunito-sans text-[12.88px] font-semibold leading-[17.56px] text-left text-gray-800 mb-3"
                 style={{ 
                   textUnderlinePosition: 'from-font',
@@ -758,7 +758,7 @@ export default function Dashboard() {
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#0e6854] rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col relative overflow-hidden min-w-[280px]">
+            <div className="bg-[#0e6854] rounded-lg shadow-md p-3 min-h-[6rem] flex flex-col relative overflow-hidden min-w-[280px]">
               <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#12705b]"></div>
               <h3 className="font-nunito-sans text-[12.88px] font-semibold leading-[17.56px] text-left text-white mb-3 relative"
                 style={{ 
