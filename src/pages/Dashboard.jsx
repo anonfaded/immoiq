@@ -657,7 +657,7 @@ export default function Dashboard() {
             style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
           >
             {/* Top Section */}
-            <div className="p-6">
+            <div className="p-6 pb-0">
               {/* Top Control Row */}
               <div className="flex items-center justify-between mb-4">
                 {/* Left Controls */}
