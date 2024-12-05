@@ -881,20 +881,40 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between mb-4">
                   {/* Action Buttons */}
                   <div className="flex gap-3">
-                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                      <SmartToy className="w-3.5 h-3.5" />
+                    <button className="w-[102.7px] h-[30.97px] flex items-center justify-center gap-1.5 bg-white border border-[#12705B] text-[#12705B] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                      style={{ 
+                        textUnderlinePosition: 'from-font',
+                        textDecorationSkipInk: 'none'
+                      }}
+                    >
+                      <img src="robot2.png" alt="KI-Widget" className="w-[18px] h-[18px]" />
                       KI-Widget
                     </button>
-                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                      <Phone className="w-3.5 h-3.5" />
+                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white border border-[#EC870C] text-[#EC870C] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                      style={{ 
+                        textUnderlinePosition: 'from-font',
+                        textDecorationSkipInk: 'none'
+                      }}
+                    >
+                      <img src="phone1.png" alt="Phone" className="w-[19px] h-[19px]" />
                       Rückrufformular
                     </button>
-                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                      <MenuBook className="w-3.5 h-3.5" />
+                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white border border-[#4361EE] text-[#4361EE] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                      style={{ 
+                        textUnderlinePosition: 'from-font',
+                        textDecorationSkipInk: 'none'
+                      }}
+                    >
+                      <img src="clipboard.png" alt="Clipboard" className="w-[18px] h-[18px]" />
                       Guides/Checklisten
                     </button>
-                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                      <RequestQuote className="w-3.5 h-3.5" />
+                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white border border-[#7B00E6] text-[#7B00E6] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                      style={{ 
+                        textUnderlinePosition: 'from-font',
+                        textDecorationSkipInk: 'none'
+                      }}
+                    >
+                      <img src="dollar.png" alt="Dollar" className="w-[19px] h-[19px]" />
                       Preisanfrage
                     </button>
                   </div>
