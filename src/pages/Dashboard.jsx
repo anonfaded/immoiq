@@ -1017,30 +1017,50 @@ export default function Dashboard() {
                               className="w-2 h-2 rounded-full shrink-0 mr-2"
                               style={{ backgroundColor: rowColor }}
                             />
-                            <span className="font-semibold text-black truncate pl-2">{row.name}</span>
+                            <span 
+                              className="font-nunito text-[12.5px] font-normal leading-[17px] text-black truncate pl-2"
+                              style={{ 
+                                textUnderlinePosition: 'from-font',
+                                textDecorationSkipInk: 'none'
+                              }}
+                            >
+                              {row.name}
+                            </span>
                           </div>
                         </div>
 
                         {/* Time */}
                         <div 
-                          className="w-[160px] font-semibold shrink-0 whitespace-nowrap pl-2"
-                          style={{ color: rowColor }}
+                          className="w-[160px] font-nunito text-[12.5px] font-medium leading-[17px] shrink-0 whitespace-nowrap pl-2"
+                          style={{ 
+                            color: rowColor,
+                            textUnderlinePosition: 'from-font',
+                            textDecorationSkipInk: 'none'
+                          }}
                         >
                           {row.time}
                         </div>
 
                         {/* Description */}
-                        <div className="flex-1 min-w-0 text-[14px] text-[#757575] pr-4">
-                          <p className="truncate">{row.description}</p>
+                        <div className="flex-1 min-w-0 pr-4">
+                          <p 
+                            className="truncate font-nunito text-[12.5px] font-medium leading-[17px] text-[#757575]"
+                            style={{ 
+                              textUnderlinePosition: 'from-font',
+                              textDecorationSkipInk: 'none'
+                            }}
+                          >
+                            {row.description}
+                          </p>
                         </div>
 
                         {/* Actions */}
                         <div className="w-[100px] flex items-center gap-1.5 justify-end shrink-0">
-                          <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                            <AttachFile className="w-3.5 h-3.5 text-gray-600" />
+                          <button className="w-7 h-7 flex items-center justify-center rounded-md bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                            <img src="clip.png" alt="Attachment" className="w-[13.2px] h-[14px]" />
                           </button>
-                          <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                            <Close className="w-3.5 h-3.5 text-gray-600" />
+                          <button className="w-7 h-7 flex items-center justify-center rounded-md bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                            <img src="cross.png" alt="Close" className="w-[18px] h-[18px]" />
                           </button>
                         </div>
                       </div>
