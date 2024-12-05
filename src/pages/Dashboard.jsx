@@ -810,18 +810,18 @@ export default function Dashboard() {
                 {/* Top Control Row */}
                 <div className="flex items-center justify-between mb-4">
                   {/* Left Controls */}
-                  <div className="flex items-center gap-2">
-                    <div className="pl-3 pr-4">
+                  <div className="flex items-center gap-1">
+                    <div className="pl-2 pr-2">
                       <input 
                         type="checkbox" 
                         className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
                       />
                     </div>
-                    <button className="p-1.5 hover:bg-gray-100 rounded-lg">
+                    <button className="p-1 hover:bg-gray-100 rounded-lg">
                       <img src="refresh.png" alt="Refresh" className="w-[18px] h-[18px]" />
                     </button>
-                    <div className="flex items-center gap-2">
-                      <button className="p-1.5 hover:bg-gray-100 rounded-lg">
+                    <div className="flex items-center gap-1">
+                      <button className="p-1 hover:bg-gray-100 rounded-lg">
                         <img src="archive.png" alt="Archive" className="w-[18px] h-[18px]" />
                       </button>
                       <span 
@@ -841,10 +841,14 @@ export default function Dashboard() {
                     <div className="relative">
                       <input
                         type="text"
-                        placeholder="Search"
-                        className="w-[176.05px] h-[30.97px] pl-8 pr-2 border-t-[0.82px] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        placeholder="Leads durchsuchen"
+                        className="w-[176.05px] h-[30.97px] pl-3 pr-8 border border-gray-200 font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        style={{ 
+                          textUnderlinePosition: 'from-font',
+                          textDecorationSkipInk: 'none'
+                        }}
                       />
-                      <img src="search.png" alt="Search" className="absolute left-2 top-1/2 -translate-y-1/2 w-[18px] h-[18px]" />
+                      <img src="search.png" alt="Search" className="absolute right-2 top-1/2 -translate-y-1/2 w-[18px] h-[18px]" />
                     </div>
                     <button className="p-1.5 hover:bg-gray-100 rounded-lg">
                       <img src="settings.png" alt="Settings" className="w-[18px] h-[18px]" />
