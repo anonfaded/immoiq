@@ -266,10 +266,10 @@ const chartOptions = {
 }
 
 const menuIcons = {
-  mandatscout: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/golf.png" alt="MandatScout" className="w-full h-full" /></div>,
-  kiwidget: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/robot.png" alt="KI-Widget" className="w-full h-full" /></div>,
-  kischreibwerkzeuge: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/write.png" alt="KI-Schreibwerkzeuge" className="w-full h-full" /></div>,
-  kontoeinstellungen: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/settings-line.png" alt="Kontoeinstellungen" className="w-full h-full" /></div>
+  mandatscout: <img src="/golf.png" alt="MandatScout" className="w-[22px] h-[22px]" />,
+  kiwidget: <img src="/robot.png" alt="KI-Widget" className="w-[22px] h-[22px]" />,
+  kischreibwerkzeuge: <img src="/write.png" alt="KI-Schreibwerkzeuge" className="w-[22px] h-[22px]" />,
+  kontoeinstellungen: <img src="/settings-line.png" alt="Kontoeinstellungen" className="w-[22px] h-[22px]" />
 }
 
 export default function Dashboard() {
