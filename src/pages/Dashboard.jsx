@@ -261,8 +261,8 @@ const chartOptions = {
 const menuIcons = {
   mandatscout: <DashboardIcon className="w-4 h-4" />,
   kiwidget: <SmartToy className="w-4 h-4" />,
+  kischreibwerkzeuge: <Edit className="w-4 h-4" />,
   kontoeinstellungen: <Settings className="w-4 h-4" />,
-  support: <Support className="w-4 h-4" />,
 }
 
 export default function Dashboard() {
@@ -380,18 +380,18 @@ export default function Dashboard() {
       { id: 'privatverkaufschancen', label: 'Privatverkaufschancen' },
     ],
     kiwidget: [
-      { id: 'widget-settings', label: 'Widget-Einstellungen' },
-      { id: 'chatbot-training', label: 'Chatbot Training' },
-      { id: 'analytics', label: 'Analytics' },
+      { id: 'leistungsubersicht', label: 'Leistungsübersicht' },
+      { id: 'erfasste-leads', label: 'Erfasste Leads' },
+      { id: 'papierkorb', label: 'Papierkorb' },
+    ],
+    kischreibwerkzeuge: [
+      { id: 'werkzeugsubersicht', label: 'Werkzeugsübersicht' },
+      { id: 'textarchiv', label: 'Textarchiv' },
     ],
     kontoeinstellungen: [
-      { id: 'profile', label: 'Profil' },
-      { id: 'notifications', label: 'Benachrichtigungen' },
-    ],
-    support: [
-      { id: 'faq', label: 'FAQ' },
-      { id: 'documentation', label: 'Dokumentation' },
-      { id: 'contact', label: 'Kontakt' },
+      { id: 'profil-verwalten', label: 'Profil verwalten' },
+      { id: 'systemstatus', label: 'Systemstatus' },
+      { id: 'abmelden', label: 'Abmelden' },
     ],
   }
 
@@ -483,11 +483,17 @@ export default function Dashboard() {
             <div key={section} className="mb-6 px-4">
               <button
                 onClick={() => toggleSection(section)}
-                className="w-full flex items-center justify-between px-4 py-2 text-xs font-bold text-gray-500 uppercase bg-gray-100 rounded-md hover:bg-gray-200 transition-colors mb-2"
+                className="w-full flex items-center justify-between px-4 py-2 text-xs font-medium text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors mb-2"
               >
                 <div className="flex items-center gap-2">
                   {menuIcons[section]}
-                  <span>{section}</span>
+                  <span className="capitalize">{
+                    section === 'mandatscout' ? 'MandatScout' :
+                    section === 'kiwidget' ? 'KI-Widget' :
+                    section === 'kischreibwerkzeuge' ? 'KI-Schreibwerkzeuge' :
+                    section === 'kontoeinstellungen' ? 'Kontoeinstellungen' : 
+                    section
+                  }</span>
                 </div>
                 {isSidebarOpen && (expandedSections[section] ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
               </button>
