@@ -817,30 +817,40 @@ export default function Dashboard() {
                         className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
                       />
                     </div>
-                    <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                      <Refresh className="w-4 h-4 text-gray-600" />
+                    <button className="p-1.5 hover:bg-gray-100 rounded-lg">
+                      <img src="refresh.png" alt="Refresh" className="w-[18px] h-[18px]" />
                     </button>
-                    <button className="flex items-center gap-1.5 text-red-600 hover:text-red-700">
-                      <Archive className="w-4 h-4" />
-                      <span className="text-sm font-medium">Zum Archiv</span>
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button className="p-1.5 hover:bg-gray-100 rounded-lg">
+                        <img src="archive.png" alt="Archive" className="w-[18px] h-[18px]" />
+                      </button>
+                      <span 
+                        className="font-nunito text-[11.41px] font-semibold leading-[15.56px] text-left text-[#E7515A]"
+                        style={{ 
+                          textUnderlinePosition: 'from-font',
+                          textDecorationSkipInk: 'none'
+                        }}
+                      >
+                        Zum Archiv
+                      </span>
+                    </div>
                   </div>
 
                   {/* Right Controls */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 ml-auto">
                     <div className="relative">
                       <input
                         type="text"
-                        placeholder="Leads durchsuchen"
-                        className="w-48 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
+                        placeholder="Search"
+                        className="w-[176.05px] h-[30.97px] pl-8 pr-2 border-t-[0.82px] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
                       />
-                      <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
+                      <img src="search.png" alt="Search" className="absolute left-2 top-1/2 -translate-y-1/2 w-[18px] h-[18px]" />
                     </div>
-                    <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                      <Settings className="w-4 h-4 text-gray-600" />
+                    <button className="p-1.5 hover:bg-gray-100 rounded-lg">
+                      <img src="settings.png" alt="Settings" className="w-[18px] h-[18px]" />
                     </button>
-                    <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                      <HelpOutline className="w-4 h-4 text-gray-600" />
+                    <button className="p-1.5 hover:bg-gray-100 rounded-lg">
+                      <img src="help.png" alt="Help" className="w-[18px] h-[18px]" />
                     </button>
                   </div>
                 </div>
