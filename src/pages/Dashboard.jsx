@@ -407,23 +407,48 @@ export default function Dashboard() {
     const calculateContainer = () => {
       const viewportHeight = window.innerHeight;
       const containerTop = containerRef.current?.getBoundingClientRect().top || 0;
-      const marginBottom = 16;
-      const topOffset = 16;
-      const headerHeight = 140;
-      const rowHeight = 48;
+      const marginBottom = 24; // Space at bottom
+      const headerHeight = 140; // Height of controls section
+      const rowHeight = 48; // Each row is h-12 (48px)
       
-      const availableHeight = viewportHeight - containerTop - marginBottom - topOffset;
-      setContainerHeight(availableHeight);
-
+      // Calculate available height for the container
+      const availableHeight = viewportHeight - containerTop - marginBottom;
       const availableRowSpace = availableHeight - headerHeight;
-      const possibleRows = Math.floor(availableRowSpace / rowHeight);
-      setRowsPerPage(Math.max(8, Math.min(possibleRows, rows.length)));
+
+      // Calculate rows based on screen height
+      let calculatedRows;
+      if (viewportHeight >= 1080) { // HD screens
+        calculatedRows = Math.max(8, Math.min(Math.floor(availableRowSpace / rowHeight), rows.length));
+      } else if (viewportHeight >= 900) { // Medium screens
+        calculatedRows = Math.max(7, Math.min(Math.floor(availableRowSpace / rowHeight), rows.length));
+      } else { // Smaller screens
+        calculatedRows = Math.max(6, Math.min(Math.floor(availableRowSpace / rowHeight), rows.length));
+      }
+
+      // Ensure we don't exceed available space
+      const maxPossibleRows = Math.floor(availableRowSpace / rowHeight);
+      calculatedRows = Math.min(calculatedRows, maxPossibleRows);
+      
+      // Update state
+      setRowsPerPage(calculatedRows);
+      setContainerHeight(headerHeight + (calculatedRows * rowHeight));
     };
 
     calculateContainer();
     window.addEventListener('resize', calculateContainer);
     return () => window.removeEventListener('resize', calculateContainer);
-  }, []);
+  }, [rows.length]);
+
+  // Add a debug effect to log viewport info (you can remove this later)
+  useEffect(() => {
+    const logViewportInfo = () => {
+      console.log('Viewport Height:', window.innerHeight);
+      console.log('Rows per page:', rowsPerPage);
+    };
+    logViewportInfo();
+    window.addEventListener('resize', logViewportInfo);
+    return () => window.removeEventListener('resize', logViewportInfo);
+  }, [rowsPerPage]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -674,147 +699,151 @@ export default function Dashboard() {
 
           {/* Table Section with proper overflow handling */}
           <div className="overflow-x-auto -mx-4 px-4">
-            <div className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-4">
-            {/* Top Section */}
-            <div className="p-6 pb-0">
-              {/* Top Control Row */}
-              <div className="flex items-center justify-between mb-4">
-                {/* Left Controls */}
-                <div className="flex items-center gap-2">
-                  <div className="pl-3 pr-4">
-                    <input 
-                      type="checkbox" 
-                      className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
-                    />
-                  </div>
-                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                    <Refresh className="w-4 h-4 text-gray-600" />
-                  </button>
-                  <button className="flex items-center gap-1.5 text-red-600 hover:text-red-700">
-                    <Archive className="w-4 h-4" />
-                    <span className="text-sm font-medium">Zum Archiv</span>
-                  </button>
-                </div>
-
-                {/* Right Controls */}
-                <div className="flex items-center gap-2">
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Leads durchsuchen"
-                      className="w-48 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
-                    />
-                    <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
-                  </div>
-                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                    <Settings className="w-4 h-4 text-gray-600" />
-                  </button>
-                  <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
-                    <HelpOutline className="w-4 h-4 text-gray-600" />
-                  </button>
-                </div>
-              </div>
-
-              {/* First Divider */}
-              <div className="h-px bg-gray-200 -mx-6 mb-4" />
-
-              {/* Buttons Row with Pagination */}
-              <div className="flex items-center justify-between mb-4">
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                    <SmartToy className="w-3.5 h-3.5" />
-                    KI-Widget
-                  </button>
-                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                    <Phone className="w-3.5 h-3.5" />
-                    Rückrufformular
-                  </button>
-                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                    <MenuBook className="w-3.5 h-3.5" />
-                    Guides/Checklisten
-                  </button>
-                  <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
-                    <RequestQuote className="w-3.5 h-3.5" />
-                    Preisanfrage
-                  </button>
-                </div>
-
-                {/* Pagination */}
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-gray-600">
-                    {`${(currentPage - 1) * rowsPerPage + 1}-${Math.min(currentPage * rowsPerPage, totalRows)} von ${totalRows}`}
-                  </span>
-                  <div className="flex gap-0.5">
-                    <button 
-                      className={`w-7 h-7 flex items-center justify-center rounded-full ${
-                        currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
-                      }`}
-                      onClick={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
-                      disabled={currentPage === 1}
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button 
-                      className={`w-7 h-7 flex items-center justify-center rounded-full ${
-                        currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
-                      }`}
-                      onClick={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
-                      disabled={currentPage === totalPages}
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Second Divider */}
-              <div className="h-px bg-gray-200 -mx-6" />
-            </div>
-
-            {/* Data Rows Section */}
-            <div className="px-6 pb-4 flex-1 overflow-hidden">
-              <div className="h-full">
-                {getCurrentPageRows().map((row, index) => (
-                  <div 
-                    key={index}
-                    className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
-                  >
-                    {/* Checkbox */}
-                    <div className="w-[52px] flex justify-center shrink-0">
+            <div 
+              ref={containerRef}
+              className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-4"
+              style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
+            >
+              {/* Top Section */}
+              <div className="p-6 pb-0">
+                {/* Top Control Row */}
+                <div className="flex items-center justify-between mb-4">
+                  {/* Left Controls */}
+                  <div className="flex items-center gap-2">
+                    <div className="pl-3 pr-4">
                       <input 
                         type="checkbox" 
                         className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
                       />
                     </div>
+                    <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                      <Refresh className="w-4 h-4 text-gray-600" />
+                    </button>
+                    <button className="flex items-center gap-1.5 text-red-600 hover:text-red-700">
+                      <Archive className="w-4 h-4" />
+                      <span className="text-sm font-medium">Zum Archiv</span>
+                    </button>
+                  </div>
 
-                    {/* Name with Status */}
-                    <div className="w-[180px] flex items-center gap-2 shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-[#34C759] shrink-0" />
-                      <span className="font-semibold text-black truncate">{row.name}</span>
+                  {/* Right Controls */}
+                  <div className="flex items-center gap-2">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Leads durchsuchen"
+                        className="w-48 h-8 pl-3 pr-8 rounded-md border border-gray-300 bg-white text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#1E88E5] focus:border-transparent"
+                      />
+                      <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
                     </div>
+                    <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                      <Settings className="w-4 h-4 text-gray-600" />
+                    </button>
+                    <button className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100">
+                      <HelpOutline className="w-4 h-4 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
 
-                    {/* Time */}
-                    <div className="w-[160px] font-semibold text-[#1E88E5] shrink-0 whitespace-nowrap">
-                      {row.time}
-                    </div>
+                {/* First Divider */}
+                <div className="h-px bg-gray-200 -mx-6 mb-4" />
 
-                    {/* Description */}
-                    <div className="flex-1 min-w-0 text-[14px] text-[#757575]">
-                      <p className="truncate">{row.description}</p>
-                    </div>
+                {/* Buttons Row with Pagination */}
+                <div className="flex items-center justify-between mb-4">
+                  {/* Action Buttons */}
+                  <div className="flex gap-3">
+                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#34C759] text-[#34C759] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                      <SmartToy className="w-3.5 h-3.5" />
+                      KI-Widget
+                    </button>
+                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#FFA726] text-[#FFA726] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                      <Phone className="w-3.5 h-3.5" />
+                      Rückrufformular
+                    </button>
+                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#1E88E5] text-[#1E88E5] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                      <MenuBook className="w-3.5 h-3.5" />
+                      Guides/Checklisten
+                    </button>
+                    <button className="h-8 px-3 flex items-center gap-1.5 bg-white border border-[#9C27B0] text-[#9C27B0] font-semibold rounded-md hover:bg-[#f8f8f8] transition-colors text-sm">
+                      <RequestQuote className="w-3.5 h-3.5" />
+                      Preisanfrage
+                    </button>
+                  </div>
 
-                    {/* Actions */}
-                    <div className="w-[100px] flex items-center gap-1.5 justify-end shrink-0">
-                      <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                        <AttachFile className="w-3.5 h-3.5 text-gray-600" />
+                  {/* Pagination */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-600">
+                      {`${(currentPage - 1) * rowsPerPage + 1}-${Math.min(currentPage * rowsPerPage, totalRows)} von ${totalRows}`}
+                    </span>
+                    <div className="flex gap-0.5">
+                      <button 
+                        className={`w-7 h-7 flex items-center justify-center rounded-full ${
+                          currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                        }`}
+                        onClick={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
+                        disabled={currentPage === 1}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
                       </button>
-                      <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
-                        <Close className="w-3.5 h-3.5 text-gray-600" />
+                      <button 
+                        className={`w-7 h-7 flex items-center justify-center rounded-full ${
+                          currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                        }`}
+                        onClick={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
+                        disabled={currentPage === totalPages}
+                      >
+                        <ChevronRight className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
-                ))}
+                </div>
+
+                {/* Second Divider */}
+                <div className="h-px bg-gray-200 -mx-6" />
+              </div>
+
+              {/* Data Rows Section */}
+              <div className="px-6 pb-4 flex-1 overflow-hidden">
+                <div className="h-full">
+                  {getCurrentPageRows().map((row, index) => (
+                    <div 
+                      key={index}
+                      className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
+                    >
+                      {/* Checkbox */}
+                      <div className="w-[52px] flex justify-center shrink-0">
+                        <input 
+                          type="checkbox" 
+                          className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
+                        />
+                      </div>
+
+                      {/* Name with Status */}
+                      <div className="w-[180px] flex items-center gap-2 shrink-0">
+                        <div className="w-2 h-2 rounded-full bg-[#34C759] shrink-0" />
+                        <span className="font-semibold text-black truncate">{row.name}</span>
+                      </div>
+
+                      {/* Time */}
+                      <div className="w-[160px] font-semibold text-[#1E88E5] shrink-0 whitespace-nowrap">
+                        {row.time}
+                      </div>
+
+                      {/* Description */}
+                      <div className="flex-1 min-w-0 text-[14px] text-[#757575]">
+                        <p className="truncate">{row.description}</p>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="w-[100px] flex items-center gap-1.5 justify-end shrink-0">
+                        <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                          <AttachFile className="w-3.5 h-3.5 text-gray-600" />
+                        </button>
+                        <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                          <Close className="w-3.5 h-3.5 text-gray-600" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
