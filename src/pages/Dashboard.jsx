@@ -292,6 +292,7 @@ export default function Dashboard() {
   const [showSuggestionForm, setShowSuggestionForm] = useState(false);
   const suggestionFormRef = useRef(null);
   const [popupPosition, setPopupPosition] = useState({ top: 0, right: 0 });
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const rows = [
     {
@@ -545,6 +546,24 @@ export default function Dashboard() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleSelectAll = (checked) => {
+    if (checked) {
+      setSelectedRows(getCurrentPageRows().map((_, index) => index));
+    } else {
+      setSelectedRows([]);
+    }
+  };
+
+  const handleSelectRow = (index) => {
+    setSelectedRows(prev => {
+      if (prev.includes(index)) {
+        return prev.filter(i => i !== index);
+      } else {
+        return [...prev, index];
+      }
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
@@ -994,6 +1013,9 @@ export default function Dashboard() {
                   <div className="flex items-center gap-1">
                     <div className="pl-2 pr-2">
                       <Checkbox
+                        checked={selectedRows.length === getCurrentPageRows().length && getCurrentPageRows().length > 0}
+                        indeterminate={selectedRows.length > 0 && selectedRows.length < getCurrentPageRows().length}
+                        onChange={(e) => handleSelectAll(e.target.checked)}
                         sx={{
                           color: '#E0E6ED',
                           padding: '0',
@@ -1006,6 +1028,9 @@ export default function Dashboard() {
                             '&:hover': {
                               color: '#12705B'
                             }
+                          },
+                          '&.MuiCheckbox-indeterminate': {
+                            color: '#12705B',
                           },
                           '& .MuiSvgIcon-root': {
                             fontSize: 20,
@@ -1135,7 +1160,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Second Divider */}
-                <div className="h-px bg-gray-200 -mx-6" />
+                <div className="h-px bg-gray-200 dark:bg-gray-700 -mx-6" />
               </div>
 
               {/* Data Rows Section */}
@@ -1171,6 +1196,8 @@ export default function Dashboard() {
                         {/* Checkbox */}
                         <div className="w-[52px] flex justify-center shrink-0 pr-4">
                           <Checkbox
+                            checked={selectedRows.includes(index)}
+                            onChange={() => handleSelectRow(index)}
                             sx={{
                               color: '#E0E6ED',
                               padding: '0',
