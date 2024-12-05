@@ -762,7 +762,7 @@ export default function Dashboard() {
                     className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
                   >
                     {/* Checkbox */}
-                    <div className="pl-3 pr-2 shrink-0">
+                    <div className="w-[52px] flex justify-center shrink-0">
                       <input 
                         type="checkbox" 
                         className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
@@ -770,23 +770,23 @@ export default function Dashboard() {
                     </div>
 
                     {/* Name with Status */}
-                    <div className="flex items-center gap-2 min-w-[140px] md:min-w-[180px] px-2 shrink-0">
+                    <div className="w-[180px] flex items-center gap-2 shrink-0">
                       <div className="w-2 h-2 rounded-full bg-[#34C759] shrink-0" />
                       <span className="font-semibold text-black truncate">{row.name}</span>
                     </div>
 
                     {/* Time */}
-                    <div className="px-2 min-w-[100px] md:min-w-[120px] font-semibold text-[#1E88E5] shrink-0">
+                    <div className="w-[120px] font-semibold text-[#1E88E5] shrink-0">
                       {row.time}
                     </div>
 
                     {/* Description */}
-                    <div className="px-2 flex-1 min-w-0 text-[14px] text-[#757575]">
+                    <div className="flex-1 min-w-0 text-[14px] text-[#757575]">
                       <p className="truncate">{row.description}</p>
                     </div>
 
                     {/* Actions */}
-                    <div className="px-3 flex items-center gap-1.5 shrink-0">
+                    <div className="w-[100px] flex items-center gap-1.5 justify-end shrink-0">
                       <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
                         <AttachFile className="w-3.5 h-3.5 text-gray-600" />
                       </button>
