@@ -534,7 +534,7 @@ export default function Dashboard() {
         </div>
 
         {/* Help Section */}
-        <div className="p-4 border-t border-gray-200 relative">
+        <div className="p-4 relative">
           <div className="bg-[#12705b] text-white rounded-lg p-4 h-auto pt-8">
             {/* Profile Picture */}
             <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
