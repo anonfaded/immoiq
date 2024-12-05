@@ -407,7 +407,9 @@ export default function Dashboard() {
     const calculateContainer = () => {
       const viewportHeight = window.innerHeight;
       const containerTop = containerRef.current?.getBoundingClientRect().top || 0;
-      const marginBottom = 24; // Space at bottom
+      
+      // Minimal margin for bottom to maximize space
+      const marginBottom = viewportHeight >= 1080 ? 24 : 8; // Much smaller margin on smaller screens
       const headerHeight = 140; // Height of controls section
       const rowHeight = 48; // Each row is h-12 (48px)
       
@@ -415,19 +417,21 @@ export default function Dashboard() {
       const availableHeight = viewportHeight - containerTop - marginBottom;
       const availableRowSpace = availableHeight - headerHeight;
 
-      // Calculate rows based on screen height
+      // Calculate rows based on screen height, maximizing space on smaller screens
       let calculatedRows;
       if (viewportHeight >= 1080) { // HD screens
         calculatedRows = Math.max(8, Math.min(Math.floor(availableRowSpace / rowHeight), rows.length));
       } else if (viewportHeight >= 900) { // Medium screens
-        calculatedRows = Math.max(7, Math.min(Math.floor(availableRowSpace / rowHeight), rows.length));
-      } else { // Smaller screens
         calculatedRows = Math.max(6, Math.min(Math.floor(availableRowSpace / rowHeight), rows.length));
+      } else { // Smaller screens - maximize available space
+        calculatedRows = Math.max(4, Math.min(Math.floor(availableRowSpace / rowHeight), rows.length));
       }
 
-      // Ensure we don't exceed available space
+      // Ensure we use maximum available space on smaller screens
       const maxPossibleRows = Math.floor(availableRowSpace / rowHeight);
-      calculatedRows = Math.min(calculatedRows, maxPossibleRows);
+      if (viewportHeight < 900) {
+        calculatedRows = maxPossibleRows;
+      }
       
       // Update state
       setRowsPerPage(calculatedRows);
@@ -701,7 +705,7 @@ export default function Dashboard() {
           <div className="overflow-x-auto -mx-4 px-4">
             <div 
               ref={containerRef}
-              className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-4"
+              className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-1 md:mb-4"
               style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
             >
               {/* Top Section */}
