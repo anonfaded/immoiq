@@ -525,19 +525,19 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <h3 className="font-semibold text-center mb-4">Support Team</h3>
+            <h3 className="font-semibold text-center mb-4">Brauchen Sie Hilfe?</h3>
             
             <div className="space-y-3">
-              <a href="tel:+1234567890" className="flex items-center gap-2 text-sm">
+              <a href="tel:+436776203125" className="flex items-center gap-2 text-sm">
                 <Phone className="w-4 h-4" />
-                +1 234 567 890
+                +43 (677) 620 - 31215
               </a>
-              <a href="mailto:support@example.com" className="flex items-center gap-2 text-sm">
+              <a href="mailto:support@immoiq.ch" className="flex items-center gap-2 text-sm">
                 <Email className="w-4 h-4" />
-                support@example.com
+                support@immoiq.ch
               </a>
               <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/436776203125"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-full hover:bg-white/20 transition-colors"
