@@ -592,12 +592,15 @@ export default function Dashboard() {
           </div>
           <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-gray-500 p-1 hover:bg-gray-100 rounded-full transition-colors"
+            className="text-gray-500 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
           >
             <img 
               src="/menu_open.png" 
               alt="Toggle Menu" 
-              className="w-6 h-6"
+              className={`w-6 h-6 transform transition-transform duration-300 ${
+                isSidebarOpen ? 'rotate-0' : 'rotate-180'
+              }`}
+              style={{ transformOrigin: 'center' }}
             />
           </button>
         </div>
