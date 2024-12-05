@@ -537,8 +537,8 @@ export default function Dashboard() {
         <div className="p-4 border-t border-gray-200 relative">
           <div className="bg-[#12705b] text-white rounded-lg p-4 h-auto pt-14">
             {/* Profile Picture */}
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-              <div className="w-20 h-20 rounded-full bg-white shadow-lg overflow-hidden p-0">
+            <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
+              <div className="w-36 h-36 rounded-full overflow-hidden">
                 <img 
                   src="/contact-whatsapp.png" 
                   alt="Support Profile" 
