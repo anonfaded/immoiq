@@ -547,26 +547,26 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <h3 className="font-semibold text-center mb-4 w-[163px] h-[18px] mx-auto text-[15px]">Brauchen Sie Hilfe?</h3>
+            <h3 className="font-semibold text-center mb-4 w-[163px] h-[18px] mx-auto text-[18px]">Brauchen Sie Hilfe?</h3>
             
             <div className="space-y-3 text-center">
               <div className="flex justify-center gap-3">
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-3">
                   <img src="/phone.png" alt="Phone" className="w-3.5 h-3.5" />
-                  <img src="/email.png" alt="Email" className="w-3.5 h-3.5" />
+                  <img src="/email.png" alt="Email" className="w-3.5 h-3.5 mt-1.5" />
                 </div>
-                <div className="flex flex-col gap-2 text-[11px] text-left">
-                  <a href="tel:+436776203125">+43 (677) 620 - 31215</a>
-                  <a href="mailto:support@immoiq.ch">support@immoiq.ch</a>
+                <div className="flex flex-col">
+                  <a href="tel:+436776203125" className="text-[11px] text-left h-[14px]">+43 (677) 620 - 31215</a>
+                  <a href="mailto:support@immoiq.ch" className="text-[11px] text-left mt-[18px] h-[14px]">support@immoiq.ch</a>
                 </div>
               </div>
               <a
                 href="https://wa.me/436776203125"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-full hover:bg-white/20 transition-colors"
+                className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-[8px] hover:bg-white/20 transition-colors"
               >
-                <WhatsApp className="w-4 h-4" />
+                <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4" />
                 WhatsApp Support
               </a>
             </div>
