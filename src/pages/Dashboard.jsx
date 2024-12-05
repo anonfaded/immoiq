@@ -921,13 +921,19 @@ export default function Dashboard() {
 
                   {/* Pagination */}
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-600">
+                    <span 
+                      className="font-nunito text-[11.41px] font-normal leading-[15.56px] text-[#0E1726]"
+                      style={{ 
+                        textUnderlinePosition: 'from-font',
+                        textDecorationSkipInk: 'none'
+                      }}
+                    >
                       {`${(currentPage - 1) * rowsPerPage + 1}-${Math.min(currentPage * rowsPerPage, totalRows)} von ${totalRows}`}
                     </span>
                     <div className="flex gap-0.5">
                       <button 
-                        className={`w-7 h-7 flex items-center justify-center rounded-full ${
-                          currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                        className={`w-7 h-7 flex items-center justify-center rounded-md bg-[#F8F8F8] ${
+                          currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200 text-gray-600'
                         }`}
                         onClick={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
                         disabled={currentPage === 1}
@@ -935,8 +941,8 @@ export default function Dashboard() {
                         <ChevronLeft className="w-4 h-4" />
                       </button>
                       <button 
-                        className={`w-7 h-7 flex items-center justify-center rounded-full ${
-                          currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-100 text-gray-600'
+                        className={`w-7 h-7 flex items-center justify-center rounded-md bg-[#F8F8F8] ${
+                          currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200 text-gray-600'
                         }`}
                         onClick={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
                         disabled={currentPage === totalPages}
