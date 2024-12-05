@@ -48,6 +48,8 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PersonIcon from '@mui/icons-material/Person'
 import BusinessIcon from '@mui/icons-material/Business'
+import LightbulbIcon from '@mui/icons-material/Lightbulb'
+import SendIcon from '@mui/icons-material/Send'
 
 // Register ChartJS components
 ChartJS.register(
@@ -287,6 +289,9 @@ export default function Dashboard() {
   const containerRef = useRef(null);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const profileMenuRef = useRef(null);
+  const [showSuggestionForm, setShowSuggestionForm] = useState(false);
+  const suggestionFormRef = useRef(null);
+  const [popupPosition, setPopupPosition] = useState({ top: 0, right: 0 });
 
   const rows = [
     {
@@ -490,6 +495,55 @@ export default function Dashboard() {
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close suggestion form when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (suggestionFormRef.current && !suggestionFormRef.current.contains(event.target)) {
+        setShowSuggestionForm(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Calculate initial position
+  useEffect(() => {
+    if (suggestionFormRef.current) {
+      const rect = suggestionFormRef.current.getBoundingClientRect();
+      setPopupPosition({
+        top: rect.bottom + window.scrollY + 8,
+        right: document.documentElement.clientWidth - rect.right
+      });
+    }
+  }, []); // Run once on mount
+
+  // Update position when popup is shown
+  useEffect(() => {
+    if (showSuggestionForm && suggestionFormRef.current) {
+      const rect = suggestionFormRef.current.getBoundingClientRect();
+      setPopupPosition({
+        top: rect.bottom + window.scrollY + 8,
+        right: document.documentElement.clientWidth - rect.right
+      });
+    }
+  }, [showSuggestionForm]);
+
+  // Also update position on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (suggestionFormRef.current) {
+        const rect = suggestionFormRef.current.getBoundingClientRect();
+        setPopupPosition({
+          top: rect.bottom + window.scrollY + 8,
+          right: document.documentElement.clientWidth - rect.right
+        });
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -714,10 +768,44 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <button className="px-4 py-2 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-2 text-sm whitespace-nowrap shrink-0">
-              <span className="text-gray-700">Vorschlag einreichen</span>
-              <img src="/right-arrow.png" alt="Arrow" className="w-[11.67px] h-[11.67px]" />
-            </button>
+            <div className="relative" ref={suggestionFormRef}>
+              <button 
+                onClick={() => setShowSuggestionForm(!showSuggestionForm)}
+                className="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm whitespace-nowrap shrink-0 bg-white dark:bg-gray-800"
+              >
+                <span className="text-gray-700 dark:text-gray-300">Vorschlag einreichen</span>
+                <img src="/right-arrow.png" alt="Arrow" className="w-[11.67px] h-[11.67px]" />
+              </button>
+
+              {/* Suggestion Form Popup */}
+              <div 
+                className={`fixed w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 z-[9999] transform transition-all duration-200 ease-out origin-top-right ${
+                  showSuggestionForm 
+                    ? 'opacity-100 scale-100 translate-y-0' 
+                    : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+                }`}
+                style={{
+                  top: `${popupPosition.top}px`,
+                  right: `${popupPosition.right}px`
+                }}
+              >
+                <div className="space-y-4">
+                  <h3 className="font-nunito text-sm font-semibold text-gray-900 dark:text-white">
+                    Vorschlag einreichen
+                  </h3>
+                  <textarea 
+                    className="w-full h-32 px-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:focus:ring-blue-400 resize-none"
+                    placeholder="Beschreiben Sie Ihren Vorschlag..."
+                  />
+                  <div className="flex justify-end">
+                    <button className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-[#12705B] hover:bg-[#12705B]/90 rounded-md transition-colors">
+                      <SendIcon className="w-4 h-4" />
+                      Senden
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
