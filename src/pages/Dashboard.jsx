@@ -259,10 +259,10 @@ const chartOptions = {
 }
 
 const menuIcons = {
-  mandatscout: <DashboardIcon className="w-4 h-4" />,
-  kiwidget: <SmartToy className="w-4 h-4" />,
-  kischreibwerkzeuge: <Edit className="w-4 h-4" />,
-  kontoeinstellungen: <Settings className="w-4 h-4" />,
+  mandatscout: <img src="/golf.png" alt="MandatScout" className="w-[22px] h-[22px]" />,
+  kiwidget: <img src="/robot.png" alt="KI-Widget" className="w-[22px] h-[22px]" />,
+  kischreibwerkzeuge: <img src="/write.png" alt="KI-Schreibwerkzeuge" className="w-[22px] h-[22px]" />,
+  kontoeinstellungen: <img src="/settings-line.png" alt="Kontoeinstellungen" className="w-[22px] h-[22px]" />
 }
 
 export default function Dashboard() {
@@ -469,12 +469,16 @@ export default function Dashboard() {
               <img src="/logo-text.svg" alt="Company Name" className="h-5 w-auto" />
             )}
           </div>
-          <IconButton 
+          <button 
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-gray-500"
+            className="text-gray-500 p-1 hover:bg-gray-100 rounded-full transition-colors"
           >
-            <MenuIcon />
-          </IconButton>
+            <img 
+              src="/menu_open.png" 
+              alt="Toggle Menu" 
+              className="w-6 h-6"
+            />
+          </button>
         </div>
 
         {/* Navigation Menu */}
@@ -495,7 +499,11 @@ export default function Dashboard() {
                     section
                   }</span>
                 </div>
-                {isSidebarOpen && (expandedSections[section] ? <KeyboardArrowDown /> : <KeyboardArrowRight />)}
+                {isSidebarOpen && (
+                  expandedSections[section] ? 
+                    <KeyboardArrowDown className="w-4 h-4" /> : 
+                    <KeyboardArrowRight className="w-4 h-4" />
+                )}
               </button>
               
               {(isSidebarOpen && expandedSections[section]) && (
@@ -511,8 +519,12 @@ export default function Dashboard() {
                       }`}
                       onClick={() => setActiveSection(item.id)}
                     >
-                      <span className="text-gray-400">-</span>
-                      <span className="ml-2">{item.label}</span>
+                      <img 
+                        src={activeSection === item.id ? "/rectangle-selected.png" : "/rectangle-unselected.png"}
+                        alt="-" 
+                        className="inline-block w-[8px] h-[2px] mr-2"
+                      />
+                      <span>{item.label}</span>
                     </Link>
                   ))}
                 </div>
@@ -526,8 +538,12 @@ export default function Dashboard() {
           <div className="bg-[#12705b] text-white rounded-lg p-4 h-auto pt-14">
             {/* Profile Picture */}
             <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg">
-                <AccountCircle className="w-16 h-16 text-gray-500" />
+              <div className="w-20 h-20 rounded-full bg-white shadow-lg overflow-hidden p-0">
+                <img 
+                  src="/contact-whatsapp.png" 
+                  alt="Support Profile" 
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
 
