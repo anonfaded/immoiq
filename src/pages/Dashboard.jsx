@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { IconButton } from '@mui/material'
 import {
@@ -277,7 +277,9 @@ export default function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
-  const rowsPerPage = 8;
+  const [containerHeight, setContainerHeight] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(8);
+  const containerRef = useRef(null);
 
   const rows = [
     {
@@ -379,6 +381,28 @@ export default function Dashboard() {
       [section]: !prev[section]
     }))
   }
+
+  // Calculate container height and rows based on viewport
+  useEffect(() => {
+    const calculateContainer = () => {
+      const viewportHeight = window.innerHeight;
+      const containerTop = containerRef.current?.getBoundingClientRect().top || 0;
+      const marginBottom = 32; // 2rem for bottom margin
+      const availableHeight = viewportHeight - containerTop - marginBottom;
+      setContainerHeight(availableHeight);
+
+      // Calculate rows that can fit
+      const headerHeight = 180; // Height of controls and headers
+      const rowHeight = 48; // h-12 = 3rem = 48px
+      const availableRowSpace = availableHeight - headerHeight;
+      const possibleRows = Math.floor(availableRowSpace / rowHeight);
+      setRowsPerPage(Math.max(6, Math.min(possibleRows, rows.length)));
+    };
+
+    calculateContainer();
+    window.addEventListener('resize', calculateContainer);
+    return () => window.removeEventListener('resize', calculateContainer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -626,7 +650,11 @@ export default function Dashboard() {
           </div>
 
           {/* New Section */}
-          <div className="bg-white rounded-lg shadow flex flex-col mb-4">
+          <div 
+            ref={containerRef}
+            className="bg-white rounded-lg shadow flex flex-col mb-8"
+            style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
+          >
             {/* Top Section */}
             <div className="p-6">
               {/* Top Control Row */}
@@ -724,16 +752,16 @@ export default function Dashboard() {
               <div className="h-px bg-gray-200 -mx-6" />
             </div>
 
-            {/* Data Rows Section with overflow control */}
-            <div className="px-6 pb-4 overflow-hidden">
-              <div className="space-y-[1px]">
+            {/* Data Rows Section */}
+            <div className="px-6 pb-4 flex-1 overflow-hidden">
+              <div className="h-full">
                 {getCurrentPageRows().map((row, index) => (
                   <div 
                     key={index}
                     className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors border-b border-[#E0E0E0] last:border-b-0"
                   >
                     {/* Checkbox */}
-                    <div className="pl-3 pr-2">
+                    <div className="pl-3 pr-2 shrink-0">
                       <input 
                         type="checkbox" 
                         className="w-4 h-4 rounded border-gray-300 text-[#1E88E5] focus:ring-[#1E88E5]"
@@ -741,23 +769,23 @@ export default function Dashboard() {
                     </div>
 
                     {/* Name with Status */}
-                    <div className="flex items-center gap-2 min-w-[180px] px-2">
-                      <div className="w-2 h-2 rounded-full bg-[#34C759]" />
-                      <span className="font-semibold text-black">{row.name}</span>
+                    <div className="flex items-center gap-2 min-w-[140px] md:min-w-[180px] px-2 shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-[#34C759] shrink-0" />
+                      <span className="font-semibold text-black truncate">{row.name}</span>
                     </div>
 
                     {/* Time */}
-                    <div className="px-2 min-w-[120px] font-semibold text-[#1E88E5]">
+                    <div className="px-2 min-w-[100px] md:min-w-[120px] font-semibold text-[#1E88E5] shrink-0">
                       {row.time}
                     </div>
 
                     {/* Description */}
-                    <div className="px-2 flex-1 text-[14px] text-[#757575] truncate pr-4">
-                      {row.description}
+                    <div className="px-2 flex-1 min-w-0 text-[14px] text-[#757575]">
+                      <p className="truncate">{row.description}</p>
                     </div>
 
                     {/* Actions */}
-                    <div className="px-3 flex items-center gap-1.5">
+                    <div className="px-3 flex items-center gap-1.5 shrink-0">
                       <button className="w-7 h-7 flex items-center justify-center rounded-full bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
                         <AttachFile className="w-3.5 h-3.5 text-gray-600" />
                       </button>
