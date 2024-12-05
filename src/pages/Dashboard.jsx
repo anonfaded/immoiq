@@ -387,13 +387,14 @@ export default function Dashboard() {
     const calculateContainer = () => {
       const viewportHeight = window.innerHeight;
       const containerTop = containerRef.current?.getBoundingClientRect().top || 0;
-      const marginBottom = 32; // 2rem for bottom margin
-      const availableHeight = viewportHeight - containerTop - marginBottom;
+      const marginBottom = 1;
+      const topOffset = 16;
+      const availableHeight = viewportHeight - containerTop - marginBottom - topOffset;
       setContainerHeight(availableHeight);
 
       // Calculate rows that can fit
-      const headerHeight = 180; // Height of controls and headers
-      const rowHeight = 48; // h-12 = 3rem = 48px
+      const headerHeight = 180;
+      const rowHeight = 48;
       const availableRowSpace = availableHeight - headerHeight;
       const possibleRows = Math.floor(availableRowSpace / rowHeight);
       setRowsPerPage(Math.max(6, Math.min(possibleRows, rows.length)));
@@ -652,7 +653,7 @@ export default function Dashboard() {
           {/* New Section */}
           <div 
             ref={containerRef}
-            className="bg-white rounded-lg shadow flex flex-col mb-8"
+            className="bg-white rounded-lg shadow flex flex-col mb-4 mt-4"
             style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
           >
             {/* Top Section */}
