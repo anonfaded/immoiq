@@ -537,19 +537,20 @@ export default function Dashboard() {
         <div className="p-4 relative">
           <div className="bg-[#12705b] text-white rounded-lg p-4 h-auto pt-8">
             {/* Profile Picture */}
-            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
+            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 pointer-events-none select-none">
               <div className="w-36 h-36 rounded-full overflow-hidden">
                 <img 
                   src="/contact-whatsapp.png" 
                   alt="Support Profile" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none"
+                  draggable="false"
                 />
               </div>
             </div>
 
             <h3 className="font-semibold text-center mb-4 w-[163px] h-[18px] mx-auto text-[18px]">Brauchen Sie Hilfe?</h3>
             
-            <div className="space-y-3 text-center">
+            <div className="space-y-3 text-center relative z-10">
               <div className="flex justify-center gap-3">
                 <div className="flex flex-col gap-3">
                   <img src="/phone.png" alt="Phone" className="w-3.5 h-3.5" />
