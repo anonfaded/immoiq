@@ -604,9 +604,9 @@ export default function Dashboard() {
         {/* Main Content Area */}
         <main className="p-4 md:px-8 space-y-4 min-w-0 overflow-hidden">
           {/* Performance Metrics Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4 overflow-x-auto">
-            {/* Cards with min-width to prevent squishing */}
-            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col min-w-[280px]">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 overflow-x-auto py-2 px-1">
+            {/* Conversations Chart Card */}
+            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col min-w-[280px] relative">
               <h3 className="text-sm font-semibold text-gray-800 mb-3">
                 KI-Widget Performance
               </h3>
@@ -645,7 +645,7 @@ export default function Dashboard() {
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col">
+            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col min-w-[280px] relative">
               <h3 className="text-sm font-semibold text-gray-800 mb-3">
                 Gelöste Anfragen
               </h3>
@@ -680,7 +680,7 @@ export default function Dashboard() {
             </div>
 
             {/* Interaction Rate Card */}
-            <div className="bg-[#0e6854] rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col relative overflow-hidden">
+            <div className="bg-[#0e6854] rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col relative overflow-hidden min-w-[280px]">
               <div className="absolute left-1/2 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#12705b]"></div>
               <h3 className="text-sm font-semibold text-white mb-3 relative">
                 Interaktionsrate
@@ -702,7 +702,7 @@ export default function Dashboard() {
           </div>
 
           {/* Table Section with proper overflow handling */}
-          <div className="overflow-x-auto -mx-4 md:-mx-8 px-4 md:px-8">
+          <div className="overflow-x-auto -mx-4 md:-mx-8 px-4 md:px-8 mt-4">
             <div 
               ref={containerRef}
               className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-1 md:mb-4"
