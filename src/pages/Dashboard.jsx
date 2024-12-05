@@ -522,16 +522,16 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <div className={`flex-1 ${isSidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300`}>
+      <div className={`flex-1 ${isSidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300 min-w-0`}>
         {/* Top Navigation Bar */}
-        <nav className="h-16 bg-white shadow-sm px-6 flex items-center justify-between sticky top-0 z-10">
-          <div className="flex items-center gap-2 text-gray-600">
-            <Home className="w-4 h-4" />
-            <span className="text-gray-400">/</span>
-            <span className="text-sm">Lead-Management</span>
+        <nav className="h-16 bg-white shadow-sm px-4 md:px-6 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-2 text-gray-600 min-w-0">
+            <Home className="w-4 h-4 shrink-0" />
+            <span className="text-gray-400 shrink-0">/</span>
+            <span className="text-sm truncate">Lead-Management</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4 ml-4 shrink-0">
             <IconButton 
               onClick={() => setIsDarkMode(!isDarkMode)}
               className="text-gray-600"
@@ -539,43 +539,45 @@ export default function Dashboard() {
               <DarkMode />
             </IconButton>
             
-            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+            <div className="w-8 md:w-10 h-8 md:h-10 rounded-full bg-gray-200 flex items-center justify-center">
               <span className="text-gray-600 font-medium">C</span>
             </div>
           </div>
         </nav>
 
         {/* Greeting Section */}
-        <div className="px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-4xl">👋</span>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-gray-900">
-                  Grüzi Carlos
-                </span>
-                <span className="text-gray-400 text-2xl">-</span>
-                <span className="text-2xl text-gray-500">
-                  Lass uns heute mehr Verkaufsmandate gewinnen!
-                </span>
+        <div className="p-4 md:px-6 md:py-4 overflow-hidden">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3 min-w-0 overflow-hidden">
+              <span className="text-3xl md:text-4xl shrink-0">👋</span>
+              <div className="min-w-0 overflow-hidden">
+                <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2">
+                  <span className="text-xl md:text-2xl font-bold text-gray-900 truncate">
+                    Grüzi Carlos
+                  </span>
+                  <span className="hidden md:inline text-gray-400 text-2xl shrink-0">-</span>
+                  <span className="text-lg md:text-2xl text-gray-500 truncate">
+                    Lass uns heute mehr Verkaufsmandate gewinnen!
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <button className="px-4 py-2 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-2 text-sm">
-            <span className="text-gray-700">
-              Vorschlag einreichen
-            </span>
-            <span className="text-lg">→</span>
-          </button>
+            <button className="px-4 py-2 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors flex items-center gap-2 text-sm whitespace-nowrap shrink-0">
+              <span className="text-gray-700">
+                Vorschlag einreichen
+              </span>
+              <span className="text-lg">→</span>
+            </button>
+          </div>
         </div>
 
         {/* Main Content Area */}
-        <main className="p-4 space-y-4">
+        <main className="p-4 md:p-4 space-y-4 min-w-0 overflow-hidden">
           {/* Performance Metrics Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            {/* Conversations Chart Card */}
-            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4 overflow-x-auto">
+            {/* Cards with min-width to prevent squishing */}
+            <div className="bg-white rounded-lg shadow-md p-3 min-h-[10.5rem] flex flex-col min-w-[280px]">
               <h3 className="text-sm font-semibold text-gray-800 mb-3">
                 KI-Widget Performance
               </h3>
@@ -670,12 +672,9 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* New Section */}
-          <div 
-            ref={containerRef}
-            className="bg-white rounded-lg shadow flex flex-col mb-4 mt-4"
-            style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
-          >
+          {/* Table Section with proper overflow handling */}
+          <div className="overflow-x-auto -mx-4 px-4">
+            <div className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-4">
             {/* Top Section */}
             <div className="p-6 pb-0">
               {/* Top Control Row */}
@@ -816,6 +815,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                 ))}
+                </div>
               </div>
             </div>
           </div>
