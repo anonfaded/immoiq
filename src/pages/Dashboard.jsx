@@ -282,61 +282,21 @@ export default function Dashboard() {
   const containerRef = useRef(null);
 
   const rows = [
-    {
-      name: "Bernd Eisenhammer",
-      time: "Heute - 11:30",
-      description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde ..."
-    },
-    {
-      name: "Hanspeter Schmid",
-      time: "Gestern - 21:10",
-      description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
-    },
-    {
-      name: "Ursula Müller",
-      time: "Vor 2 Tagen",
-      description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
-    },
-    {
-      name: "Monika Zimmermann",
-      time: "Vor 2 Tagen",
-      description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite ..."
-    },
-    {
-      name: "Bernd Eisenhammer",
-      time: "Vor 2 Tagen",
-      description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde."
-    },
-    {
-      name: "Hanspeter Schmid",
-      time: "Vor 4 Tagen",
-      description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
-    },
-    {
-      name: "Ursula Müller",
-      time: "Vor 6 Tagen",
-      description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
-    },
-    {
-      name: "Monika Zimmermann",
-      time: "Vor 1 Woche",
-      description: "Frau Zimmermann hat sich über die Funktion für Kundenbewertungen informiert und gefragt, wie diese in ihre bestehende Webseite .."
-    },
-    {
-      name: "Bernd Eisenhammer",
-      time: "Vor 1 Woche",
-      description: "Herr Eisenhammer wollte wissen, wie das Rückrufformular funktioniert und ob es mit ihrem aktuellen CRM-System verbunden werde .."
-    },
-    {
-      name: "Hanspeter Schmid",
-      time: "Vor 1 Woche",
-      description: "Herr Schmid hat sich für die Integration des KI-Widgets auf seiner Webseite interessiert. Er möchte mehr über die Lead-Management ..."
-    },
-    {
-      name: "Ursula Müller",
-      time: "Vor 2 Wochen",
-      description: "Frau Müller hat nachgefragt, wie das KI-Tool für die Erstellung von Immobilienbeschreibungen genutzt werden kann, um Zeit zu spare."
-    }
+    { name: 'Bernd Schmitt', time: 'Heute - 11:30', description: 'Termin verschoben: Donnerstag, 13.07.2023, 13 Uhr - Besprechung Quartalszahlen' },
+    { name: 'Anna Weber', time: 'Heute - 10:15', description: 'Neuer Termin: Mittwoch, 12.07.2023, 15 Uhr - Team Meeting' },
+    { name: 'Michael Klein', time: 'Heute - 09:45', description: 'Update: Projektstand Marketing Kampagne Q3' },
+    { name: 'Sarah Wagner', time: 'Gestern - 16:20', description: 'Erinnerung: Deadline Projektbericht Ende dieser Woche' },
+    { name: 'Thomas Bauer', time: 'Gestern - 14:30', description: 'Feedback zu Präsentation erforderlich' },
+    { name: 'Laura Müller', time: 'Gestern - 11:00', description: 'Neue Dokumente im Shared Drive verfügbar' },
+    { name: 'Felix Hoffmann', time: 'Vorgestern - 15:45', description: 'Meeting Notizen: Strategiebesprechung' },
+    { name: 'Julia Schmidt', time: 'Vorgestern - 13:20', description: 'Wichtige Änderungen am Projektplan' },
+    { name: 'David Fischer', time: 'Vorgestern - 10:00', description: 'Quartalsbericht zur Überprüfung bereit' },
+    { name: 'Marie Weber', time: 'Montag - 16:30', description: 'Neue Kundenanfrage: Beratungstermin vereinbaren' },
+    { name: 'Paul Schneider', time: 'Montag - 14:15', description: 'Status Update: IT-Infrastruktur Projekt' },
+    { name: 'Lisa Meyer', time: 'Montag - 11:45', description: 'Reminder: Teambuilding Event nächste Woche' },
+    { name: 'Robert Wagner', time: 'Montag - 09:30', description: 'Analyse der Marktzahlen abgeschlossen' },
+    { name: 'Sophie Koch', time: 'Sonntag - 18:00', description: 'Vorschlag: Neue Marketingstrategie Q4' },
+    { name: 'Max Becker', time: 'Sonntag - 15:20', description: 'Feedback zur neuen Website-Version' }
   ];
 
   const totalRows = rows.length;
@@ -387,17 +347,17 @@ export default function Dashboard() {
     const calculateContainer = () => {
       const viewportHeight = window.innerHeight;
       const containerTop = containerRef.current?.getBoundingClientRect().top || 0;
-      const marginBottom = 1;
+      const marginBottom = 16;
       const topOffset = 16;
+      const headerHeight = 140;
+      const rowHeight = 48;
+      
       const availableHeight = viewportHeight - containerTop - marginBottom - topOffset;
       setContainerHeight(availableHeight);
 
-      // Calculate rows that can fit
-      const headerHeight = 180;
-      const rowHeight = 48;
       const availableRowSpace = availableHeight - headerHeight;
       const possibleRows = Math.floor(availableRowSpace / rowHeight);
-      setRowsPerPage(Math.max(6, Math.min(possibleRows, rows.length)));
+      setRowsPerPage(Math.max(8, Math.min(possibleRows, rows.length)));
     };
 
     calculateContainer();
