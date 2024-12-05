@@ -487,7 +487,7 @@ export default function Dashboard() {
             <div key={section} className="mb-6 px-4">
               <button
                 onClick={() => toggleSection(section)}
-                className="w-full flex items-center justify-between px-4 py-2 text-xs font-medium text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors mb-2"
+                className="w-full flex items-center justify-between px-4 py-2 text-[14px] font-semibold leading-[19.1px] text-[#0E1726] bg-[#ECECEE] rounded-md hover:bg-gray-200 transition-colors mb-2"
               >
                 <div className="flex items-center gap-2">
                   {menuIcons[section]}
@@ -512,17 +512,17 @@ export default function Dashboard() {
                     <Link
                       key={item.id}
                       to="#"
-                      className={`block py-2 pr-4 text-sm transition-colors ${
+                      className={`block py-2 pr-4 text-[14px] font-semibold transition-colors font-nunito ${
                         activeSection === item.id
-                          ? 'text-[#34c759]'
-                          : 'text-gray-600 hover:text-gray-900'
+                          ? 'text-[#12705B]'
+                          : 'text-[#0E1726] hover:text-[#12705B]'
                       }`}
                       onClick={() => setActiveSection(item.id)}
                     >
                       <img 
                         src={activeSection === item.id ? "/rectangle-selected.png" : "/rectangle-unselected.png"}
                         alt="-" 
-                        className="inline-block w-[8px] h-[2px] mr-2"
+                        className="inline-block w-[8px] h-[2px] mr-2 relative top-[-1px] align-middle"
                       />
                       <span>{item.label}</span>
                     </Link>
