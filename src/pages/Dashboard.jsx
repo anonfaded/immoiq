@@ -547,17 +547,19 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <h3 className="font-semibold text-center mb-4">Brauchen Sie Hilfe?</h3>
+            <h3 className="font-semibold text-center mb-4 w-[163px] h-[18px] mx-auto text-[15px]">Brauchen Sie Hilfe?</h3>
             
-            <div className="space-y-3">
-              <a href="tel:+436776203125" className="flex items-center gap-2 text-sm">
-                <Phone className="w-4 h-4" />
-                +43 (677) 620 - 31215
-              </a>
-              <a href="mailto:support@immoiq.ch" className="flex items-center gap-2 text-sm">
-                <Email className="w-4 h-4" />
-                support@immoiq.ch
-              </a>
+            <div className="space-y-3 text-center">
+              <div className="flex justify-center gap-3">
+                <div className="flex flex-col gap-2">
+                  <img src="/phone.png" alt="Phone" className="w-3.5 h-3.5" />
+                  <img src="/email.png" alt="Email" className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex flex-col gap-2 text-[11px] text-left">
+                  <a href="tel:+436776203125">+43 (677) 620 - 31215</a>
+                  <a href="mailto:support@immoiq.ch">support@immoiq.ch</a>
+                </div>
+              </div>
               <a
                 href="https://wa.me/436776203125"
                 target="_blank"
