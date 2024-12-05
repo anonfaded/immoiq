@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { IconButton, Checkbox } from '@mui/material'
 import {
@@ -43,6 +43,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js'
+import LightModeIcon from '@mui/icons-material/LightMode'
 
 // Register ChartJS components
 ChartJS.register(
@@ -368,12 +369,32 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark')
+    // Check if user has a theme preference
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'dark' || (!savedTheme && userPrefersDark)) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      setIsDarkMode(false);
+      document.documentElement.classList.remove('dark');
     }
-  }, [isDarkMode])
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => {
+      const newMode = !prev;
+      if (newMode) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+      return newMode;
+    });
+  };
 
   const menuItems = {
     mandatscout: [
@@ -455,14 +476,14 @@ export default function Dashboard() {
   }, [rowsPerPage]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
       {/* Sidebar */}
       <div 
-        className={`fixed h-screen bg-white shadow-lg transition-all duration-300 z-20
+        className={`fixed h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 z-20
           ${isSidebarOpen ? 'w-64' : 'w-20'} flex flex-col`}
       >
         {/* Logo Section */}
-        <div className="h-20 p-4 border-b border-gray-200 flex items-center justify-between">
+        <div className="h-20 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src="/logo-svg.svg" alt="Company Logo" className="h-8 w-auto" />
             {isSidebarOpen && (
@@ -487,7 +508,7 @@ export default function Dashboard() {
             <div key={section} className="mb-6 px-4">
               <button
                 onClick={() => toggleSection(section)}
-                className="w-full flex items-center justify-between px-4 py-2 text-[14px] font-semibold leading-[19.1px] text-[#0E1726] bg-[#ECECEE] rounded-md hover:bg-gray-200 transition-colors mb-2"
+                className="w-full flex items-center justify-between px-4 py-2 text-[14px] font-semibold leading-[19.1px] text-[#0E1726] dark:text-gray-200 bg-[#ECECEE] dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors mb-2"
               >
                 <div className="flex items-center gap-2">
                   {menuIcons[section]}
@@ -514,8 +535,8 @@ export default function Dashboard() {
                       to="#"
                       className={`block py-2 pr-4 text-[14px] font-semibold transition-colors font-nunito ${
                         activeSection === item.id
-                          ? 'text-[#12705B]'
-                          : 'text-[#0E1726] hover:text-[#12705B]'
+                          ? 'text-[#12705B] dark:text-[#34C759]'
+                          : 'text-[#0E1726] dark:text-gray-300 hover:text-[#12705B] dark:hover:text-[#34C759]'
                       }`}
                       onClick={() => setActiveSection(item.id)}
                     >
@@ -578,28 +599,29 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className={`flex-1 ${isSidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300 min-w-0`}>
         {/* Top Navigation Bar */}
-        <nav className="h-16 bg-white shadow-sm px-4 md:px-8 flex items-center justify-between sticky top-0 z-10">
-          <div className="flex items-center gap-2 text-gray-600 min-w-0">
+        <nav className="h-16 bg-white dark:bg-gray-800 shadow-sm px-4 md:px-8 flex items-center justify-between sticky top-0 z-10">
+          <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300 min-w-0">
             <img src="/home.png" alt="Home" className="w-[17.5px] h-[17.5px]" />
-            <span className="text-gray-400">/</span>
-            <span className="font-nunito text-[14px] font-semibold">Lead-Management</span>
+            <span className="text-gray-400 dark:text-gray-500">/</span>
+            <span className="font-nunito text-[14px] font-semibold dark:text-gray-300">Lead-Management</span>
           </div>
 
           {/* Right Section */}
           <div className="flex items-center gap-2">
-            <IconButton
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className="text-gray-600"
+            <button
+              onClick={toggleDarkMode}
+              className="w-[42px] h-[42px] flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
             >
-              <img src="/dark-mode.png" alt="Dark Mode" className="w-9 h-9" />
-            </IconButton>
+              {isDarkMode ? (
+                <img src="/dark-mode.png" alt="Dark Mode" className="w-9 h-9" />
+              ) : (
+                <LightModeIcon className="w-9 h-9 text-gray-600" />
+              )}
+            </button>
             
-            <IconButton
-              onClick={() => setShowUserMenu(!showUserMenu)}
-              className="text-gray-600"
-            >
+            <button className="p-1.5 hover:bg-gray-100 rounded-lg dark:hover:bg-gray-700">
               <img src="/profile.png" alt="Profile" className="w-9 h-9" />
-            </IconButton>
+            </button>
           </div>
         </nav>
 
@@ -610,11 +632,11 @@ export default function Dashboard() {
               <span className="text-3xl md:text-4xl shrink-0">👋</span>
               <div className="min-w-0 overflow-hidden">
                 <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2">
-                  <span className="text-xl md:text-2xl font-bold text-gray-900 truncate">
+                  <span className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white truncate">
                     Grüzi Carlos
                   </span>
-                  <span className="hidden md:inline text-gray-400 text-2xl shrink-0">-</span>
-                  <span className="text-lg md:text-2xl text-gray-500 truncate">
+                  <span className="hidden md:inline text-gray-400 dark:text-gray-500 text-2xl shrink-0">-</span>
+                  <span className="text-lg md:text-2xl text-gray-500 dark:text-gray-400 truncate">
                     Lass uns heute mehr Verkaufsmandate gewinnen!
                   </span>
                 </div>
@@ -633,8 +655,8 @@ export default function Dashboard() {
           {/* Performance Metrics Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-3 overflow-x-auto py-1 -ml-1 pl-1">
             {/* Conversations Chart Card */}
-            <div className="bg-white rounded-lg shadow-md p-3 min-h-[6rem] flex flex-col min-w-[280px] relative">
-              <h3 className="font-nunito-sans text-[12.88px] font-semibold leading-[17.56px] text-left text-gray-800 mb-3"
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 min-h-[6rem] flex flex-col min-w-[280px] relative">
+              <h3 className="font-nunito-sans text-[12.88px] font-semibold leading-[17.56px] text-left text-gray-800 dark:text-gray-200 mb-3"
                 style={{ 
                   textUnderlinePosition: 'from-font',
                   textDecorationSkipInk: 'none'
@@ -697,8 +719,8 @@ export default function Dashboard() {
             </div>
 
             {/* Solved Requests Card */}
-            <div className="bg-white rounded-lg shadow-md p-3 min-h-[6rem] flex flex-col min-w-[280px] relative">
-              <h3 className="font-nunito-sans text-[12.88px] font-semibold leading-[17.56px] text-left text-gray-800 mb-3"
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-3 min-h-[6rem] flex flex-col min-w-[280px] relative">
+              <h3 className="font-nunito-sans text-[12.88px] font-semibold leading-[17.56px] text-left text-gray-800 dark:text-gray-200 mb-3"
                 style={{ 
                   textUnderlinePosition: 'from-font',
                   textDecorationSkipInk: 'none'
@@ -719,7 +741,7 @@ export default function Dashboard() {
                       89%
                     </span>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-nunito-sans text-[10.16px] font-semibold leading-[13.86px] text-left text-gray-500"
+                      <span className="font-nunito-sans text-[10.16px] font-semibold leading-[13.86px] text-left text-gray-500 dark:text-gray-400"
                         style={{ 
                           textUnderlinePosition: 'from-font',
                           textDecorationSkipInk: 'none'
@@ -733,7 +755,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex-1 flex flex-col justify-end">
                   <div className="relative flex items-center px-1 mb-1">
-                    <div className="relative flex-1 h-2.5 bg-[#EBEDF2] rounded-full overflow-hidden">
+                    <div className="relative flex-1 h-2.5 bg-[#EBEDF2] dark:bg-gray-700 rounded-full overflow-hidden">
                       <div 
                         className="absolute top-0 left-0 h-full bg-[#12705B] rounded-full transition-all duration-500"
                         style={{ width: '89%' }}
@@ -744,7 +766,7 @@ export default function Dashboard() {
                       />
                     </div>
                     <span 
-                      className="font-nunito-sans text-[9.49px] font-normal leading-[12.94px] text-left text-[#0E1726] ml-4"
+                      className="font-nunito-sans text-[9.49px] font-normal leading-[12.94px] text-left text-[#0E1726] dark:text-gray-300 ml-4"
                       style={{ 
                         textUnderlinePosition: 'from-font',
                         textDecorationSkipInk: 'none'
@@ -802,7 +824,7 @@ export default function Dashboard() {
           <div className="overflow-x-auto -mx-4 md:-mx-8 px-4 md:px-8 mt-4">
             <div 
               ref={containerRef}
-              className="min-w-[800px] bg-white rounded-lg shadow flex flex-col mb-1 md:mb-4"
+              className="min-w-[800px] bg-white dark:bg-gray-800 rounded-lg shadow flex flex-col mb-1 md:mb-4"
               style={{ height: containerHeight ? `${containerHeight}px` : 'auto' }}
             >
               {/* Top Section */}
@@ -857,7 +879,7 @@ export default function Dashboard() {
                       <input
                         type="text"
                         placeholder="Leads durchsuchen"
-                        className="w-[176.05px] h-[30.97px] pl-3 pr-8 border border-gray-200 font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        className="w-[176.05px] h-[30.97px] pl-3 pr-8 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 font-nunito text-[11.41px] font-semibold leading-[15.56px] text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 dark:focus:ring-blue-400"
                         style={{ 
                           textUnderlinePosition: 'from-font',
                           textDecorationSkipInk: 'none'
@@ -875,13 +897,13 @@ export default function Dashboard() {
                 </div>
 
                 {/* First Divider */}
-                <div className="h-px bg-gray-200 -mx-6 mb-4" />
+                <div className="h-px bg-gray-200 dark:bg-gray-700 -mx-6 mb-4" />
 
                 {/* Buttons Row with Pagination */}
                 <div className="flex items-center justify-between mb-4">
                   {/* Action Buttons */}
                   <div className="flex gap-3">
-                    <button className="w-[102.7px] h-[30.97px] flex items-center justify-center gap-1.5 bg-white border border-[#12705B] text-[#12705B] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                    <button className="w-[102.7px] h-[30.97px] flex items-center justify-center gap-1.5 bg-white dark:bg-gray-800 border border-[#12705B] text-[#12705B] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] dark:hover:bg-gray-700 transition-colors"
                       style={{ 
                         textUnderlinePosition: 'from-font',
                         textDecorationSkipInk: 'none'
@@ -890,7 +912,7 @@ export default function Dashboard() {
                       <img src="robot2.png" alt="KI-Widget" className="w-[18px] h-[18px]" />
                       KI-Widget
                     </button>
-                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white border border-[#EC870C] text-[#EC870C] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-[#EC870C] text-[#EC870C] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] dark:hover:bg-gray-700 transition-colors"
                       style={{ 
                         textUnderlinePosition: 'from-font',
                         textDecorationSkipInk: 'none'
@@ -899,7 +921,7 @@ export default function Dashboard() {
                       <img src="phone1.png" alt="Phone" className="w-[19px] h-[19px]" />
                       Rückrufformular
                     </button>
-                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white border border-[#4361EE] text-[#4361EE] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-[#4361EE] text-[#4361EE] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] dark:hover:bg-gray-700 transition-colors"
                       style={{ 
                         textUnderlinePosition: 'from-font',
                         textDecorationSkipInk: 'none'
@@ -908,7 +930,7 @@ export default function Dashboard() {
                       <img src="clipboard.png" alt="Clipboard" className="w-[18px] h-[18px]" />
                       Guides/Checklisten
                     </button>
-                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white border border-[#7B00E6] text-[#7B00E6] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] transition-colors"
+                    <button className="h-[30.97px] px-3 flex items-center gap-1.5 bg-white dark:bg-gray-800 border border-[#7B00E6] text-[#7B00E6] font-nunito text-[11.41px] font-semibold leading-[15.56px] rounded-md hover:bg-[#f8f8f8] dark:hover:bg-gray-700 transition-colors"
                       style={{ 
                         textUnderlinePosition: 'from-font',
                         textDecorationSkipInk: 'none'
@@ -922,7 +944,7 @@ export default function Dashboard() {
                   {/* Pagination */}
                   <div className="flex items-center gap-2">
                     <span 
-                      className="font-nunito text-[11.41px] font-normal leading-[15.56px] text-[#0E1726]"
+                      className="font-nunito text-[11.41px] font-normal leading-[15.56px] text-[#0E1726] dark:text-gray-300"
                       style={{ 
                         textUnderlinePosition: 'from-font',
                         textDecorationSkipInk: 'none'
@@ -932,8 +954,8 @@ export default function Dashboard() {
                     </span>
                     <div className="flex gap-0.5">
                       <button 
-                        className={`w-7 h-7 flex items-center justify-center rounded-md bg-[#F8F8F8] ${
-                          currentPage === 1 ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200 text-gray-600'
+                        className={`w-7 h-7 flex items-center justify-center rounded-md bg-[#F8F8F8] dark:bg-gray-700 ${
+                          currentPage === 1 ? 'text-gray-400 dark:text-gray-500 cursor-not-allowed' : 'hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300'
                         }`}
                         onClick={() => currentPage > 1 && setCurrentPage(prev => prev - 1)}
                         disabled={currentPage === 1}
@@ -941,8 +963,8 @@ export default function Dashboard() {
                         <ChevronLeft className="w-4 h-4" />
                       </button>
                       <button 
-                        className={`w-7 h-7 flex items-center justify-center rounded-md bg-[#F8F8F8] ${
-                          currentPage === totalPages ? 'text-gray-400 cursor-not-allowed' : 'hover:bg-gray-200 text-gray-600'
+                        className={`w-7 h-7 flex items-center justify-center rounded-md bg-[#F8F8F8] dark:bg-gray-700 ${
+                          currentPage === totalPages ? 'text-gray-400 dark:text-gray-500 cursor-not-allowed' : 'hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300'
                         }`}
                         onClick={() => currentPage < totalPages && setCurrentPage(prev => prev + 1)}
                         disabled={currentPage === totalPages}
@@ -985,7 +1007,7 @@ export default function Dashboard() {
                     return (
                       <div 
                         key={index}
-                        className="h-12 flex items-center hover:bg-[#F9F9F9] transition-colors"
+                        className="h-12 flex items-center hover:bg-[#F9F9F9] dark:hover:bg-gray-700 dark:bg-gray-800 transition-colors"
                       >
                         {/* Checkbox */}
                         <div className="w-[52px] flex justify-center shrink-0 pr-4">
@@ -1018,7 +1040,7 @@ export default function Dashboard() {
                               style={{ backgroundColor: rowColor }}
                             />
                             <span 
-                              className="font-nunito text-[12.5px] font-normal leading-[17px] text-black truncate pl-2"
+                              className="font-nunito text-[12.5px] font-normal leading-[17px] text-black dark:text-white truncate pl-2"
                               style={{ 
                                 textUnderlinePosition: 'from-font',
                                 textDecorationSkipInk: 'none'
@@ -1044,7 +1066,7 @@ export default function Dashboard() {
                         {/* Description */}
                         <div className="flex-1 min-w-0 pr-4">
                           <p 
-                            className="truncate font-nunito text-[12.5px] font-medium leading-[17px] text-[#757575]"
+                            className="truncate font-nunito text-[12.5px] font-medium leading-[17px] text-[#757575] dark:text-gray-400"
                             style={{ 
                               textUnderlinePosition: 'from-font',
                               textDecorationSkipInk: 'none'
@@ -1056,10 +1078,10 @@ export default function Dashboard() {
 
                         {/* Actions */}
                         <div className="w-[100px] flex items-center gap-1.5 justify-end shrink-0">
-                          <button className="w-7 h-7 flex items-center justify-center rounded-md bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                          <button className="w-7 h-7 flex items-center justify-center rounded-md bg-[#F3F3F3] dark:bg-gray-700 hover:bg-[#D6D6D6] dark:hover:bg-gray-600 transition-colors">
                             <img src="clip.png" alt="Attachment" className="w-[13.2px] h-[14px]" />
                           </button>
-                          <button className="w-7 h-7 flex items-center justify-center rounded-md bg-[#F3F3F3] hover:bg-[#D6D6D6] transition-colors">
+                          <button className="w-7 h-7 flex items-center justify-center rounded-md bg-[#F3F3F3] dark:bg-gray-700 hover:bg-[#D6D6D6] dark:hover:bg-gray-600 transition-colors">
                             <img src="cross.png" alt="Close" className="w-[18px] h-[18px]" />
                           </button>
                         </div>
