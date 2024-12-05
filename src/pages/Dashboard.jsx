@@ -266,10 +266,10 @@ const chartOptions = {
 }
 
 const menuIcons = {
-  mandatscout: <img src="/golf.png" alt="MandatScout" className="w-[22px] h-[22px]" />,
-  kiwidget: <img src="/robot.png" alt="KI-Widget" className="w-[22px] h-[22px]" />,
-  kischreibwerkzeuge: <img src="/write.png" alt="KI-Schreibwerkzeuge" className="w-[22px] h-[22px]" />,
-  kontoeinstellungen: <img src="/settings-line.png" alt="Kontoeinstellungen" className="w-[22px] h-[22px]" />
+  mandatscout: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/golf.png" alt="MandatScout" className="w-full h-full" /></div>,
+  kiwidget: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/robot.png" alt="KI-Widget" className="w-full h-full" /></div>,
+  kischreibwerkzeuge: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/write.png" alt="KI-Schreibwerkzeuge" className="w-full h-full" /></div>,
+  kontoeinstellungen: <div className={`${isSidebarOpen ? 'w-[22px] h-[22px]' : 'w-4 h-4'} flex items-center justify-center`}><img src="/settings-line.png" alt="Kontoeinstellungen" className="w-full h-full" /></div>
 }
 
 export default function Dashboard() {
@@ -293,6 +293,8 @@ export default function Dashboard() {
   const suggestionFormRef = useRef(null);
   const [popupPosition, setPopupPosition] = useState({ top: 0, right: 0 });
   const [selectedRows, setSelectedRows] = useState([]);
+  const [showSubmenu, setShowSubmenu] = useState(null);
+  const submenuRef = useRef(null);
 
   const rows = [
     {
@@ -565,13 +567,21 @@ export default function Dashboard() {
     });
   };
 
+  // Close submenu when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (submenuRef.current && !submenuRef.current.contains(event.target)) {
+        setShowSubmenu(null);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
       {/* Sidebar */}
-      <div 
-        className={`fixed h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 z-20
-          ${isSidebarOpen ? 'w-64' : 'w-20'} flex flex-col`}
-      >
+      <div className={`fixed h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 z-20 ${isSidebarOpen ? 'w-64' : 'w-20'} flex flex-col`}>
         {/* Logo Section */}
         <div className="h-20 p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -597,23 +607,60 @@ export default function Dashboard() {
           {Object.entries(menuItems).map(([section, items]) => (
             <div key={section} className="mb-6 px-4">
               <button
-                onClick={() => toggleSection(section)}
-                className="w-full flex items-center justify-between px-4 py-2 text-[14px] font-semibold leading-[19.1px] text-[#0E1726] dark:text-gray-200 bg-[#ECECEE] dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors mb-2"
+                onClick={() => isSidebarOpen ? toggleSection(section) : setShowSubmenu(showSubmenu === section ? null : section)}
+                className={`w-full flex items-center justify-between px-4 py-2 text-[14px] font-semibold leading-[19.1px] text-[#0E1726] dark:text-gray-200 bg-[#ECECEE] dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors mb-2 ${
+                  !isSidebarOpen ? 'justify-center relative' : ''
+                }`}
               >
                 <div className="flex items-center gap-2">
                   {menuIcons[section]}
-                  <span className="capitalize">{
-                    section === 'mandatscout' ? 'MandatScout' :
-                    section === 'kiwidget' ? 'KI-Widget' :
-                    section === 'kischreibwerkzeuge' ? 'KI-Schreibwerkzeuge' :
-                    section === 'kontoeinstellungen' ? 'Kontoeinstellungen' : 
-                    section
-                  }</span>
+                  {isSidebarOpen && (
+                    <span className="capitalize">{
+                      section === 'mandatscout' ? 'MandatScout' :
+                      section === 'kiwidget' ? 'KI-Widget' :
+                      section === 'kischreibwerkzeuge' ? 'KI-Schreibwerkzeuge' :
+                      section === 'kontoeinstellungen' ? 'Kontoeinstellungen' : 
+                      section
+                    }</span>
+                  )}
                 </div>
                 {isSidebarOpen && (
                   expandedSections[section] ? 
                     <KeyboardArrowDown className="w-4 h-4" /> : 
                     <KeyboardArrowRight className="w-4 h-4" />
+                )}
+
+                {/* Popup submenu for closed sidebar */}
+                {!isSidebarOpen && showSubmenu === section && (
+                  <div className="fixed ml-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-[9999]"
+                    style={{
+                      top: `${submenuRef.current?.getBoundingClientRect().top}px`,
+                      left: `${submenuRef.current?.getBoundingClientRect().right}px`
+                    }}
+                  >
+                    {items.map(item => (
+                      <Link
+                        key={item.id}
+                        to="#"
+                        className={`block px-4 py-2 text-[14px] font-semibold transition-colors font-nunito ${
+                          activeSection === item.id
+                            ? 'text-[#12705B] dark:text-[#34C759] bg-gray-100 dark:bg-gray-700'
+                            : 'text-[#0E1726] dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
+                        onClick={() => {
+                          setActiveSection(item.id);
+                          setShowSubmenu(null);
+                        }}
+                      >
+                        <img 
+                          src={activeSection === item.id ? "/rectangle-selected.png" : "/rectangle-unselected.png"}
+                          alt="-" 
+                          className="inline-block w-[8px] h-[2px] mr-2 relative top-[-1px] align-middle"
+                        />
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
                 )}
               </button>
               
@@ -635,7 +682,7 @@ export default function Dashboard() {
                         alt="-" 
                         className="inline-block w-[8px] h-[2px] mr-2 relative top-[-1px] align-middle"
                       />
-                      <span>{item.label}</span>
+                      {item.label}
                     </Link>
                   ))}
                 </div>
@@ -646,42 +693,57 @@ export default function Dashboard() {
 
         {/* Help Section */}
         <div className="p-4 relative">
-          <div className="bg-[#12705b] text-white rounded-lg p-4 h-auto pt-8">
-            {/* Profile Picture */}
-            <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 pointer-events-none select-none">
-              <div className="w-36 h-36 rounded-full overflow-hidden">
-                <img 
-                  src="/contact-whatsapp.png" 
-                  alt="Support Profile" 
-                  className="w-full h-full object-cover select-none"
-                  draggable="false"
-                />
-              </div>
-            </div>
+          <div className={`bg-[#12705b] text-white rounded-lg ${isSidebarOpen ? 'p-4 h-auto pt-8' : 'p-3'}`}>
+            {isSidebarOpen ? (
+              <>
+                {/* Profile Picture */}
+                <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 pointer-events-none select-none">
+                  <div className="w-36 h-36 rounded-full overflow-hidden">
+                    <img 
+                      src="/contact-whatsapp.png" 
+                      alt="Support Profile" 
+                      className="w-full h-full object-cover select-none"
+                      draggable="false"
+                    />
+                  </div>
+                </div>
 
-            <h3 className="font-semibold text-center mb-4 w-[163px] h-[18px] mx-auto text-[18px]">Brauchen Sie Hilfe?</h3>
-            
-            <div className="space-y-3 text-center relative z-10">
-              <div className="flex justify-center gap-3">
-                <div className="flex flex-col gap-3">
-                  <img src="/phone.png" alt="Phone" className="w-3.5 h-3.5" />
-                  <img src="/email.png" alt="Email" className="w-3.5 h-3.5 mt-1.5" />
+                <h3 className="font-semibold text-center mb-4 w-[163px] h-[18px] mx-auto text-[18px]">Brauchen Sie Hilfe?</h3>
+                
+                <div className="space-y-3 text-center relative z-10">
+                  <div className="flex justify-center gap-3">
+                    <div className="flex flex-col gap-3">
+                      <img src="/phone.png" alt="Phone" className="w-3.5 h-3.5" />
+                      <img src="/email.png" alt="Email" className="w-3.5 h-3.5 mt-1.5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <a href="tel:+436776203125" className="text-[11px] text-left h-[14px]">+43 (677) 620 - 31215</a>
+                      <a href="mailto:support@immoiq.ch" className="text-[11px] text-left mt-[18px] h-[14px]">support@immoiq.ch</a>
+                    </div>
+                  </div>
+                  <a
+                    href="https://wa.me/436776203125"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-[12px] hover:bg-white/20 transition-colors"
+                  >
+                    <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4" />
+                    WhatsApp Support
+                  </a>
                 </div>
-                <div className="flex flex-col">
-                  <a href="tel:+436776203125" className="text-[11px] text-left h-[14px]">+43 (677) 620 - 31215</a>
-                  <a href="mailto:support@immoiq.ch" className="text-[11px] text-left mt-[18px] h-[14px]">support@immoiq.ch</a>
-                </div>
+              </>
+            ) : (
+              <div className="flex items-center justify-center">
+                <a
+                  href="https://wa.me/436776203125"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-4 h-4"
+                >
+                  <img src="/whatsapp.png" alt="WhatsApp" className="w-full h-full" />
+                </a>
               </div>
-              <a
-                href="https://wa.me/436776203125"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 text-sm bg-white/10 backdrop-blur-sm text-white px-3 py-2 rounded-[12px] hover:bg-white/20 transition-colors"
-              >
-                <img src="/whatsapp.png" alt="WhatsApp" className="w-4 h-4" />
-                WhatsApp Support
-              </a>
-            </div>
+            )}
           </div>
         </div>
       </div>
